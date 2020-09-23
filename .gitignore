@@ -65,3 +65,7 @@ bundle.*
 
 # Development databases
 dev.sqlite3
+
+#.env
+.env
+sendgrid.env
