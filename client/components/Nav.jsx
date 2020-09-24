@@ -6,6 +6,11 @@ import { logOff } from 'authenticare/client/auth'
 import { changePage } from '../actions'
 
 function NavHeader({ dispatch }) {
+  function logOffHandler() {
+    logOff()
+    dispatch(changePage('Home'))
+  }
+
   if (isAuthenticated())
     return (
       <Header background="dark-1" pad="medium">
@@ -18,12 +23,12 @@ function NavHeader({ dispatch }) {
               <Menu
                 label="Go Places"
                 items={[
-                  { label: 'Log Off', onClick: () => logOff() }
+                  { label: 'Log Off', onClick: () => logOffHandler() }
                 ]}
               />
             ) : (
                 <Nav direction="row">
-                  <Anchor onClick={() => logOff()} label="Log Off" />
+                  <Anchor onClick={logOffHandler} label="Log Off" />
                 </Nav>
               )
           }
