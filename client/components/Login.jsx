@@ -5,8 +5,9 @@ import { connect } from 'react-redux'
 import { addUserInfo, changePage } from '../actions'
 import { getUserInfo } from '../api'
 import { baseApiUrl as baseUrl } from '../config'
+import { Form, FormField, TextInput } from 'grommet'
 
-function Login () {
+function Login() {
   const [user] = useState({
     username: '',
     password: ''
@@ -40,18 +41,15 @@ function Login () {
   }
 
   return (
-    <>
-            Login
-      <Form onSubmit={submitHandler}>
-        <FormField label='email' name='email'>
-          <TextInput name='email' type='email' onChange={emailHandler} placeholder='example@mail.com' />
-        </FormField>
-        <FormField label='password' name='password'>
-          <TextInput name='password' type='password' onChange={passwordHandler} />
-        </FormField>
-        <input type='submit' value='Submit' />
-      </Form>
-    </>
+    <Form onSubmit={submitHandler}>
+      <FormField label='email' name='email'>
+        <TextInput name='email' type='email' onChange={emailHandler} placeholder='example@mail.com' />
+      </FormField>
+      <FormField label='password' name='password'>
+        <TextInput name='password' type='password' onChange={passwordHandler} />
+      </FormField>
+      <input type='submit' value='Submit' />
+    </Form>
   )
 }
 
