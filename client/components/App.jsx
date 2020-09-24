@@ -4,7 +4,7 @@ import Home from './Home'
 import Nav from './Nav'
 import Login from './Login'
 import Register from './Register'
-import {Card} from './Card'
+
 
 
 
