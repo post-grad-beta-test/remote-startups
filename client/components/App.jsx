@@ -2,8 +2,9 @@ import { Box, Grommet, Heading, Text, WorldMap } from 'grommet'
 import React from 'react'
 import { connect } from 'react-redux'
 import Home from './Home'
-import NavHeader from './Nav'
+import NavHeader from './NavHeader'
 import Register from './Register'
+import {Card} from './Card'
 
 const theme = {
   global: {
@@ -34,10 +35,11 @@ const App = ({ currentPage }) => {
   return (
     <Grommet theme={theme}>
       <NavHeader />
-      <Home/>
+      <Card />
+      <Home />
       <Box Box fill align="center" justify="center">
         <Box>
-          <WorldMap color="#173F5F" opacity="0.8"/>
+          <WorldMap color="#173F5F" opacity="0.8" />
         </Box>
         <Box pad="medium">
           <Heading size="large">Co-ject!</Heading>
@@ -50,7 +52,7 @@ const App = ({ currentPage }) => {
   )
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     currentPage: state.currentPage
   }
