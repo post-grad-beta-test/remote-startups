@@ -40,10 +40,10 @@ function Register () {
     register({ username, password }, { baseUrl })
       .then((token) => {
         if (isAuthenticated()) {
-          sendRegistrationEmail(email)
+          sendRegistrationEmail(username)
           alert('check your inbox')
           dispatch(changePage('Home'))
-          return getUserInfo(email)
+          return getUserInfo(username)
         } else {
           alert('Nope')
         }
@@ -54,7 +54,6 @@ function Register () {
       .catch(err => alert(err.message))
   }
 
-  console.log(values)
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormField label='email' name='email'>

@@ -1,6 +1,6 @@
 import { CHANGE_PAGE } from '../actions'
 
-function currentPage (state = 'LogIn', action) {
+function currentPage (state = 'Home', action) {
   switch (action.type) {
     case CHANGE_PAGE:
       return action.page
