@@ -4,7 +4,7 @@ const { applyAuthRoutes } = require('authenticare/server')
 const sgMail = require('@sendgrid/mail')
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-
+console.log(process.env);
 const {
   userExists,
   saveNewUser,
