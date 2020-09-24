@@ -30,7 +30,7 @@ function Login() {
             .then((token) => {
                 if (isAuthenticated()) {
                     dispatch(changePage('Home'))
-                    return getUserInfo(email)
+                    return getUserInfo(username)
                 }
             })
             .then(res => {

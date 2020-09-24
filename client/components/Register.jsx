@@ -32,10 +32,10 @@ function Register({ dispatch }) {
             register({ username, password }, { baseUrl })
                 .then((token) => {
                     if (isAuthenticated()) {
-                        sendRegistrationEmail(email)
+                        sendRegistrationEmail(username)
                         alert('check your inbox')
                         dispatch(changePage('Home'))
-                        return getUserInfo(email)
+                        return getUserInfo(username)
                     } else {
                         alert('Nope')
                     }
@@ -43,7 +43,7 @@ function Register({ dispatch }) {
                 .then(res => {
                     dispatch(addUserInfo(res))
                 })
-                .catch(err => alert(err.message))
+                .catch(err => console.log(err.message))
         } else alert('passwords do not match')
     }
 

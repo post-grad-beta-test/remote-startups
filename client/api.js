@@ -21,7 +21,5 @@ export function getUserInfo (email) {
   return request
     .get(`/api/v1/auth?email=${email}`)
     .set(acceptJsonHeader)
-    .then(res => {
-      return res.body
-    })
+    .then(res => res.body)
 }
