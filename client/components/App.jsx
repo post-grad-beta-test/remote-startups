@@ -7,7 +7,7 @@ const App = () => {
   return (
     <>
       <Nav />
-      <h1>React development has begun!</h1>
+      <h1>Coject!</h1>
       <Register />
     </>
   )
