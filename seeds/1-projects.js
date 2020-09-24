@@ -1,11 +1,11 @@
 
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   // Deletes ALL existing entries
-  return knex('table_name').del()
+  return knex('projects').del()
     .then(function () {
       // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, name: 'Remote Startups', description: 'Tech startups from home!'}
+      return knex('projects').insert([
+        { id: 1, name: 'Remote Startups', description: 'Tech startups from home!' }
       ]);
     });
 };
