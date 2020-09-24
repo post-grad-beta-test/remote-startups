@@ -6,4 +6,5 @@ Tech startup weekends from home!
 https://sendgrid.com/
 
 echo "export SENDGRID_API_KEY='YOUR_API_KEY'" > sendgrid.env
+
 source ./sendgrid.env
