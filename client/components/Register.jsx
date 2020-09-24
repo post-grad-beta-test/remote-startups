@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-// import { addUserInfo, changePage } from '../actions'
+import { changePage } from '../actions'
 import { sendRegistrationEmail, getUserInfo } from '../api'
 import { register, isAuthenticated } from 'authenticare/client'
 import { baseApiUrl as baseUrl } from '../config'
