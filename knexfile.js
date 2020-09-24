@@ -22,7 +22,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'name',
       password: 'password'
     },
     pool: {
@@ -38,7 +38,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'name',
       password: 'password'
     },
     pool: {
@@ -50,4 +50,4 @@ module.exports = {
     }
   }
 
-};
+}
