@@ -7,28 +7,28 @@ import { Controller, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import * as yup from 'yup'
 import { addUserInfo, changePage } from '../actions'
-import { getUserInfo, sendRegistrationEmail } from '../api'
+import { getUserInfo, sendRegistrationEmail, updateUserInfo } from '../api'
 import { baseApiUrl as baseUrl } from '../config'
 
 const schema = yup.object().shape({
   email: yup
     .string()
     .email()
-    .required('Email is a required field'),
-  password: yup
-    .string()
-    .required('Please enter your password')
-    .matches(
-      /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-      'Password must contain at least 8 characters, one uppercase, one number and one special case character'
-    ),
-  confirmPassword: yup
-    .string()
-    .required('Please confirm your password')
-    .when('password', {
-      is: password => (!!(password && password.length > 0)),
-      then: yup.string().oneOf([yup.ref('password')], "Password doesn't match")
-    })
+    .required('Email is a required field')
+  // password: yup
+  //   .string()
+  //   .required('Please enter your password')
+  //   .matches(
+  //     /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+  //     'Password must contain at least 8 characters, one uppercase, one number and one special case character'
+  //   ),
+  // confirmPassword: yup
+  //   .string()
+  //   .required('Please confirm your password')
+  //   .when('password', {
+  //     is: password => (!!(password && password.length > 0)),
+  //     then: yup.string().oneOf([yup.ref('password')], "Password doesn't match")
+  //   })
 })
 
 function Register () {
@@ -38,11 +38,11 @@ function Register () {
   }
   )
   const onSubmit = (values) => {
-    const { username, password, email } = values
+    const { username, password, email, firstName, lastName } = values
     register({ username, password }, { baseUrl })
       .then((token) => {
         if (isAuthenticated()) {
-          sendRegistrationEmail(username)
+          sendRegistrationEmail(email)
           alert('check your inbox')
           dispatch(changePage('Home'))
           return getUserInfo(username)
@@ -51,18 +51,20 @@ function Register () {
         }
       })
       .then(res => {
+        updateUserInfo(username, firstName, lastName, email)
         dispatch(addUserInfo(res))
+        console.log(res)
       })
       .catch(err => alert(err.message))
   }
   return (
     <Box align='center' pad='large' >
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form data-testid="login-form" onSubmit={handleSubmit(onSubmit)}>
         <FormField label='First name' name='firstName'>
-          <Controller as={TextInput} name="firstName" control={control} defaultValue=""/>
+          <Controller as={TextInput} name="firstName" control={control} defaultValue="" type='text'/>
         </FormField>
         <FormField label='Last name' name='lastName'>
-          <Controller as={TextInput} name="lastName" control={control} defaultValue=""/>
+          <Controller as={TextInput} name="lastName" control={control} defaultValue="" type='text'/>
         </FormField>
         <FormField label='username' name='username'>
           <Controller as={TextInput} name="username" control={control} defaultValue=""/>
@@ -73,11 +75,11 @@ function Register () {
         </FormField>
         <FormField label='password' name='password'>
           <Controller as={TextInput} name="password" type="password" control={control} defaultValue="" />
-          <p>{errors.password?.message}</p>
+          {/* <p>{errors.password?.message}</p> */}
         </FormField>
         <FormField label="confirm-password" name='confirm-password'>
           <Controller as={TextInput} name="confirmPassword" type="password" control={control} defaultValue="" />
-          <p>{errors.confirmPassword?.message}</p>
+          {/* <p>{errors.confirmPassword?.message}</p> */}
         </FormField>
         <Button type='submit' value='Submit' label='Submit' />
       </Form>
