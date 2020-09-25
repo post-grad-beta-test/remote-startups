@@ -14,7 +14,7 @@ const schema = yup.object().shape({
   email: yup
     .string()
     .email()
-    .required('Email is a required field')
+    .required('Email is a required field'),
   password: yup
     .string()
     .required('Please enter your password')
@@ -28,8 +28,8 @@ const schema = yup.object().shape({
     .when('password', {
       is: password => (!!(password && password.length > 0)),
       then: yup.string().oneOf([yup.ref('password')], "Password doesn't match")
+    })
 })
-
 function Register () {
   const dispatch = useDispatch()
   const { handleSubmit, control, errors } = useForm({
@@ -55,6 +55,12 @@ function Register () {
   }
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
+      <FormField label='First name' name='firstName'>
+        <Controller as={TextInput} name="firstName" control={control} defaultValue=""/>
+      </FormField>
+      <FormField label='Last name' name='lastName'>
+        <Controller as={TextInput} name="lastName" control={control} defaultValue=""/>
+      </FormField>
       <FormField label='username' name='username'>
         <Controller as={TextInput} name="username" control={control} defaultValue=""/>
       </FormField>
@@ -75,4 +81,3 @@ function Register () {
   )
 }
 export default Register
-
