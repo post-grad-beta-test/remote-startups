@@ -2,10 +2,10 @@
 import { isAuthenticated, signIn } from 'authenticare/client'
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { addUserInfo, changePage } from '../actions'
+import { addUserInfo, changeNavState, changePage } from '../actions'
 import { getUserInfo } from '../api'
 import { baseApiUrl as baseUrl } from '../config'
-import { Form, FormField, TextInput } from 'grommet'
+import { Form, FormField, TextInput, Button } from 'grommet'
 
 function Login() {
   const [user] = useState({
@@ -31,6 +31,7 @@ function Login() {
       .then((token) => {
         if (isAuthenticated()) {
           dispatch(changePage('Home'))
+          dispatch(changeNavState('Logged In'))
           return getUserInfo(username)
         }
       })
@@ -48,7 +49,7 @@ function Login() {
       <FormField label='password' name='password'>
         <TextInput name='password' type='password' onChange={passwordHandler} />
       </FormField>
-      <input type='submit' value='Submit' />
+      <Button type='submit' value='Submit' label='Submit' />
     </Form>
   )
 }

@@ -6,7 +6,7 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import * as yup from 'yup'
-import { addUserInfo, changePage } from '../actions'
+import { addUserInfo, changeNavState, changePage } from '../actions'
 import { getUserInfo, sendRegistrationEmail, updateUserInfo } from '../api'
 import { baseApiUrl as baseUrl } from '../config'
 
@@ -45,6 +45,7 @@ function Register () {
           sendRegistrationEmail(email)
           alert('check your inbox')
           dispatch(changePage('Home'))
+          dispatch(changeNavState('Logged In'))
           return getUserInfo(username)
         } else {
           alert('Nope')
