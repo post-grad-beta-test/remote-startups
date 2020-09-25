@@ -2,7 +2,7 @@
 import { isAuthenticated, signIn } from 'authenticare/client'
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { addUserInfo, changePage } from '../actions'
+import { addUserInfo, changeNavState, changePage } from '../actions'
 import { getUserInfo } from '../api'
 import { baseApiUrl as baseUrl } from '../config'
 import { Form, FormField, TextInput } from 'grommet'
@@ -31,6 +31,7 @@ function Login() {
       .then((token) => {
         if (isAuthenticated()) {
           dispatch(changePage('Home'))
+          dispatch(changeNavState('Logged In'))
           return getUserInfo(username)
         }
       })
