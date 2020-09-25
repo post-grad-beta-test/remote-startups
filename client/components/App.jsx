@@ -7,6 +7,7 @@ import Register from './Register'
 
 
 
+
 const App = ({ currentPage }) => {
   return (
     <>

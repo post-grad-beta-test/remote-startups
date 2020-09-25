@@ -30,10 +30,11 @@ const schema = yup.object().shape({
     })
 })
 
-function Register () {
+function Register() {
   const dispatch = useDispatch()
   const { handleSubmit, control, errors } = useForm({
-    resolver: yupResolver(schema) }
+    resolver: yupResolver(schema)
+  }
   )
   const onSubmit = ({ values }) => {
     const { username, password } = values
@@ -57,15 +58,15 @@ function Register () {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormField label='email' name='email'>
-        <Controller as={TextInput} name="email" control={control} defaultValue=""/>
+        <Controller as={TextInput} name="email" control={control} defaultValue="" />
         <p>{errors.email?.message}</p>
       </FormField>
       <FormField label='password' name='password'>
-        <Controller as={TextInput} name="password" type="password" control={control} defaultValue=""/>
+        <Controller as={TextInput} name="password" type="password" control={control} defaultValue="" />
         <p>{errors.password?.message}</p>
       </FormField>
       <FormField label="confirm-password" name='confirm-password'>
-        <Controller as={TextInput} name="confirmPassword" type="password" control={control} defaultValue=""/>
+        <Controller as={TextInput} name="confirmPassword" type="password" control={control} defaultValue="" />
         <p>{errors.confirmPassword?.message}</p>
       </FormField>
       <Button type='submit' value='Submit' label='Submit' />
