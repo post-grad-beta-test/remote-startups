@@ -31,7 +31,7 @@ const schema = yup.object().shape({
   //   })
 })
 
-function Register () {
+function Register() {
   const dispatch = useDispatch()
   const { handleSubmit, control, errors } = useForm({
     resolver: yupResolver(schema)
@@ -44,17 +44,13 @@ function Register () {
         if (isAuthenticated()) {
           sendRegistrationEmail(email)
           alert('check your inbox')
-          dispatch(changePage('Home'))
-          dispatch(changeNavState('Logged In'))
-          return getUserInfo(username)
-        } else {
-          alert('Nope')
-        }
+        } else alert('Something went wrong')
       })
-      .then(res => {
-        updateUserInfo(username, firstName, lastName, email)
-        dispatch(addUserInfo(res))
-        console.log(res)
+      .then(() => {
+        updateUserInfo({ username, firstName, lastName, email })
+        dispatch(addUserInfo({ username }))
+        dispatch(changePage('Home'))
+        dispatch(changeNavState('Logged In'))
       })
       .catch(err => alert(err.message))
   }
@@ -62,13 +58,13 @@ function Register () {
     <Box align='center' pad='large' >
       <Form data-testid="login-form" onSubmit={handleSubmit(onSubmit)}>
         <FormField label='First name' name='firstName'>
-          <Controller as={TextInput} name="firstName" control={control} defaultValue="" type='text'/>
+          <Controller as={TextInput} name="firstName" control={control} defaultValue="" type='text' />
         </FormField>
         <FormField label='Last name' name='lastName'>
-          <Controller as={TextInput} name="lastName" control={control} defaultValue="" type='text'/>
+          <Controller as={TextInput} name="lastName" control={control} defaultValue="" type='text' />
         </FormField>
         <FormField label='username' name='username'>
-          <Controller as={TextInput} name="username" control={control} defaultValue=""/>
+          <Controller as={TextInput} name="username" control={control} defaultValue="" />
         </FormField>
         <FormField label='email' name='email'>
           <Controller as={TextInput} name="email" control={control} defaultValue="" />
