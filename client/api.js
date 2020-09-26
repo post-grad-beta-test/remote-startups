@@ -1,7 +1,7 @@
 import request from 'superagent'
 const acceptJsonHeader = { Accept: 'application/json' }
 
-export function sendRegistrationEmail (email) {
+export function sendRegistrationEmail(email) {
   return request
     .post('/api/v1/sendRegistrationEmail')
     .set(acceptJsonHeader)
@@ -12,7 +12,7 @@ export function sendRegistrationEmail (email) {
     })
 }
 
-export function sendReminderEmail (email) {
+export function sendReminderEmail(email) {
   return request
     .post('/api/v1/sendReminderEmail')
     .set(acceptJsonHeader)
@@ -23,7 +23,7 @@ export function sendReminderEmail (email) {
     })
 }
 
-export function getUserInfo (username) {
+export function getUserInfo(username) {
   return request
     .get(`/api/v1/auth?username=${username}`)
     .set(acceptJsonHeader)
@@ -33,12 +33,11 @@ export function getUserInfo (username) {
     })
 }
 
-export function updateUserInfo (firstName, lastName, username, email) {
-  console.log('this is the api')
+export function updateUserInfo(info) {
   return request
     .patch(`/api/v1/auth`)
     .set(acceptJsonHeader)
-    .send({ username, firstName, lastName, email })
+    .send(info)
     .then(res => res.body)
     .catch((error) => {
       res.sendStatus('something went wrong')

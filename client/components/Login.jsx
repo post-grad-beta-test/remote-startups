@@ -7,13 +7,13 @@ import { getUserInfo } from '../api'
 import { baseApiUrl as baseUrl } from '../config'
 import { Form, FormField, TextInput, Button } from 'grommet'
 
-function Login() {
+function Login({ dispatch }) {
   const [user] = useState({
     username: '',
     password: ''
   })
 
-  const emailHandler = (event) => {
+  const usernameHandler = (event) => {
     event.preventDefault()
     user.username = event.target.value
   }
@@ -35,16 +35,14 @@ function Login() {
           return getUserInfo(username)
         }
       })
-      .then(res => {
-        dispatch(addUserInfo(res))
-      })
+      .then(res => dispatch(addUserInfo({ username: res.username })))
       .catch(err => alert(err.message + ': Incorrect email or password, please try again'))
   }
 
   return (
     <Form onSubmit={submitHandler}>
-      <FormField label='email' name='email'>
-        <TextInput name='email' type='email' onChange={emailHandler} placeholder='example@mail.com' />
+      <FormField label='username' name='username'>
+        <TextInput name='username' type='username' onChange={usernameHandler} />
       </FormField>
       <FormField label='password' name='password'>
         <TextInput name='password' type='password' onChange={passwordHandler} />

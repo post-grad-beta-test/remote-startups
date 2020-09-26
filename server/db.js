@@ -14,7 +14,6 @@ function getUserByName (username, db = connection) {
 }
 
 function saveNewUser (user, db = connection) {
-  console.log(user)
   return userExists(user.username, db)
     .then(exists => {
       if (exists) {
@@ -26,13 +25,13 @@ function saveNewUser (user, db = connection) {
       return db('users')
         .insert({
           username: user.username,
-          password_hash: passwordHash
+          password_hash: passwordHash,
+          created_at: new Date()
         })
     })
 }
 
 function userExists (username, db = connection) {
-  console.log('userexists')
   return db('users')
     .count('id as n')
     .where('username', username)
@@ -44,7 +43,7 @@ function userExists (username, db = connection) {
 function updateDetails ({ username, firstName, lastName, email }, db = connection) {
   return db('users')
     .where('username', username)
-    .insert({ first_name: firstName, last_name: lastName, email: email })
+    .update({ first_name: firstName, last_name: lastName, email })
 }
 module.exports = {
   userExists,

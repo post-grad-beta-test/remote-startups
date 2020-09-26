@@ -9,10 +9,10 @@ export function changePage (page) {
   }
 }
 
-export function addUserInfo (userInfo) {
+export function addUserInfo (username) {
   return {
     type: ADD_USER_INFO,
-    userInfo
+    username
   }
 }
 

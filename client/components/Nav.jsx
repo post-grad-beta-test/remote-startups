@@ -4,7 +4,7 @@ import { isAuthenticated } from 'authenticare/client'
 import LoggedIn from './LoggedIn'
 import LoggedOff from './LoggedOff'
 
-function NavHeader({  navState }) {
+function NavHeader({ navState }) {
   if (isAuthenticated())
     return (
       <>
