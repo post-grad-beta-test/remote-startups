@@ -1,12 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Home from './Home'
-import Nav from './Nav'
 import Login from './Login'
+import Nav from './Nav'
 import Register from './Register'
-
-
-
 
 const App = ({ currentPage }) => {
   return (
@@ -19,7 +16,7 @@ const App = ({ currentPage }) => {
   )
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     currentPage: state.currentPage
   }

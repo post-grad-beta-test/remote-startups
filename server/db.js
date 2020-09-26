@@ -3,10 +3,10 @@ const config = require('../knexfile').development
 const connection = knex(config)
 const { generateHash } = require('authenticare/server')
 
-function getUserByName (email, db = connection) {
+function getUserByName (username, db = connection) {
   return db('users')
-    .where('email', email)
-    .select('id', 'email as username', 'password_hash as hash')
+    .where('username', username)
+    .select('id', 'username', 'first_name', 'last_name', 'email', 'password_hash as hash')
     .first()
     .then(user => {
       return user
@@ -14,34 +14,40 @@ function getUserByName (email, db = connection) {
 }
 
 function saveNewUser (user, db = connection) {
-  user.email = user.username
-  return userExists(user.email, db)
+  return userExists(user.username, db)
     .then(exists => {
       if (exists) {
-        return Promise.reject(new Error('User exists'))
+        return alert()
       }
     })
     .then(() => generateHash(user.password))
     .then(passwordHash => {
       return db('users')
         .insert({
-          email: user.email,
-          password_hash: passwordHash
+          username: user.username,
+          password_hash: passwordHash,
+          created_at: new Date()
         })
     })
 }
 
-function userExists (email, db = connection) {
+function userExists (username, db = connection) {
   return db('users')
     .count('id as n')
-    .where('email', email)
+    .where('username', username)
     .then(count => {
       return count[0].n > 0
     })
 }
 
+function updateDetails ({ username, firstName, lastName, email }, db = connection) {
+  return db('users')
+    .where('username', username)
+    .update({ first_name: firstName, last_name: lastName, email })
+}
 module.exports = {
   userExists,
   saveNewUser,
-  getUserByName
+  getUserByName,
+  updateDetails
 }

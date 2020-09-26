@@ -7,7 +7,8 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 const {
   userExists,
   saveNewUser,
-  getUserByName
+  getUserByName,
+  updateDetails
 } = require('../db')
 
 applyAuthRoutes(router, {
@@ -45,18 +46,26 @@ router.post('/sendReminderEmail', (req, res) => {
 })
 
 router.get('/auth', (req, res) => {
-  const email = req.query.email
-  getUserByName(email)
+  const username = req.query.username
+  getUserByName(username)
     .then(user => {
       const userInfo = {
         id: user.id,
-        email: user.username
+        username: user.username,
+        firstName: user.first_name,
+        lastName: user.last_name,
+        email: user.email
       }
       res.json(userInfo)
     })
-    .catch((err) => {
-      res.status(500).send(err.message)
-    })
+    .catch((err) => res.status(500).send(err.message))
 })
 
+router.patch('/auth', (req, res) => {
+  console.log('req.body', req.body)
+  updateDetails(req.body)
+    .then(() => res.send(200))
+    .catch((err) => res.status(500).send(err.message))
+
+})
 module.exports = router
