@@ -16,7 +16,7 @@ function LoggedIn({ dispatch, username }) {
             <Box direction="row" align="center" gap="small" onClick={() => dispatch(changePage('Home'))} >
                 Coject - Yourself, With Others
             </Box>
-            <Box direction="row" align="center" gap="small" onClick={() => dispatch(changePage('Profile'))} >
+            <Box direction="row" align="center" gap="small" onClick={() => dispatch(changePage('User'))} >
                 Logged in as {username}
             </Box>
             <ResponsiveContext.Consumer>
