@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Home from './Home'
 import Login from './Login'
-import Nav from './Nav'
+import NavHeader from './Nav'
 import Register from './Register'
 import UserTabs from './UserTabs'
 
@@ -24,8 +24,7 @@ const App = ({ currentPage }) => {
     </>
   )
 }
-
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     currentPage: state.currentPage
   }
