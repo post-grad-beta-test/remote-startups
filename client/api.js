@@ -1,4 +1,5 @@
 import request from 'superagent'
+import { getEncodedToken } from 'authenticare/client'
 const acceptJsonHeader = { Accept: 'application/json' }
 
 export function sendRegistrationEmail(email) {
@@ -40,6 +41,17 @@ export function updateUserInfo(info) {
     .send(info)
     .then(res => res.body)
     .catch((error) => {
-      res.sendStatus('something went wrong')
+      res.status(500).send('something went wrong')
+    })
+}
+
+export function getUsername() {
+  return request 
+    .post('/api/v1/auth/username')
+    .set(acceptJsonHeader)
+    .set({ 'Authorization': `Bearer ${getEncodedToken()}` })
+    .then(res => res.body)
+    .catch((error) => {
+      res.status(500).send('something went wrong')
     })
 }

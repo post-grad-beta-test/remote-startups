@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { applyAuthRoutes } = require('authenticare/server')
+const { applyAuthRoutes, getTokenDecoder } = require('authenticare/server')
 const sgMail = require('@sendgrid/mail')
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
@@ -66,6 +66,14 @@ router.patch('/auth', (req, res) => {
   updateDetails(req.body)
     .then(() => res.send(200))
     .catch((err) => res.status(500).send(err.message))
-
 })
+
+router.post('/auth/username', getTokenDecoder(), (req, res) => {
+  if (req.user) {
+    res.json(req.user.username)
+  } else {
+    res.status(500).send('authenication token not provided')
+  }
+})
+
 module.exports = router

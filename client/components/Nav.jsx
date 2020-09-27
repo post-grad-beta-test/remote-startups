@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import LoggedIn from './LoggedIn'
 import LoggedOff from './LoggedOff'
 
-function NavHeader ({ navState }) {
-  if (isAuthenticated()) {
+function Nav({ navState }) {
+  if (isAuthenticated())
     return (
       <>
         {navState === 'Logged In' && <LoggedIn />}
@@ -26,4 +26,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps)(NavHeader)
+export default connect(mapStateToProps)(Nav)
