@@ -7,17 +7,10 @@ import { getUserInfo } from '../api'
 import { addUserInfo } from '../actions'
 
 function UserTabs({ dispatch, user }) {
-  useEffect(() => {
-    if (isAuthenticated()) {
-      getUserInfo()
-        .then(userInfo => {
-          dispatch(addUserInfo(userInfo))
-        })
-    }
-    else dispatch(changeNavState('Logged Off'))
-  }, [])
-
-  console.log(user)
+  getUserInfo()
+    .then(userInfo => {
+      dispatch(addUserInfo(userInfo))
+    })
 
   return (
     <Tabs justify="end" flex margin="large">
