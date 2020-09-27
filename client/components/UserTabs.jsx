@@ -1,4 +1,4 @@
-import { Box, Tabs, Tab, Form, FormField, Image, TextInput, List, DateInput } from 'grommet'
+import { Box, Tabs, Tab, Form, FormField, Image, Text, TextInput, List, DateInput } from 'grommet'
 import { User, Aggregate, TableAdd } from 'grommet-icons'
 import React from 'react'
 
@@ -11,8 +11,13 @@ function UserTabs() {
             <FormField label="Profile Picture">
               <Image src="https://picsum.photos/200" />
             </FormField>
-            <FormField label="email">
-              <TextInput placeholder="john@gmail.com" />
+            <FormField label="Email">
+              <Text textAlign="start">
+                john@gmail.com
+          </Text>
+            </FormField>
+            <FormField label="Username">
+              <TextInput placeholder="j0hnnyBoi69" />
             </FormField>
             <FormField label="First Name">
               <TextInput />
@@ -41,9 +46,12 @@ function UserTabs() {
               <TextInput placeholder="Tell us what you want to collaborate on and why" type="text" plain={false} />
             </FormField>
             <FormField label="Topics" name="Topics">
-              <Select options={["ACCOUNTING", "AGRICULTURAL SCIENCE", "APPLIED SCIENCES", "ARCHITECTURE", "BANKING & FINANCE", "BIOCHEMISTRY", "BUSINESS ADMINISTRATION & MANAGEMENT", "CHEMISTRY", "CHEMICAL ENGINEERING", "CIVIL ENGINEERING", "COMMUNITY", "COMMUNICATION", "COMPUTER ENGINEERING", "COMPUTER SCIENCE", "CRIMINOLOGY", "ECONOMICS", "EDUCATION", "ELECTRICAL & ELECTRONICS ENGINEERING", "ENGINEERING", "ENGLISH LANGUAGE & LITERATURE", "ENTREPRENEURSHIP", "ENVIRONMENTAL DESIGN", "ENVIRONMENTAL SCIENCE", "ESTATE MANAGEMENT", "FRENCH", "GARDENING", "GAMING", "GEOLOGY", "HISTORY", "HUMAN RESOURCE MANAGEMENT", "INSURANCE", "INTERNATIONAL RELATIONS", "LAW", "LIBRARY SCIENCE", "LINGUISTICS & COMMUNICATION", "MARKETING", "MASS COMMUNICATION", "MATHEMATICS", "MECHANICAL ENGINEERING", "MEDICAL & HEALTH SCIENCE", "MICROBIOLOGY", "NURSING", "OFFICE TECHNOLOGY MANAGEMENT", "PERMACULTURE", "PHARMACEUTICAL SCIENCES", "PHILOSOPHY", "PHYSICS", "POLITICAL SCIENCE", "PROJECT MANAGEMENT", "PSYCHOLOGY", "PUBLIC ADMINISTRATION", "PUBLIC HEALTH", "PURCHASING & SUPPLY CHAIN MANAGEMENT", "QUANTITY SURVEY", "SCIENCE LABORATORY TECHNOLOGY", "SOCIOLOGY", "STATISTICS", "SUSTAINABILITY", "TECHNOLOGY", "THEATRE ARTS", "THEOLOGY & BIBLICAL STUDIES", "URBAN & REGIONAL PLANNING", "VETERINARY MEDICINE"]} multiple searchPlaceholder="Search Interests" />
+              <TextInput placeholder="Choose from the list or create your own" suggestions={["ACCOUNTING", "", "AGRICULTURAL SCIENCE", "", "APPLIED SCIENCES", "", "ARCHITECTURE", "", "BANKING & FINANCE", "", "BIOCHEMISTRY", "", "BUSINESS ADMINISTRATION & MANAGEMENT", "", "CHEMISTRY", "", "CHEMICAL ENGINEERING", "", "CIVIL ENGINEERING", "", "COMMUNITY", "", "COMMUNICATION", "", "COMPUTER ENGINEERING", "", "COMPUTER SCIENCE", "", "CRIMINOLOGY", "", "ECONOMICS", "", "EDUCATION", "", "ELECTRICAL & ELECTRONICS ENGINEERING", "", "ENGINEERING", "", "ENGLISH LANGUAGE & LITERATURE", "", "ENTREPRENEURSHIP", "", "ENVIRONMENTAL DESIGN", "", "ENVIRONMENTAL SCIENCE", "", "ESTATE MANAGEMENT", "", "FRENCH", "", "GARDENING", "", "GAMING", "", "GEOLOGY", "", "HISTORY", "", "HUMAN RESOURCE MANAGEMENT", "", "INSURANCE", "", "INTERNATIONAL RELATIONS", "", "LAW", "", "LIBRARY SCIENCE", "", "LINGUISTICS & COMMUNICATION", "", "MASTERS DISSERTATION", "", "MARKETING", "", "MASS COMMUNICATION", "", "MATHEMATICS", "", "MECHANICAL ENGINEERING", "", "MEDICAL & HEALTH SCIENCE", "", "MICROBIOLOGY", "", "NURSING", "", "OFFICE TECHNOLOGY MANAGEMENT", "", "PERMACULTURE", "", "PHARMACEUTICAL SCIENCES", "", "PHILOSOPHY", "", "PHYSICS", "", "POLITICAL SCIENCE", "", "PROJECT MANAGEMENT", "", "PSYCHOLOGY", "", "PUBLIC ADMINISTRATION", "", "PUBLIC HEALTH", "", "PURCHASING & SUPPLY CHAIN MANAGEMENT", "", "QUANTITY SURVEY", "", "SCIENCE LABORATORY TECHNOLOGY", "", "SOCIOLOGY", "", "STATISTICS", "", "SUSTAINABILITY", "", "TECHNOLOGY", "", "THEATRE ARTS", "", "THEOLOGY & BIBLICAL STUDIES", "", "URBAN & REGIONAL PLANNING", "", "VETERINARY MEDICINE", "", "OTHER"]} type="text" plain={false} />
+              <FormField label="Starting Date">
+                <DateInput format="dd/mm/yyyy" />
+              </FormField>
             </FormField>
-            <FormField label="To Be Completed By">
+            <FormField label="Finished date">
               <DateInput format="dd/mm/yyyy" />
             </FormField>
             <FormField label="Project Image" name="Project Name">
