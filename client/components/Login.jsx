@@ -1,13 +1,13 @@
 /* eslint-disable promise/always-return */
 import { isAuthenticated, signIn } from 'authenticare/client'
-import { Form, FormField, TextInput } from 'grommet'
+import { Form, FormField, TextInput, Button } from 'grommet'
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { addUserInfo, changeNavState, changePage } from '../actions'
 import { getUserInfo } from '../api'
 import { baseApiUrl as baseUrl } from '../config'
 
-function Login ({ dispatch }) {
+function Login({ dispatch }) {
   const [user] = useState({
     username: '',
     password: ''
@@ -30,7 +30,7 @@ function Login ({ dispatch }) {
     signIn({ username, password }, { baseUrl })
       .then((token) => {
         if (isAuthenticated()) {
-          dispatch(changePage('Home'))
+          dispatch(changePage('User'))
           dispatch(changeNavState('Logged In'))
           return getUserInfo(username)
         }
@@ -47,7 +47,9 @@ function Login ({ dispatch }) {
       <FormField htmlfor='password' name='password'>
         <TextInput name='password' type='password' onChange={passwordHandler} />
       </FormField>
-    </Form>)
+      <Button type='submit' value='Submit' label='Submit' />
+    </Form>
+  )
 }
 
 export default connect()(Login)

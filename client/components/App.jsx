@@ -1,19 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Home from './Home'
 import Login from './Login'
-import NavHeader from './Nav'
 import Register from './Register'
 import UserTabs from './UserTabs'
 
 const App = ({ currentPage }) => {
   return (
     <>
-      <NavHeader />
-      {currentPage === 'Home' && <Home />}
-      {currentPage === 'Login' && <Login />}
-      {currentPage === 'Register' && <Register />}
-      <UserTabs/>
+      <Nav />
+      <IfNotAuthenticated>
+        {currentPage === 'Home' && <Home />}
+        {currentPage === 'Login' && <Login />}
+        {currentPage === 'Register' && <Register />}
+      </IfNotAuthenticated>
+      <IfAuthenticated>
+        {currentPage === 'Home' && <Home />}
+        {currentPage === 'User' && <UserTabs />}
+      </IfAuthenticated>
     </>
   )
 }

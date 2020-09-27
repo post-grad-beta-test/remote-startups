@@ -1,4 +1,4 @@
-import { Box, DateInput, Form, FormField, Image, List, Tab, Tabs, TextInput } from 'grommet'
+import { Box, DateInput, Form, FormField, Image, List, Tab, Tabs, Text, TextInput } from 'grommet'
 import { Aggregate, TableAdd, User } from 'grommet-icons'
 import React from 'react'
 
@@ -11,8 +11,13 @@ function UserTabs () {
             <FormField label="Profile Picture">
               <Image src="https://picsum.photos/200" />
             </FormField>
-            <FormField label="email">
-              <TextInput placeholder="john@gmail.com" />
+            <FormField label="Email">
+              <Text textAlign="start">
+                john@gmail.com
+              </Text>
+            </FormField>
+            <FormField label="Username">
+              <TextInput placeholder="j0hnnyBoi69" />
             </FormField>
             <FormField label="First Name">
               <TextInput />
@@ -28,7 +33,7 @@ function UserTabs () {
       </Tab>
       <Tab title="Projects Joined" icon={<Aggregate />}>
         <Box align="center" justify="center" pad="xlarge">
-          <List data={[{ 'name': 'Sustainability Project', 'Finishing': '05/10/20' }, { 'name': 'Communication Tool', 'Finishing': '11/10/20' }]} primaryKey="name" secondaryKey="finishing"/>
+          <List data={[{ 'name': 'Sustainability Project', 'Finishing': '05/10/20' }, { 'name': 'Communication Tool', 'Finishing': '11/10/20' }]} primaryKey="name" secondaryKey="finishing" onClickItem={[{ 'screen': 1, 'label': 'Screen', 'key': 1 }]} />
         </Box>
       </Tab>
       <Tab title="Create Project" icon={<TableAdd />}>
@@ -42,8 +47,11 @@ function UserTabs () {
             </FormField>
             <FormField label="Topics" name="Topics">
               <TextInput placeholder="Choose from the list or create your own" suggestions={['ACCOUNTING', '', 'AGRICULTURAL SCIENCE', '', 'APPLIED SCIENCES', '', 'ARCHITECTURE', '', 'BANKING & FINANCE', '', 'BIOCHEMISTRY', '', 'BUSINESS ADMINISTRATION & MANAGEMENT', '', 'CHEMISTRY', '', 'CHEMICAL ENGINEERING', '', 'CIVIL ENGINEERING', '', 'COMMUNITY', '', 'COMMUNICATION', '', 'COMPUTER ENGINEERING', '', 'COMPUTER SCIENCE', '', 'CRIMINOLOGY', '', 'ECONOMICS', '', 'EDUCATION', '', 'ELECTRICAL & ELECTRONICS ENGINEERING', '', 'ENGINEERING', '', 'ENGLISH LANGUAGE & LITERATURE', '', 'ENTREPRENEURSHIP', '', 'ENVIRONMENTAL DESIGN', '', 'ENVIRONMENTAL SCIENCE', '', 'ESTATE MANAGEMENT', '', 'FRENCH', '', 'GARDENING', '', 'GAMING', '', 'GEOLOGY', '', 'HISTORY', '', 'HUMAN RESOURCE MANAGEMENT', '', 'INSURANCE', '', 'INTERNATIONAL RELATIONS', '', 'LAW', '', 'LIBRARY SCIENCE', '', 'LINGUISTICS & COMMUNICATION', '', 'MASTERS DISSERTATION', '', 'MARKETING', '', 'MASS COMMUNICATION', '', 'MATHEMATICS', '', 'MECHANICAL ENGINEERING', '', 'MEDICAL & HEALTH SCIENCE', '', 'MICROBIOLOGY', '', 'NURSING', '', 'OFFICE TECHNOLOGY MANAGEMENT', '', 'PERMACULTURE', '', 'PHARMACEUTICAL SCIENCES', '', 'PHILOSOPHY', '', 'PHYSICS', '', 'POLITICAL SCIENCE', '', 'PROJECT MANAGEMENT', '', 'PSYCHOLOGY', '', 'PUBLIC ADMINISTRATION', '', 'PUBLIC HEALTH', '', 'PURCHASING & SUPPLY CHAIN MANAGEMENT', '', 'QUANTITY SURVEY', '', 'SCIENCE LABORATORY TECHNOLOGY', '', 'SOCIOLOGY', '', 'STATISTICS', '', 'SUSTAINABILITY', '', 'TECHNOLOGY', '', 'THEATRE ARTS', '', 'THEOLOGY & BIBLICAL STUDIES', '', 'URBAN & REGIONAL PLANNING', '', 'VETERINARY MEDICINE', '', 'OTHER']} type="text" plain={false} />
+              <FormField label="Starting Date">
+                <DateInput format="dd/mm/yyyy" />
+              </FormField>
             </FormField>
-            <FormField label="To Be Completed By">
+            <FormField label="Finished date">
               <DateInput format="dd/mm/yyyy" />
             </FormField>
             <FormField label="Project Image" name="Project Name">
