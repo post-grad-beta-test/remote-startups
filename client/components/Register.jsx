@@ -1,13 +1,13 @@
 /* eslint-disable promise/always-return */
 import { yupResolver } from '@hookform/resolvers'
 import { isAuthenticated, register } from 'authenticare/client'
-import { Box, Button, Form, FormField, TextInput } from 'grommet'
+import { Box, Button, Form, TextInput } from 'grommet'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import * as yup from 'yup'
 import { addUserInfo, changeNavState, changePage } from '../actions'
-import { getUserInfo, sendRegistrationEmail, updateUserInfo } from '../api'
+import { sendRegistrationEmail, updateUserInfo } from '../api'
 import { baseApiUrl as baseUrl } from '../config'
 
 const schema = yup.object().shape({
@@ -31,7 +31,7 @@ const schema = yup.object().shape({
   //   })
 })
 
-function Register() {
+function Register () {
   const dispatch = useDispatch()
   const { handleSubmit, control, errors } = useForm({
     resolver: yupResolver(schema)
@@ -56,28 +56,28 @@ function Register() {
   }
   return (
     <Box align='center' pad='large' >
-      <Form data-testid="login-form" onSubmit={handleSubmit(onSubmit)}>
-        <FormField label='First name' name='firstName'>
-          <Controller as={TextInput} name="firstName" control={control} defaultValue="" type='text' />
-        </FormField>
-        <FormField label='Last name' name='lastName'>
-          <Controller as={TextInput} name="lastName" control={control} defaultValue="" type='text' />
-        </FormField>
-        <FormField label='username' name='username'>
-          <Controller as={TextInput} name="username" control={control} defaultValue="" />
-        </FormField>
-        <FormField label='email' name='email'>
-          <Controller as={TextInput} name="email" control={control} defaultValue="" />
+      <Form pad="small" onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor='firstName'> First Name </label>
+        <Controller as={TextInput} id='firstName' name="firstName" control={control} defaultValue="" type='text' />
+
+        <label htmlFor='lastName'>Last Name
+          <Controller as={TextInput} id="lastName" name="lastName" control={control} defaultValue="" type='text' />
+        </label>
+        <label htmlFor='username'>username
+          <Controller as={TextInput} id="username" name="username" control={control} defaultValue="" />
+        </label>
+        <label htmlFor='email'>Email
+          <Controller as={TextInput} id="email" name="email" control={control} defaultValue="" />
           <p>{errors.email?.message}</p>
-        </FormField>
-        <FormField label='password' name='password'>
-          <Controller as={TextInput} name="password" type="password" control={control} defaultValue="" />
+        </label>
+        <label htmlFor='password'>Password
+          <Controller as={TextInput} id="password" name="password" type="password" control={control} defaultValue="" />
           {/* <p>{errors.password?.message}</p> */}
-        </FormField>
-        <FormField label="confirm-password" name='confirm-password'>
-          <Controller as={TextInput} name="confirmPassword" type="password" control={control} defaultValue="" />
+        </label>
+        <label htmlFor='confirmPassword'>Confirm Password
+          <Controller as={TextInput} id="confirmPassword" name="confirmPassword" type="password" control={control} defaultValue="" />
           {/* <p>{errors.confirmPassword?.message}</p> */}
-        </FormField>
+        </label>
         <Button type='submit' value='Submit' label='Submit' />
       </Form>
     </Box>
