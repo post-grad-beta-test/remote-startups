@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import Home from './Home'
 import Login from './Login'
-import NavHeader from './Nav'
+import Nav from './Nav'
 import Register from './Register'
 import UserTabs from './UserTabs'
 
