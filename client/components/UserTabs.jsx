@@ -41,7 +41,7 @@ function UserTabs({ dispatch, user }) {
       </Tab>
       <Tab title="Projects Joined" icon={<Aggregate />}>
         <Box align="center" justify="center" pad="xlarge">
-          <List data={[{ "name": "Sustainability Project", "Finishing": "05/10/20" }, { "name": "Communication Tool", "Finishing": "11/10/20" }]} primaryKey="name" secondaryKey="finishing" onClickItem={[{ "screen": 1, "label": "Screen", "key": 1 }]} />
+          <List data={[{ "name": "Sustainability Project", "Finishing": "05/10/20" }, { "name": "Communication Tool", "Finishing": "11/10/20" }]} primaryKey="name" secondaryKey="finishing" />
         </Box>
       </Tab>
       <Tab title="Create Project" icon={<TableAdd />}>
