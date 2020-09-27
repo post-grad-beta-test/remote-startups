@@ -4,7 +4,7 @@ import { isAuthenticated } from 'authenticare/client'
 import LoggedIn from './LoggedIn'
 import LoggedOff from './LoggedOff'
 
-function NavHeader({ navState }) {
+function Nav({ navState }) {
   if (isAuthenticated())
     return (
       <>
@@ -25,4 +25,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(NavHeader)
+export default connect(mapStateToProps)(Nav)
