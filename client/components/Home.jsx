@@ -1,6 +1,6 @@
-import { Box, Text, WorldMap, Heading } from 'grommet'
-import { Card } from './Card'
+import { Box, Heading, Stack, Text, WorldMap } from 'grommet'
 import React from 'react'
+import { Card } from './Card'
 
 const Identifier = ({ children, title, subTitle, size, ...rest }) => (
   <Box gap="small" align="center" {...rest}>
@@ -14,20 +14,19 @@ const Identifier = ({ children, title, subTitle, size, ...rest }) => (
   </Box>
 )
 
-
-function Home() {
+function Home () {
   return (
     <>
-      <Box align="center" pad="medium">
-        <Heading size="large">Co-ject!</Heading>
-        <Text size="xlarge" color='accent-5'>An online collaboration space</Text>
-      </Box>
-      <Card />
-      <Box Box fill align="center" justify="center">
-        <Box>
-          <WorldMap color="#173F5F" opacity="0.8" />
+      <Stack anchor='top'>
+        <Box fill justify="center" >
+          <WorldMap align= 'center' color='accent-3' opacity="0.8" />
         </Box>
-      </Box>
+        <Box fill align="center" justify="center" pad='medium'>
+          <Heading size="large">Co-ject!</Heading>
+          <Text size="xlarge" color='accent-5'>An online collaboration space</Text>
+        </Box>
+      </Stack>
+      <Card />
     </>
   )
 }
