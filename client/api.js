@@ -24,16 +24,6 @@ export function sendReminderEmail(email) {
     })
 }
 
-export function getUserInfo(username) {
-  return request
-    .get(`/api/v1/auth?username=${username}`)
-    .set(acceptJsonHeader)
-    .then(res => res.body)
-    .catch((error) => {
-      res.status(500).send('something went wrong')
-    })
-}
-
 export function updateUserInfo(info) {
   return request
     .patch(`/api/v1/auth`)
@@ -45,9 +35,9 @@ export function updateUserInfo(info) {
     })
 }
 
-export function getUsername() {
+export function getUserInfo() {
   return request 
-    .post('/api/v1/auth/username')
+    .post('/api/v1/auth')
     .set(acceptJsonHeader)
     .set({ 'Authorization': `Bearer ${getEncodedToken()}` })
     .then(res => res.body)

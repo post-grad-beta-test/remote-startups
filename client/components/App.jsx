@@ -9,14 +9,14 @@ import UserTabs from './UserTabs'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import { isAuthenticated } from 'authenticare/client/auth'
 import { changeNavState, addUserInfo } from '../actions'
-import { getUsername } from '../api'
+import { getUserInfo } from '../api'
 
 const App = ({ dispatch, currentPage }) => {
   useEffect(() => {
     if (isAuthenticated()) {
       dispatch(changeNavState('Logged In'))
-      getUsername()
-        .then(username => dispatch(addUserInfo({ username })))
+      getUserInfo()
+        .then(userInfo => dispatch(addUserInfo({ username: userInfo.username })))
     }
     else dispatch(changeNavState('Logged Off'))
   }, [])
