@@ -49,7 +49,7 @@ function Register () {
       .then(() => {
         updateUserInfo({ username, firstName, lastName, email })
         dispatch(addUserInfo({ username }))
-        dispatch(changePage('Home'))
+        dispatch(changePage('User'))
         dispatch(changeNavState('Logged In'))
       })
       .catch(err => alert(err.message))
