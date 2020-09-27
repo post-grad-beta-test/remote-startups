@@ -1,10 +1,11 @@
 const knex = require('knex')
-const config = require('../knexfile').development
+const config = require('../../knexfile').development
 const connection = knex(config)
 
-function saveNewEvent ({ userID, eventName, description, startDate, endDate }, db = connection) {
+function saveNewEvent (id, body, db = connection) {
+  const { eventName, description, startDate, endDate } = body
   return db('projects')
-    .insert({ user_id: userID, name: eventName, description: description, start_date: startDate, date_end: endDate })
+    .insert({ user_id: id, name: eventName, description: description, date_start: startDate, date_end: endDate })
 }
 
 function getAllEvents (db = connection) {
@@ -16,14 +17,22 @@ function deleteEvent (id, db = connection) {
   return db('projects').where({ id }).delete()
 }
 
-function addUserToEvent ({ userId, eventId }, db = connection) {
+function addUserToEvent (id, eventId, db = connection) {
   return db('users_projects')
-    .insert({ project_id: eventId, User_id: userId })
+    .insert({ project_id: eventId, user_id: id })
+}
+
+function getUsersForEvent ({ eventId, db = connection }) {
+  return db('users_projects')
+    .where('event_id', eventId)
+    .select('users_id')
 }
 
 module.exports = {
   saveNewEvent,
   getAllEvents,
+  deleteEvent,
   addUserToEvent,
-  deleteEvent
+  getUsersForEvent
+
 }
