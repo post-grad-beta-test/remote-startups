@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Box, Tabs, Tab, Form, FormField, Image, Text, TextInput, List, Select, DateInput } from 'grommet'
+import { Box, Tabs, Tab, Form, FormField, Image, Text, TextInput, List, Select, DateInput, Button } from 'grommet'
 import { User, Aggregate, TableAdd } from 'grommet-icons'
 import { isAuthenticated } from 'authenticare/client/auth'
 import { getUserInfo } from '../api'
@@ -35,6 +35,7 @@ function UserTabs({ dispatch, user }) {
             <FormField label="My Interests">
               <Select options={["ACCOUNTING", "AGRICULTURAL SCIENCE", "APPLIED SCIENCES", "ARCHITECTURE", "BANKING & FINANCE", "BIOCHEMISTRY", "BUSINESS ADMINISTRATION & MANAGEMENT", "CHEMISTRY", "CHEMICAL ENGINEERING", "CIVIL ENGINEERING", "COMMUNITY", "COMMUNICATION", "COMPUTER ENGINEERING", "COMPUTER SCIENCE", "CRIMINOLOGY", "ECONOMICS", "EDUCATION", "ELECTRICAL & ELECTRONICS ENGINEERING", "ENGINEERING", "ENGLISH LANGUAGE & LITERATURE", "ENTREPRENEURSHIP", "ENVIRONMENTAL DESIGN", "ENVIRONMENTAL SCIENCE", "ESTATE MANAGEMENT", "FRENCH", "GARDENING", "GAMING", "GEOLOGY", "HISTORY", "HUMAN RESOURCE MANAGEMENT", "INSURANCE", "INTERNATIONAL RELATIONS", "LAW", "LIBRARY SCIENCE", "LINGUISTICS & COMMUNICATION", "MARKETING", "MASS COMMUNICATION", "MATHEMATICS", "MECHANICAL ENGINEERING", "MEDICAL & HEALTH SCIENCE", "MICROBIOLOGY", "NURSING", "OFFICE TECHNOLOGY MANAGEMENT", "PERMACULTURE", "PHARMACEUTICAL SCIENCES", "PHILOSOPHY", "PHYSICS", "POLITICAL SCIENCE", "PROJECT MANAGEMENT", "PSYCHOLOGY", "PUBLIC ADMINISTRATION", "PUBLIC HEALTH", "PURCHASING & SUPPLY CHAIN MANAGEMENT", "QUANTITY SURVEY", "SCIENCE LABORATORY TECHNOLOGY", "SOCIOLOGY", "STATISTICS", "SUSTAINABILITY", "TECHNOLOGY", "THEATRE ARTS", "THEOLOGY & BIBLICAL STUDIES", "URBAN & REGIONAL PLANNING", "VETERINARY MEDICINE"]} multiple searchPlaceholder="Search Interests" />
             </FormField>
+            <Button label="Submit Changes" type="submit" active={false} hoverIndicator onClick={() => push("/userdashboard")} />
           </Form>
         </Box>
       </Tab>
@@ -65,6 +66,7 @@ function UserTabs({ dispatch, user }) {
               <Image src="https://picsum.photos/200
 " />
             </FormField>
+            <Button label="Launch Project" type="submit" active={false} hoverIndicator onClick={() => push("/userdashboard")} />
           </Form>
         </Box>
       </Tab>
