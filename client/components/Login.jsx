@@ -1,55 +1,46 @@
 /* eslint-disable promise/always-return */
 import { isAuthenticated, signIn } from 'authenticare/client'
-import { Form, FormField, TextInput, Button } from 'grommet'
-import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { Form, TextInput, Button, Box } from 'grommet'
+import React from 'react'
 import { addUserInfo, changeNavState, changePage } from '../actions'
 import { getUserInfo } from '../api'
 import { baseApiUrl as baseUrl } from '../config'
+import { Controller, useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 
-function Login({ dispatch }) {
-  const [user] = useState({
-    username: '',
-    password: ''
+function Login() {
+  const dispatch = useDispatch()
+  const { handleSubmit, control } = useForm({
+    // resolver: yupResolver(schema)
   })
 
-  const usernameHandler = (event) => {
-    event.preventDefault()
-    user.username = event.target.value
-  }
-
-  const passwordHandler = (event) => {
-    event.preventDefault()
-    user.password = event.target.value
-  }
-
-  const submitHandler = event => {
-    event.preventDefault()
-    const { username, password } = user
-
+  const onSubmit = values => {
+    const { username, password } = values
     signIn({ username, password }, { baseUrl })
-      .then((token) => {
+      .then(token => {
         if (isAuthenticated()) {
           dispatch(changePage('User'))
           dispatch(changeNavState('Logged In'))
           return getUserInfo()
         }
+        else alert('incorrect email or password')
       })
-      .then(userInfo => dispatch(addUserInfo({ username: userInfo.username })))
+      .then(userInfo => dispatch(addUserInfo({ userInfo })))
       .catch(err => alert(err.message + ': Incorrect email or password, please try again'))
   }
 
   return (
-    <Form onSubmit={submitHandler}>
-      <FormField label='username' name='username'>
-        <TextInput name='username' type='username' onChange={usernameHandler} />
-      </FormField>
-      <FormField htmlfor='password' name='password'>
-        <TextInput name='password' type='password' onChange={passwordHandler} />
-      </FormField>
-      <Button type='submit' value='Submit' label='Submit' />
-    </Form>
-  )
+    <Box align='center' pad='large' >
+      <Form pad="small" onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor='username' name='username'>Username
+          <Controller as={TextInput} control={control} name='username' defaultValue="" type='text' />
+        </label>
+        <label htmlFor='password' name='password'>Password
+          <Controller as={TextInput} control={control} name='password' defaultValue="" type='password' />
+        </label>
+        <Button type='submit' value='Submit' label='Submit' />
+      </Form>
+    </Box>)
 }
 
-export default connect()(Login)
+export default Login

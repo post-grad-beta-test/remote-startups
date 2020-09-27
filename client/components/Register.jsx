@@ -31,12 +31,12 @@ const schema = yup.object().shape({
   //   })
 })
 
-function Register () {
+function Register() {
   const dispatch = useDispatch()
   const { handleSubmit, control, errors } = useForm({
     resolver: yupResolver(schema)
-  }
-  )
+  })
+
   const onSubmit = (values) => {
     const { username, password, email, firstName, lastName } = values
     register({ username, password }, { baseUrl })
