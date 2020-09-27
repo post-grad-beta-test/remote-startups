@@ -5,7 +5,7 @@ import LoggedIn from './LoggedIn'
 import LoggedOff from './LoggedOff'
 
 function Nav({ navState }) {
-  if (isAuthenticated())
+  if (isAuthenticated()) {
     return (
       <>
         {navState === 'Logged In' && <LoggedIn />}
