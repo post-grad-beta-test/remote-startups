@@ -1,6 +1,6 @@
-import {CHANGE_NAV_STATE} from '../actions'
+import { CHANGE_NAV_STATE } from '../actions'
 
-export default function navState(state='Logged Off', action) {
+export default function navState(state = 'Logged Off', action) {
     switch (action.type) {
         case CHANGE_NAV_STATE:
             return action.navState

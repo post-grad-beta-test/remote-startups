@@ -6,7 +6,7 @@ export const Card = () => {
   return (
     <div className='container'>
       <div>
-        <Box align="center" justify="center" pad="small" background={{ "image": "url('')" }} height="xlarge" flex fill="vertical" direction="row-responsive" wrap overflow="auto" round="medium" onClick={[{ "screen": 1, "label": "liveProjects", "key": 1 }]}>
+        <Box align="center" justify="center" pad="small" background={{ "image": "url('')" }} height="xlarge" flex fill="vertical" direction="row-responsive" wrap overflow="auto" round="medium" >
           <Box align="center" pad="small" background={{ "0": "b", "1": "r", "2": "a", "3": "n", "4": "d", "color": "white", "image": "url('')", "position": "bottom" }} round="medium" elevation="xlarge" margin="medium" direction="column" alignSelf="center" animation={{ "type": "fadeIn", "size": "medium" }}>
             <Box align="start" justify="start" pad="small" direction="row" alignSelf="start" />
             <Box align="center" justify="center" pad="xsmall" margin="xsmall" animation="zoomIn" hoverIndicator border={{ "style": "outset" }} elevation="medium" gap="xsmall">
