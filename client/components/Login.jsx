@@ -32,10 +32,10 @@ function Login({ dispatch }) {
         if (isAuthenticated()) {
           dispatch(changePage('User'))
           dispatch(changeNavState('Logged In'))
-          return getUserInfo(username)
+          return getUserInfo()
         }
       })
-      .then(res => dispatch(addUserInfo({ username: res.username })))
+      .then(userInfo => dispatch(addUserInfo({ username: userInfo.username })))
       .catch(err => alert(err.message + ': Incorrect email or password, please try again'))
   }
 

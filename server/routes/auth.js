@@ -68,11 +68,11 @@ router.patch('/auth', (req, res) => {
     .catch((err) => res.status(500).send(err.message))
 })
 
-router.post('/auth/username', getTokenDecoder(), (req, res) => {
+router.post('/auth', getTokenDecoder(), (req, res) => {
   if (req.user) {
-    res.json(req.user.username)
+    res.json(req.user)
   } else {
-    res.status(500).send('authenication token not provided')
+    res.status(500).send('authentication token not provided')
   }
 })
 
