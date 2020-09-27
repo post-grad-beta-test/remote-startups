@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { connect } from 'react-redux'
 import Home from './Home'
 import Login from './Login'
@@ -9,6 +9,7 @@ import UserTabs from './UserTabs'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
 const App = ({ currentPage }) => {
+  
   return (
     <>
       <Nav />
