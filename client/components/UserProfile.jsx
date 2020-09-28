@@ -43,7 +43,7 @@ function UserProfile({ dispatch, user }) {
 
 function mapStateToProps(state) {
   return {
-    user: state.addUserInfo
+    user: state.createUser
   }
 }
 
