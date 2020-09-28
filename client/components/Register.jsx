@@ -39,11 +39,10 @@ function Register() {
 
   const onSubmit = (values) => {
     const { username, password, email, firstName, lastName } = values
-    let image = Math.floor(Math.random() * 100) +1
-    if (image < 10) image = '00' + image 
-    else if (image < 100 && image > 9) image = '0' + image 
+    let image = Math.floor(Math.random() * 100) + 1
+    if (image < 10) image = '00' + image
+    else if (image < 100 && image > 9) image = '0' + image
     else image = image.toString()
-
     register({ username, password }, { baseUrl })
       .then((token) => {
         if (isAuthenticated()) {
