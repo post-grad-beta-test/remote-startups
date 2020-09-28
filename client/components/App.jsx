@@ -1,15 +1,14 @@
+import { isAuthenticated } from 'authenticare/client/auth'
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { addUserInfo, changeNavState } from '../actions'
+import { getUserInfo } from '../api'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Home from './Home'
 import Login from './Login'
 import Nav from './Nav'
 import Register from './Register'
 import UserTabs from './UserTabs'
-
-import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
-import { isAuthenticated } from 'authenticare/client/auth'
-import { changeNavState, addUserInfo } from '../actions'
-import { getUserInfo } from '../api'
 
 const App = ({ dispatch, currentPage }) => {
   useEffect(() => {
@@ -17,8 +16,7 @@ const App = ({ dispatch, currentPage }) => {
       dispatch(changeNavState('Logged In'))
       getUserInfo()
         .then(userInfo => dispatch(addUserInfo({ username: userInfo.username })))
-    }
-    else dispatch(changeNavState('Logged Off'))
+    } else dispatch(changeNavState('Logged Off'))
   }, [])
 
   return (
