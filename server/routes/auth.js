@@ -62,7 +62,6 @@ router.get('/auth', (req, res) => {
 })
 
 router.patch('/auth', (req, res) => {
-  console.log('req.body', req.body)
   updateDetails(req.body)
     .then(() => res.send(200))
     .catch((err) => res.status(500).send(err.message))
