@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
+import createUser from './createUser.test'
 import currentPage from './currentPage'
-import addUserInfo from './addUserInfo'
 import navState from './navState'
 
 const reducers = combineReducers({
   currentPage,
-  addUserInfo,
+  createUser,
   navState
 })
 
