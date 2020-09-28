@@ -41,7 +41,7 @@ function LoggedIn ({ dispatch, username }) {
 
 function mapStateToProps (state) {
   return {
-    username: state.addUserInfo.username
+    username: state.createUser.username
   }
 }
 
