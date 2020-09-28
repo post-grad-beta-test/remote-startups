@@ -5,6 +5,7 @@ exports.up = function (knex) {
     table.string('last_name')
     table.string('email')
     table.string('username')
+    table.string('image')
     table.timestamp('created_at')
     table.string('password_hash')
     table.timestamp('reset_expires_at')
