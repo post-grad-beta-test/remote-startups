@@ -17,7 +17,7 @@ function UserProfile({ dispatch, user }) {
       <Box align="center" justify="center" pad="xlarge">
         <Form>
           <FormField label="Profile Picture">
-            <Image src="https://picsum.photos/200" />
+            <Image src={`avatar.images/gee_me_${user.image}.svg`} />
           </FormField>
           <FormField label="email">
             <TextInput placeholder={user.email} />
