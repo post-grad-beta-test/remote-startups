@@ -17,6 +17,8 @@ applyAuthRoutes(router, {
   getUserByName
 })
 
+//this lets anyone send the welcome email via your api - an attacker could burn all your sendGrid credits while spamming someone
+// at least use authenticare to only email the current user - see https://github.com/don-smith/authenticare/blob/master/docs/server/getTokenDecoder.md
 router.post('/sendRegistrationEmail', (req, res) => {
   const { email } = req.body
   const msg = {
@@ -30,7 +32,9 @@ router.post('/sendRegistrationEmail', (req, res) => {
     .catch(err => err.message + ' no sendgrid API key found, please follow instructions in README')
 })
 
+//again, you should use authenticare to make sure a user can only send this to themselves
 router.post('/sendReminderEmail', (req, res) => {
+  //this isn't passing in a username
   if (userExists()) {
     const { email } = req.body
     const resetPassword = '#'
@@ -45,6 +49,7 @@ router.post('/sendReminderEmail', (req, res) => {
   }
 })
 
+//this allows any attacker to find a users email if they know their username - limit this to only sending back data for current user
 router.get('/auth', (req, res) => {
   const username = req.query.username
   getUserByName(username)
@@ -61,12 +66,15 @@ router.get('/auth', (req, res) => {
     .catch((err) => res.status(500).send(err.message))
 })
 
+//this lets any user overwrite the email for an account once they know the username, then they can reset the password to themselves and take full control of it
+//nees to be locked down so a user can only update their own details
 router.patch('/auth', (req, res) => {
   updateDetails(req.body)
     .then(() => res.send(200))
     .catch((err) => res.status(500).send(err.message))
 })
 
+//this getTokenDecoder is what you need on all the methods you need to lock down
 router.post('/auth', getTokenDecoder(), (req, res) => {
   if (req.user) {
     getUserByName(req.user.username)

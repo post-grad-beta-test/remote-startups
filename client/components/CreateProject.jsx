@@ -1,5 +1,5 @@
-import { Box, Button, DateInput, Form, FormField, Image, List, Select, Tab, TextInput } from 'grommet'
-import { Aggregate, TableAdd, User } from 'grommet-icons'
+import { Box, Button, DateInput, Form, FormField, Image, List, Select, Tab, TextInput } from 'grommet' // List is never used
+import { Aggregate, TableAdd, User } from 'grommet-icons' //Aggregate and User are never used
 import React from 'react'
 
 

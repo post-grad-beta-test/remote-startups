@@ -15,6 +15,9 @@ const schema = yup.object().shape({
     .string()
     .email()
     .required('Email is a required field')
+
+    //deleted commented out code - if you want it back, get it from git
+
   // password: yup
   //   .string()
   //   .required('Please enter your password')

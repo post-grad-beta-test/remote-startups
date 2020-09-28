@@ -4,6 +4,10 @@ import { connect } from 'react-redux'
 import { addUserInfo, changeNavState } from '../actions'
 import { getUserInfo } from '../api'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+
+//you might want to try putting an index.js file in components so you can do things like
+// import {Home, Login //etc} from './'
+//and get these imports down to one line
 import Home from './Home'
 import Login from './Login'
 import Nav from './Nav'
@@ -11,6 +15,8 @@ import Register from './Register'
 import UserTabs from './UserTabs'
 
 const App = ({ dispatch, currentPage }) => {
+  //personally I would extract the callback passed to useEffect into a separate utils file
+  // it would reduce the amount of imports in this file and only need to have dispatch passed to it
   useEffect(() => {
     if (isAuthenticated()) {
       dispatch(changeNavState('Logged In'))

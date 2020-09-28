@@ -11,3 +11,5 @@ test('addUserInfo returns user info', () => {
   expect(action.type).toBe(ADD_USER_INFO)
   expect(action.username).toEqual({ username: 'test' })
 })
+
+//if you're going to test your action creators, you should test all of them

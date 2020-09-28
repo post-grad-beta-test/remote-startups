@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import App from './components/App'
 import store from './store'
 
+//personally I'd extract the theme data into another file to keep this cleaner and easy to read
 const theme = {
   global: {
     font: {

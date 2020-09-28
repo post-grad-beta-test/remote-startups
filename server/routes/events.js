@@ -1,6 +1,9 @@
+//me no have tests, me is sad
+
 const express = require('express')
 const router = express.Router()
 
+//unused functions being imported - fixing linter would help you notice
 const { saveNewEvent,
   getAllEvents,
   deleteEvent,
@@ -21,6 +24,8 @@ router.post('/:id', (req, res) => {
     })
     .catch(err => console.log(err))
 })
+
+//delete commented out code, get it back from git if you need it later
 
 // router.del('/', (req, res) => {
 //   const id = Number(req.body)

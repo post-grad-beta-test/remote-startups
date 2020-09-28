@@ -2,6 +2,7 @@ import { Box, Heading, Stack, Text, WorldMap } from 'grommet'
 import React from 'react'
 import { Card } from './Card'
 
+//this is never used
 const Identifier = ({ children, title, subTitle, size, ...rest }) => (
   <Box gap="small" align="center" {...rest}>
     {children}

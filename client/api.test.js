@@ -22,3 +22,5 @@ test('sendReminderEmail passes email to client side', () => {
       expect(res.email).toMatch(/test@mail.com/)
     })
 })
+
+//needs more complete testing
