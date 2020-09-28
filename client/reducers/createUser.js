@@ -5,7 +5,7 @@ const InitialUserInfo = {
   username: ''
 }
 
-function addUserInfo (state = InitialUserInfo, action) {
+function createUser (state = InitialUserInfo, action) {
   switch (action.type) {
     case ADD_USER_INFO:
       return action.username
@@ -14,4 +14,4 @@ function addUserInfo (state = InitialUserInfo, action) {
   }
 }
 
-export default addUserInfo
+export default createUser
