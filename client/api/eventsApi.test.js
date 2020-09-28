@@ -1,5 +1,6 @@
 import nock from 'nock'
 import { addNewEvent, showAllEvents } from './eventsApi'
+const request = require('supertest')
 
 test('fetches events from server', () => {
   nock(/localhost/)
@@ -11,17 +12,19 @@ test('fetches events from server', () => {
       expect(200)
       expect(res.event_id).toEqual(1)
       expect(res.name).toEqual('Test Event')
+      return null
     })
 })
 
-test('send a new event to the server', () => {
+describe('send a new event to the server', () => {
   const scope = nock(/localhost/)
     .post('/api/v1/events/1')
-    .reply(200)
-
-  return addNewEvent({ event: 'an event' })
-    .then(() => {
-      expect(scope).isDone().toBe(true)
-      return null
-    })
+    .reply(201)
+  test('post an event to the server', () => {
+    return addNewEvent(1, 'an event', 'a description')
+      .then((result) => {
+        expect(scope.isDone()).toBe(true)
+        return null
+      })
+  })
 })
