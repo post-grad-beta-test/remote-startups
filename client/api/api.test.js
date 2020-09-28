@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { getKeywords, fetchAnalytics, sendRegistrationEmail, sendReminderEmail } from './api'
+import { sendRegistrationEmail, sendReminderEmail } from './api'
 
 test('sendRegistrationEmail passes email to client side', () => {
   nock(/localhost/)

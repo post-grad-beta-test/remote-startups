@@ -3,7 +3,7 @@ import { Aggregate, TableAdd, User } from 'grommet-icons'
 import React from 'react'
 import { connect } from 'react-redux'
 import { addUserInfo } from '../actions'
-import { getUserInfo } from '../api'
+import { getUserInfo } from '../api/api'
 
 function UserTabs ({ dispatch, user }) {
   getUserInfo()

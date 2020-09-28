@@ -22,8 +22,16 @@ router.post('/:id', (req, res) => {
     .catch(err => console.log(err))
 })
 
-// router.del('/', (req, res) => {
-//   const id = Number(req.body)
-// })
+router.delete('/', (req, res) => {
+  const id = Number(req.body)
+  deleteEvent(id)
+    .then(() => {
+      res.sendStatus(200)
+      return null
+    })
+    .catch(error => {
+      res.status(500).send('DATABASE ERROR' + error.message)
+    })
+})
 
 module.exports = router

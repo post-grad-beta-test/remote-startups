@@ -1,5 +1,5 @@
-import request from 'superagent'
 import { getEncodedToken } from 'authenticare/client'
+import request from 'superagent'
 const acceptJsonHeader = { Accept: 'application/json' }
 
 export function sendRegistrationEmail(email) {
@@ -45,3 +45,6 @@ export function getUserInfo() {
       res.status(500).send('something went wrong')
     })
 }
+
+
+
