@@ -1,14 +1,14 @@
 /* eslint-disable promise/always-return */
 import { isAuthenticated, signIn } from 'authenticare/client'
-import { Form, TextInput, Button, Box } from 'grommet'
+import { Box, Button, Form, TextInput } from 'grommet'
 import React from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import { addUserInfo, changeNavState, changePage } from '../actions'
 import { getUserInfo } from '../api'
 import { baseApiUrl as baseUrl } from '../config'
-import { Controller, useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
 
-function Login() {
+function Login () {
   const dispatch = useDispatch()
   const { handleSubmit, control } = useForm({
     // resolver: yupResolver(schema)
@@ -22,8 +22,7 @@ function Login() {
           dispatch(changePage('User'))
           dispatch(changeNavState('Logged In'))
           return getUserInfo()
-        }
-        else alert('incorrect email or password')
+        } else alert('incorrect email or password')
       })
       .then(userInfo => dispatch(addUserInfo({ userInfo })))
       .catch(err => alert(err.message + ': Incorrect email or password, please try again'))
