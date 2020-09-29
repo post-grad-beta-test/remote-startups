@@ -32,7 +32,7 @@ function UserProfile({ dispatch, user }) {
   return (
     <Tab title="Profile" icon={<User />} plain={false} reverse={false}>
       <Box align="center" justify="center" pad="xlarge">
-        <Form pad="small" onSubmit={handleSubmit(onSubmit)}>
+        <Form pad="medium" onSubmit={handleSubmit(onSubmit)}>
           <FormField label="">
             <Image src={`avatar.images/gee_me_${user.image}.svg`} width={400} height={200} mode='fit' />
           </FormField>
@@ -41,7 +41,7 @@ function UserProfile({ dispatch, user }) {
           <Controller as={TextInput} id="email" name="email" control={control} defaultValue="" placeholder={user.email} />
           </label>
           <Button type='submit' value='Submit' label='Submit' />
-        </Form>
+        </Form >
       </Box>
     </Tab>
   )
