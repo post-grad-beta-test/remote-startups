@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/:id', (req, res) => {
+  console.log('route')
   const id = Number(req.params.id)
   saveNewEvent(id, req.body)
     .then((ids) => {

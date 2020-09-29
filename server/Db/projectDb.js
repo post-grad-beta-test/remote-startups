@@ -5,15 +5,15 @@ const connection = knex(config)
 function saveNewEvent (id, event, db = connection) {
   const { eventName, description, startDate, endDate } = event
   return db('projects')
-    .insert({ user_id: id, name: eventName, description: description, date_start: startDate, date_end: endDate })
+    .insert({ user_id: id, name: name, description: description, date_start: startDate, date_end: endDate })
 }
 
-function getAllEvents (db = connection) {
+function getAllEvents(db = connection) {
   return db('projects')
     .select()
 }
 
-function deleteEvent (id, db = connection) {
+function deleteEvent(id, db = connection) {
   return db('projects').where({ id }).delete()
 }
 
@@ -22,7 +22,7 @@ function addUserToEvent (userId, eventId, db = connection) {
     .insert({ project_id: eventId, user_id: userId })
 }
 
-function getUsersForEvent ({ eventId, db = connection }) {
+function getUsersForEvent({ eventId, db = connection }) {
   return db('users_projects')
     .where('event_id', eventId)
     .select('users_id')
