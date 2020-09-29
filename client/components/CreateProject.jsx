@@ -13,7 +13,6 @@ const CreateProject = ({ userId }) => {
     addNewEvent(userId, projectData)
 
       .then(() => {
-        (console.log('event added!'))
       })
   }
   return (
@@ -55,7 +54,6 @@ const CreateProject = ({ userId }) => {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     userId: state.createUser.id
   }
