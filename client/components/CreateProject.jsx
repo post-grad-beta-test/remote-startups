@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 const CreateProject = ({ userId }) => {
   const { register, handleSubmit } = useForm()
   const onSubmit = (projectData) => {
-    console.log(userId)
+    console.log(projectData)
     addNewEvent(userId, projectData)
 
       .then(() => {
