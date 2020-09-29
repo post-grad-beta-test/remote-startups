@@ -40,14 +40,22 @@ function userExists(username, db = connection) {
     })
 }
 
-function updateDetails({ username, firstName, lastName, email, image }, db = connection) {
+function addDetails({ username, firstName, lastName, email, image }, db = connection) {
   return db('users')
     .where('username', username)
     .update({ first_name: firstName, last_name: lastName, email, image })
 }
+
+function updateEmail({ username, email }, db = connection) {
+  return db('users')
+    .where('username', username)
+    .update({ email })
+}
+
 module.exports = {
   userExists,
   saveNewUser,
   getUserByName,
-  updateDetails
+  addDetails,
+  updateEmail
 }
