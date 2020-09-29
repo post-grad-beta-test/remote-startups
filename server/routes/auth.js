@@ -8,7 +8,8 @@ const {
   userExists,
   saveNewUser,
   getUserByName,
-  updateDetails
+  addDetails,
+  updateEmail
 } = require('../db')
 
 applyAuthRoutes(router, {
@@ -62,7 +63,7 @@ router.get('/auth', (req, res) => {
 })
 
 router.patch('/auth', (req, res) => {
-  updateDetails(req.body)
+  addDetails(req.body)
     .then(() => res.send(200))
     .catch((err) => res.status(500).send(err.message))
 })
@@ -84,6 +85,12 @@ router.post('/auth', getTokenDecoder(), (req, res) => {
   } else {
     res.status(500).send('authentication token not provided')
   }
+})
+
+router.patch('/update', (req, res) => {
+  updateEmail(req.body)
+    .then(() => res.send(200))
+    .catch((err) => res.status(500).send(err.message))
 })
 
 module.exports = router
