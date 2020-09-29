@@ -34,8 +34,8 @@ function UserProfile({ dispatch, user }) {
     <Tab title="Profile" icon={<User />} plain={false} reverse={false}>
       <Box align="center" justify="center" pad="xlarge">
         <Form pad="small" onSubmit={handleSubmit(onSubmit)}>
-          <FormField label="Profile Picture">
-            <Image src={`avatar.images/gee_me_${user.image}.svg`} />
+          <FormField label="">
+            <Image src={`avatar.images/gee_me_${user.image}.svg`} width={400} height={200} mode='fit' />
           </FormField>
           <h3>{user.firstName} {user.lastName}</h3>
           <label htmlFor="email">Update email:
