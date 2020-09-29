@@ -38,7 +38,6 @@ function UserProfile({ dispatch, user }) {
             <Image src={`avatar.images/gee_me_${user.image}.svg`} />
           </FormField>
           <h3>{user.firstName} {user.lastName}</h3>
-          <br />
           <label htmlFor="email">Update email:
             <Controller as={TextInput} id="email" name="email" control={control} defaultValue="" placeholder={user.email} />
           </label>
