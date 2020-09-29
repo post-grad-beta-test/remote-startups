@@ -11,13 +11,11 @@ function Nav({ navState }) {
         {navState === 'Logged In' && <LoggedIn />}
       </>
     )
-  } else {
-    return (
+  } else return (
       <>
         {navState === 'Logged Off' && <LoggedOff />}
       </>
     )
-  }
 }
 
 function mapStateToProps (state) {
