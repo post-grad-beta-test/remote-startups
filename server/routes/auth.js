@@ -28,10 +28,10 @@ router.post('/sendRegistrationEmail', getTokenDecoder(), (req, res) => {
       html: `Hello ${email}!<br>Welcome to Co-ject Events.<br>A platform for collaboration while working remotely.`
     }
     sgMail.send(msg)
-      .then(email => res.sendStatus(201).json(email))
+      .then(email => res.status(201).json(email))
       .catch(err => err.message + ' no sendgrid API key found, please follow instructions in README')
   } else {
-    res.sendStatus(500).send('authentication token not provided')
+    res.status(500).send('authentication token not provided')
   }
 })
 
@@ -39,9 +39,9 @@ router.patch('/auth', getTokenDecoder(), (req, res) => {
   if (req.user) {
     addDetails(req.body)
       .then(() => res.send(200))
-      .catch((err) => res.sendStatus(500).send(err.message))
+      .catch((err) => res.status(500).send(err.message))
   } else {
-    res.sendStatus(500).send('authentication token not provided')
+    res.status(500).send('authentication token not provided')
   }
 })
 
@@ -60,17 +60,17 @@ router.post('/auth', getTokenDecoder(), (req, res) => {
         res.json(userInfo)
       })
   } else {
-    res.sendStatus(500).send('authentication token not provided')
+    res.status(500).send('authentication token not provided')
   }
 })
 
-router.patch('/update', getTokenDecoder(), (req, res) => {
+router.patch('/updateEmail', getTokenDecoder(), (req, res) => {
   if (req.user) {
     updateEmail(req.body)
       .then(() => res.send(200))
       .catch((err) => res.sendStatus(500).send(err.message))
   } else {
-    res.sendStatus(500).send('authentication token not provided')
+    res.status(500).send('authentication token not provided')
   }
 })
 
