@@ -18,54 +18,51 @@ applyAuthRoutes(router, {
   getUserByName
 })
 
-router.post('/sendRegistrationEmail', (req, res) => {
-  const { email } = req.body
-  const msg = {
-    to: email,
-    from: 'coject@hotmail.com',
-    subject: 'Welcome to Co-ject!',
-    html: `Hello ${email}!<br>Welcome to Co-ject Events.<br>A platform for collaboration while working remotely.`
-  }
-  sgMail.send(msg)
-    .then(email => res.status(201).json(email))
-    .catch(err => err.message + ' no sendgrid API key found, please follow instructions in README')
-})
-
-router.post('/sendReminderEmail', (req, res) => {
-  if (userExists()) {
+router.post('/sendRegistrationEmail', getTokenDecoder(), (req, res) => {
+  if (req.user) {
     const { email } = req.body
-    const resetPassword = '#'
     const msg = {
       to: email,
       from: 'coject@hotmail.com',
-      subject: 'Reset Password Co-ject',
-      html: `Hello ${email}\nPlease click on the following link to reset your password.\n<a href=${resetPassword}>Link</a>`
+      subject: 'Welcome to Co-ject!',
+      html: `Hello ${email}!<br>Welcome to Co-ject Events.<br>A platform for collaboration while working remotely.`
     }
     sgMail.send(msg)
       .then(email => res.status(201).json(email))
+      .catch(err => err.message + ' no sendgrid API key found, please follow instructions in README')
+  } else {
+    res.status(500).send('authentication token not provided')
   }
 })
 
-router.get('/auth', (req, res) => {
-  const username = req.query.username
-  getUserByName(username)
-    .then(user => {
-      const userInfo = {
-        id: user.id,
-        username: user.username,
-        firstName: user.first_name,
-        lastName: user.last_name,
-        email: user.email
-      }
-      res.json(userInfo)
-    })
-    .catch((err) => res.status(500).send(err.message))
+router.get('/auth', getTokenDecoder(), (req, res) => {
+  if (req.user) {
+    const username = req.query.username
+    getUserByName(username)
+      .then(user => {
+        const userInfo = {
+          id: user.id,
+          username: user.username,
+          firstName: user.first_name,
+          lastName: user.last_name,
+          email: user.email
+        }
+        res.json(userInfo)
+      })
+      .catch((err) => res.status(500).send(err.message))
+  } else {
+    res.status(500).send('authentication token not provided')
+  }
 })
 
-router.patch('/auth', (req, res) => {
-  addDetails(req.body)
-    .then(() => res.send(200))
-    .catch((err) => res.status(500).send(err.message))
+router.patch('/auth', getTokenDecoder(), (req, res) => {
+  if (req.user) {
+    addDetails(req.body)
+      .then(() => res.send(200))
+      .catch((err) => res.status(500).send(err.message))
+  } else {
+    res.status(500).send('authentication token not provided')
+  }
 })
 
 router.post('/auth', getTokenDecoder(), (req, res) => {
@@ -87,10 +84,14 @@ router.post('/auth', getTokenDecoder(), (req, res) => {
   }
 })
 
-router.patch('/update', (req, res) => {
-  updateEmail(req.body)
-    .then(() => res.send(200))
-    .catch((err) => res.status(500).send(err.message))
+router.patch('/update', getTokenDecoder(), (req, res) => {
+  if (req.user) {
+    updateEmail(req.body)
+      .then(() => res.send(200))
+      .catch((err) => res.status(500).send(err.message))
+  } else {
+    res.status(500).send('authentication token not provided')
+  }
 })
 
 module.exports = router
