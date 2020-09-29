@@ -24,7 +24,7 @@ function Login() {
           return getUserInfo()
         } else alert('incorrect email or password')
       })
-      .then(userInfo => dispatch(addUserInfo({ userInfo })))
+      .then(userInfo => dispatch(addUserInfo({ username: userInfo.username })))
       .catch(err => alert(err.message + ': Incorrect email or password, please try again'))
   }
 
