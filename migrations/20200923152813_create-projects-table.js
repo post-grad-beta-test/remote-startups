@@ -5,8 +5,9 @@ exports.up = function (knex) {
     table.foreign('user_id').references('users.id')
     table.string('name')
     table.string('description')
-    table.date('date_start')
-    table.date('date_end')
+    table.string('topic')
+    table.string('date_start')
+    table.string('date_end')
   })
 }
 

@@ -25,7 +25,7 @@ function Login() {
         } else alert('incorrect email or password')
       })
       .then(userInfo => dispatch(addUserInfo({ username: userInfo.username })))
-      .catch(err => alert(err.message + ': Incorrect email or password, please try again'))
+      .catch(err => console.log(err.message))
   }
 
   return (
@@ -39,7 +39,8 @@ function Login() {
         </label>
         <Button type='submit' value='Submit' label='Submit' />
       </Form>
-    </Box>)
+    </Box>
+  )
 }
 
 export default Login

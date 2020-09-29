@@ -3,7 +3,6 @@ import { getEncodedToken } from 'authenticare/client'
 const acceptJsonHeader = { Accept: 'application/json' }
 
 export function addNewEvent(id, event) {
-  console.log(id)
   return request
     .post('/api/v1/events/' + id)
     .set(acceptJsonHeader)
