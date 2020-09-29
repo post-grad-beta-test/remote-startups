@@ -56,8 +56,9 @@ function Register() {
         dispatch(changePage('User'))
         dispatch(changeNavState('Logged In'))
       })
-      .catch(err => alert(err.message))
+      .catch(err => console.log(err.message))
   }
+  
   return (
     <Box align='center' pad='large' >
       <Form pad="small" onSubmit={handleSubmit(onSubmit)}>
