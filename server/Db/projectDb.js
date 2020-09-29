@@ -3,9 +3,9 @@ const config = require('../../knexfile').development
 const connection = knex(config)
 
 function saveNewEvent(id, event, db = connection) {
-  const { name, description, startDate, endDate } = event
+  const { name, description, startDate, endDate, topic } = event
   return db('projects')
-    .insert({ user_id: id, name: name, description: description, date_start: startDate, date_end: endDate })
+    .insert({ user_id: id, name, description, date_start: startDate, date_end: endDate, topic })
 }
 
 function getAllEvents(db = connection) {
