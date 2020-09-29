@@ -2,7 +2,7 @@ import { isAuthenticated } from 'authenticare/client/auth'
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { addUserInfo, changeNavState } from '../actions'
-import { getUserInfo } from '../api/api'
+import { getUserInfo } from '../api'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Home from './Home'
 import Login from './Login'
@@ -34,7 +34,7 @@ const App = ({ dispatch, currentPage }) => {
     </>
   )
 }
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     currentPage: state.currentPage
   }

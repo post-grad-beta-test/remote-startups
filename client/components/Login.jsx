@@ -5,7 +5,7 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { addUserInfo, changeNavState, changePage } from '../actions'
-import { getUserInfo } from '../api/api'
+import { getUserInfo } from '../api'
 import { baseApiUrl as baseUrl } from '../config'
 
 function Login() {
