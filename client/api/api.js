@@ -8,9 +8,7 @@ export function sendRegistrationEmail(email) {
     .set(acceptJsonHeader)
     .send({ email })
     .then(res => res.body)
-    .catch(error => {
-      res.status(500).send('ooops something went wrong')
-    })
+    .catch(err => console.log(err.message))
 }
 
 export function sendReminderEmail(email) {
@@ -19,9 +17,7 @@ export function sendReminderEmail(email) {
     .set(acceptJsonHeader)
     .send({ email })
     .then(res => res.body)
-    .catch(error => {
-      res.status(500).send('something went wrong')
-    })
+    .catch(err => console.log(err.message))
 }
 
 export function updateUserInfo(info) {
@@ -30,9 +26,7 @@ export function updateUserInfo(info) {
     .set(acceptJsonHeader)
     .send(info)
     .then(res => res.body)
-    .catch((error) => {
-      res.status(500).send('something went wrong')
-    })
+    .catch(err => console.log(err.message))
 }
 
 export function getUserInfo() {
@@ -41,10 +35,5 @@ export function getUserInfo() {
     .set(acceptJsonHeader)
     .set({ 'Authorization': `Bearer ${getEncodedToken()}` })
     .then(res => res.body)
-    .catch((error) => {
-      res.status(500).send('something went wrong')
-    })
+    .catch(err => console.log(err.message))
 }
-
-
-

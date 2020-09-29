@@ -1,82 +1,21 @@
-import { Box, Button, DateInput, Form, FormField, Image, List, Select, Tab, Tabs, TextInput } from 'grommet'
-import { Aggregate, TableAdd, User } from 'grommet-icons'
+import { Tabs } from 'grommet'
 import React from 'react'
 import { connect } from 'react-redux'
-import { addUserInfo } from '../actions'
-import { getUserInfo } from '../api/api'
+import { CreateProject } from './CreateProject'
+import { ProjectsJoined } from './ProjectsJoined'
+import UserProfile from './UserProfile'
 
-function UserTabs ({ dispatch, user }) {
-  getUserInfo()
-    .then(userInfo => {
-      dispatch(addUserInfo(userInfo))
-    })
-
+function UserTabs () {
   return (
-    <Tabs justify="end" flex margin="large">
-      <Tab title="Profile" icon={<User />} plain={false} reverse={false}>
-        <Box align="center" justify="center" pad="xlarge">
-          <Form>
-            <FormField label="Profile Picture">
-              <Image src="https://picsum.photos/200" />
-            </FormField>
-            <FormField label="email">
-              <TextInput placeholder={user.email} />
-            </FormField>
-            <FormField label="Username">
-              <TextInput placeholder={user.username} />
-            </FormField>
-            <FormField label="First Name">
-              <TextInput placeholder={user.first_name} />
-            </FormField>
-            <FormField label="Last Name">
-              <TextInput placeholder={user.last_name} />
-            </FormField>
-            <FormField label="My Interests">
-              <Select options={['ACCOUNTING', 'AGRICULTURAL SCIENCE', 'APPLIED SCIENCES', 'ARCHITECTURE', 'BANKING & FINANCE', 'BIOCHEMISTRY', 'BUSINESS ADMINISTRATION & MANAGEMENT', 'CHEMISTRY', 'CHEMICAL ENGINEERING', 'CIVIL ENGINEERING', 'COMMUNITY', 'COMMUNICATION', 'COMPUTER ENGINEERING', 'COMPUTER SCIENCE', 'CRIMINOLOGY', 'ECONOMICS', 'EDUCATION', 'ELECTRICAL & ELECTRONICS ENGINEERING', 'ENGINEERING', 'ENGLISH LANGUAGE & LITERATURE', 'ENTREPRENEURSHIP', 'ENVIRONMENTAL DESIGN', 'ENVIRONMENTAL SCIENCE', 'ESTATE MANAGEMENT', 'FRENCH', 'GARDENING', 'GAMING', 'GEOLOGY', 'HISTORY', 'HUMAN RESOURCE MANAGEMENT', 'INSURANCE', 'INTERNATIONAL RELATIONS', 'LAW', 'LIBRARY SCIENCE', 'LINGUISTICS & COMMUNICATION', 'MARKETING', 'MASS COMMUNICATION', 'MATHEMATICS', 'MECHANICAL ENGINEERING', 'MEDICAL & HEALTH SCIENCE', 'MICROBIOLOGY', 'NURSING', 'OFFICE TECHNOLOGY MANAGEMENT', 'PERMACULTURE', 'PHARMACEUTICAL SCIENCES', 'PHILOSOPHY', 'PHYSICS', 'POLITICAL SCIENCE', 'PROJECT MANAGEMENT', 'PSYCHOLOGY', 'PUBLIC ADMINISTRATION', 'PUBLIC HEALTH', 'PURCHASING & SUPPLY CHAIN MANAGEMENT', 'QUANTITY SURVEY', 'SCIENCE LABORATORY TECHNOLOGY', 'SOCIOLOGY', 'STATISTICS', 'SUSTAINABILITY', 'TECHNOLOGY', 'THEATRE ARTS', 'THEOLOGY & BIBLICAL STUDIES', 'URBAN & REGIONAL PLANNING', 'VETERINARY MEDICINE']} multiple searchPlaceholder="Search Interests" />
-            </FormField>
-            <Button label="Submit Changes" type="submit" active={false} hoverIndicator onClick={() => push('/userdashboard')} />
-          </Form>
-        </Box>
-      </Tab>
-      <Tab title="Projects Joined" icon={<Aggregate />}>
-        <Box align="center" justify="center" pad="xlarge">
-          <List data={[{ 'name': 'Sustainability Project', 'Finishing': '05/10/20' }, { 'name': 'Communication Tool', 'Finishing': '11/10/20' }]} primaryKey="name" secondaryKey="finishing" />
-        </Box>
-      </Tab>
-      <Tab title="Create Project" icon={<TableAdd />}>
-        <Box align="center" justify="center" pad="xlarge" gap="large" elevation="xlarge" round="small" hoverIndicator={false} flex="grow" direction="column" overflow="visible">
-          <Form>
-            <FormField label="Project Name" name="Project Name">
-              <TextInput placeholder="How to loose a guy in 10 days" />
-            </FormField>
-            <FormField label="Description">
-              <TextInput placeholder="Tell us what you want to collaborate on and why" type="text" plain={false} />
-            </FormField>
-            <FormField label="Topics" name="Topics">
-              <Select options={['ACCOUNTING', 'AGRICULTURAL SCIENCE', 'APPLIED SCIENCES', 'ARCHITECTURE', 'BANKING & FINANCE', 'BIOCHEMISTRY', 'BUSINESS ADMINISTRATION & MANAGEMENT', 'CHEMISTRY', 'CHEMICAL ENGINEERING', 'CIVIL ENGINEERING', 'COMMUNITY', 'COMMUNICATION', 'COMPUTER ENGINEERING', 'COMPUTER SCIENCE', 'CRIMINOLOGY', 'ECONOMICS', 'EDUCATION', 'ELECTRICAL & ELECTRONICS ENGINEERING', 'ENGINEERING', 'ENGLISH LANGUAGE & LITERATURE', 'ENTREPRENEURSHIP', 'ENVIRONMENTAL DESIGN', 'ENVIRONMENTAL SCIENCE', 'ESTATE MANAGEMENT', 'FRENCH', 'GARDENING', 'GAMING', 'GEOLOGY', 'HISTORY', 'HUMAN RESOURCE MANAGEMENT', 'INSURANCE', 'INTERNATIONAL RELATIONS', 'LAW', 'LIBRARY SCIENCE', 'LINGUISTICS & COMMUNICATION', 'MARKETING', 'MASS COMMUNICATION', 'MATHEMATICS', 'MECHANICAL ENGINEERING', 'MEDICAL & HEALTH SCIENCE', 'MICROBIOLOGY', 'NURSING', 'OFFICE TECHNOLOGY MANAGEMENT', 'PERMACULTURE', 'PHARMACEUTICAL SCIENCES', 'PHILOSOPHY', 'PHYSICS', 'POLITICAL SCIENCE', 'PROJECT MANAGEMENT', 'PSYCHOLOGY', 'PUBLIC ADMINISTRATION', 'PUBLIC HEALTH', 'PURCHASING & SUPPLY CHAIN MANAGEMENT', 'QUANTITY SURVEY', 'SCIENCE LABORATORY TECHNOLOGY', 'SOCIOLOGY', 'STATISTICS', 'SUSTAINABILITY', 'TECHNOLOGY', 'THEATRE ARTS', 'THEOLOGY & BIBLICAL STUDIES', 'URBAN & REGIONAL PLANNING', 'VETERINARY MEDICINE']} multiple searchPlaceholder="Search Interests" />
-            </FormField>
-            <FormField label="Starting">
-              <DateInput format="dd/mm/yyyy" />
-            </FormField>
-            <FormField label="Finishing">
-              <DateInput format="dd/mm/yyyy" />
-            </FormField>
-            <FormField label="Project Image" name="Project Name">
-              <Image src="https://picsum.photos/200
-" />
-            </FormField>
-            <Button label="Launch Project" type="submit" active={false} hoverIndicator onClick={() => push('/userdashboard')} />
-          </Form>
-        </Box>
-      </Tab>
-    </Tabs>
+    <>
+
+      <Tabs justify="end" flex margin="large">
+        <UserProfile />
+        <ProjectsJoined />
+        <CreateProject />
+      </Tabs >
+    </>
   )
 }
 
-function mapStateToProps (state) {
-  return {
-    user: state.createUser
-  }
-}
-
-export default connect(mapStateToProps)(UserTabs)
+export default connect()(UserTabs)
