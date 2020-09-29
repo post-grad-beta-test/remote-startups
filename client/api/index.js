@@ -46,12 +46,3 @@ export function updateEmail(info) {
     .then(res => res.body)
     .catch(err => console.log(err.message))
 }
-
-export function updateEmail(info) {
-  return request
-    .patch('/api/v1/updatePassword')
-    .set(acceptJsonHeader)
-    .send(info)
-    .then(res => res.body)
-    .catch(err => console.log(err.message))
-}
