@@ -1,7 +1,7 @@
 /* eslint-disable promise/always-return */
 import { yupResolver } from '@hookform/resolvers'
 import { isAuthenticated, register } from 'authenticare/client'
-import { Box, Button, Form, TextInput, Select } from 'grommet'
+import { Box, Button, Form, TextInput } from 'grommet'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
