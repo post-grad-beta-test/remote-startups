@@ -38,7 +38,7 @@ router.post('/sendRegistrationEmail', getTokenDecoder(), (req, res) => {
 router.patch('/auth', getTokenDecoder(), (req, res) => {
   if (req.user) {
     addDetails(req.body)
-      .then(() => res.send(200))
+      .then(() => res.sendStatus(200))
       .catch((err) => res.status(500).send(err.message))
   } else {
     res.status(500).send('authentication token not provided')
@@ -67,8 +67,8 @@ router.post('/auth', getTokenDecoder(), (req, res) => {
 router.patch('/updateEmail', getTokenDecoder(), (req, res) => {
   if (req.user) {
     updateEmail(req.body)
-      .then(() => res.send(200))
-      .catch((err) => res.sendStatus(500).send(err.message))
+      .then(() => res.sendStatus(200))
+      .catch((err) => res.status(500).send(err.message))
   } else {
     res.status(500).send('authentication token not provided')
   }
