@@ -8,7 +8,7 @@ const InitialUserInfo = {
 function createUser (state = InitialUserInfo, action) {
   switch (action.type) {
     case ADD_USER_INFO:
-      return action.username
+      return action.username | state
     default:
       return state
   }
