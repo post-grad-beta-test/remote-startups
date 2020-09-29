@@ -2,11 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import { controlNavState } from './helpers'
-import Home from './Home'
-import Login from './Login'
-import Nav from './Nav'
-import Register from './Register'
-import UserTabs from './UserTabs'
+import { Home, Nav, Login, Register, UserTabs } from '../components'
 
 const App = ({ dispatch, currentPage }) => {
   useEffect(() => controlNavState(dispatch), [])
