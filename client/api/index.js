@@ -1,5 +1,5 @@
-import request from 'superagent'
 import { getEncodedToken } from 'authenticare/client'
+import request from 'superagent'
 const acceptJsonHeader = { Accept: 'application/json' }
 
 export function sendRegistrationEmail(email) {
@@ -30,7 +30,7 @@ export function addNewUserInfo(info) {
 }
 
 export function getUserInfo() {
-  return request 
+  return request
     .post('/api/v1/auth')
     .set(acceptJsonHeader)
     .set({ 'Authorization': `Bearer ${getEncodedToken()}` })

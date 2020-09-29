@@ -34,7 +34,7 @@ const App = ({ dispatch, currentPage }) => {
     </>
   )
 }
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     currentPage: state.currentPage
   }

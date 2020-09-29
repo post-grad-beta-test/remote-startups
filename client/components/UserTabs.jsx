@@ -1,11 +1,11 @@
 import { Tabs } from 'grommet'
 import React from 'react'
 import { connect } from 'react-redux'
-import UserProfile from './UserProfile'
-import { ProjectsJoined } from './ProjectsJoined'
 import { CreateProject } from './CreateProject'
+import { ProjectsJoined } from './ProjectsJoined'
+import UserProfile from './UserProfile'
 
-function UserTabs() {
+function UserTabs () {
   return (
     <>
 
@@ -17,6 +17,5 @@ function UserTabs() {
     </>
   )
 }
-
 
 export default connect()(UserTabs)
