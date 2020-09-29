@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import createUser from './createUser.test'
+import createUser from './createUser'
 import currentPage from './currentPage'
 import navState from './navState'
 

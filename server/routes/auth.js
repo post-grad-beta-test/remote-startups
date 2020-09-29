@@ -69,7 +69,18 @@ router.patch('/auth', (req, res) => {
 
 router.post('/auth', getTokenDecoder(), (req, res) => {
   if (req.user) {
-    res.json(req.user)
+    getUserByName(req.user.username)
+      .then(user => {
+        const userInfo = {
+          id: user.id,
+          username: user.username,
+          firstName: user.first_name,
+          lastName: user.last_name,
+          email: user.email,
+          image: user.image
+        }
+        res.json(userInfo)
+      })
   } else {
     res.status(500).send('authentication token not provided')
   }

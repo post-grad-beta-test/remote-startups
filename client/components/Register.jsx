@@ -1,7 +1,7 @@
 /* eslint-disable promise/always-return */
 import { yupResolver } from '@hookform/resolvers'
 import { isAuthenticated, register } from 'authenticare/client'
-import { Box, Button, Form, TextInput } from 'grommet'
+import { Box, Button, Form, TextInput, Select } from 'grommet'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
@@ -39,6 +39,10 @@ function Register() {
 
   const onSubmit = (values) => {
     const { username, password, email, firstName, lastName } = values
+    let image = Math.floor(Math.random() * 100) + 1
+    if (image < 10) image = '00' + image
+    else if (image < 100 && image > 9) image = '0' + image
+    else image = image.toString()
     register({ username, password }, { baseUrl })
       .then((token) => {
         if (isAuthenticated()) {
@@ -47,7 +51,7 @@ function Register() {
         } else alert('Something went wrong')
       })
       .then(() => {
-        updateUserInfo({ username, firstName, lastName, email })
+        updateUserInfo({ username, firstName, lastName, email, image })
         dispatch(addUserInfo({ username }))
         dispatch(changePage('User'))
         dispatch(changeNavState('Logged In'))
