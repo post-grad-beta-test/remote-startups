@@ -7,7 +7,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import * as yup from 'yup'
 import { addUserInfo, changeNavState, changePage } from '../actions'
-import { sendRegistrationEmail, updateUserInfo } from '../api/api'
+import { sendRegistrationEmail, addNewUserInfo } from '../api'
 import { baseApiUrl as baseUrl } from '../config'
 
 const schema = yup.object().shape({
@@ -31,7 +31,7 @@ const schema = yup.object().shape({
   //   })
 })
 
-function Register () {
+function Register() {
   const dispatch = useDispatch()
   const { handleSubmit, control, errors } = useForm({
     resolver: yupResolver(schema)
@@ -51,7 +51,7 @@ function Register () {
         } else alert('Something went wrong')
       })
       .then(() => {
-        updateUserInfo({ username, firstName, lastName, email, image })
+        addNewUserInfo({ username, firstName, lastName, email, image })
         dispatch(addUserInfo({ username }))
         dispatch(changePage('User'))
         dispatch(changeNavState('Logged In'))

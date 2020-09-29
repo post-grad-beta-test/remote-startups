@@ -8,7 +8,7 @@ import { addUserInfo, changeNavState, changePage } from '../actions'
 import { getUserInfo } from '../api/api'
 import { baseApiUrl as baseUrl } from '../config'
 
-function Login () {
+function Login() {
   const dispatch = useDispatch()
   const { handleSubmit, control } = useForm({
     // resolver: yupResolver(schema)
@@ -31,11 +31,11 @@ function Login () {
   return (
     <Box align='center' pad='large' >
       <Form pad="small" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor='username' name='username'>Username
-          <Controller as={TextInput} control={control} name='username' defaultValue="" type='text' />
+        <label htmlFor='username'>Username
+        <Controller as={TextInput} control={control} id='username' name='username' defaultValue="" type='text' />
         </label>
-        <label htmlFor='password' name='password'>Password
-          <Controller as={TextInput} control={control} name='password' defaultValue="" type='password' />
+        <label htmlFor='password'>Password
+        <Controller as={TextInput} control={control} id='password' name='password' defaultValue="" type='password' />
         </label>
         <Button type='submit' value='Submit' label='Submit' />
       </Form>

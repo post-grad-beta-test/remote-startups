@@ -20,7 +20,7 @@ export function sendReminderEmail(email) {
     .catch(err => console.log(err.message))
 }
 
-export function updateUserInfo(info) {
+export function addNewUserInfo(info) {
   return request
     .patch(`/api/v1/auth`)
     .set(acceptJsonHeader)
@@ -30,10 +30,19 @@ export function updateUserInfo(info) {
 }
 
 export function getUserInfo() {
-  return request 
+  return request
     .post('/api/v1/auth')
     .set(acceptJsonHeader)
     .set({ 'Authorization': `Bearer ${getEncodedToken()}` })
+    .then(res => res.body)
+    .catch(err => console.log(err.message))
+}
+
+export function updateEmail(info) {
+  return request
+    .patch('/api/v1/update')
+    .set(acceptJsonHeader)
+    .send(info)
     .then(res => res.body)
     .catch(err => console.log(err.message))
 }
