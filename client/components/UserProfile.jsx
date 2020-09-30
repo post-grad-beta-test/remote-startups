@@ -1,12 +1,12 @@
-import { Box, Button, Form, FormField, Image, Select, Tab, TextInput } from 'grommet'
+import { Box, Button, Form, FormField, Image, Tab, TextInput } from 'grommet'
 import { User } from 'grommet-icons'
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
 import { Controller, useForm } from 'react-hook-form'
+import { connect } from 'react-redux'
 import { addUserInfo, changePage } from '../actions'
 import { getUserInfo, updateEmail } from '../api'
 
-function UserProfile({ dispatch, user }) {
+function UserProfile ({ dispatch, user }) {
   useEffect(() => {
     getUserInfo()
       .then(userInfo => {
@@ -38,7 +38,7 @@ function UserProfile({ dispatch, user }) {
           </FormField>
           <h3>{user.firstName} {user.lastName}</h3>
           <label htmlFor="email">Update email:
-          <Controller as={TextInput} id="email" name="email" control={control} defaultValue="" placeholder={user.email} />
+            <Controller as={TextInput} id="email" name="email" control={control} defaultValue="" placeholder={user.email} />
           </label>
           <Button type='submit' value='Submit' label='Submit' />
         </Form >
@@ -47,7 +47,7 @@ function UserProfile({ dispatch, user }) {
   )
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     user: state.createUser
   }
