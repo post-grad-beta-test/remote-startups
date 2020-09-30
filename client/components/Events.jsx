@@ -1,24 +1,11 @@
 import { Box, DataTable, Heading, Tab } from 'grommet'
 import { Aggregate } from 'grommet-icons'
-import React, { useEffect, useState } from 'react'
-import { connect, useDispatch } from 'react-redux'
-import { setEvents } from '../actions'
-import { showAllEvents } from '../api/eventsApi'
+import React from 'react'
+import { connect } from 'react-redux'
 import { columns, getData } from '../helpers'
 
-const Events = () => {
-  const [listEvents, setListEvents] = useState([])
-  const dispatch = useDispatch()
-  useEffect(() => {
-    showAllEvents()
-      .then((events) => {
-        setListEvents(events)
-        dispatch(setEvents(events))
-        console.log('use effect')
-      })
-  }, [])
-
-  const DATA = getData(listEvents)
+const Events = ({ events }) => {
+  const DATA = getData(events)
 
   return (
     <Tab title="Events" icon={<Aggregate />}>
@@ -38,7 +25,7 @@ const Events = () => {
 
 function mapStateToProps (state) {
   return {
-    events: state.events
+    events: state.setEvents
   }
 }
 export default connect(mapStateToProps)(Events)
