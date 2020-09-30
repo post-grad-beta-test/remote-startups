@@ -1,6 +1,7 @@
 export const CHANGE_PAGE = 'CHANGE_PAGE'
 export const ADD_USER_INFO = 'ADD_USER_INFO'
 export const CHANGE_NAV_STATE = 'CHANGE_NAV_STATE'
+export const SET_EVENTS = 'SET_EVENTS'
 
 export function changePage (page) {
   return {
@@ -21,4 +22,11 @@ export function changeNavState (navState) {
     type: CHANGE_NAV_STATE,
     navState
   }
+}
+
+export function setEvents(events) {
+  return ({
+    type: SET_EVENTS,
+    events
+  })
 }
