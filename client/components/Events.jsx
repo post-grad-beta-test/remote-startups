@@ -1,34 +1,42 @@
 import { Box, Heading, DataTable, Tab } from 'grommet'
 import { Aggregate } from 'grommet-icons'
-import React from 'react'
-import { connect } from 'react-redux'
-import { showAllEvents } from '../api'
+import React, { useState, useEffect } from 'react'
+import { connect, useDispatch } from 'react-redux'
+import { showAllEvents } from '../api/eventsApi'
 import { setEvents } from '../actions'
+import { columns, getData } from '../helpers'
 
-class Events extends React.Component{
-  componentDidMount() {
-      showAllEvents()
-          .then(events => {
-              this.props.dispatch(setEvents(events))
-          })
-          .catch(err => {
-              console.log(err)
-          })
-  }
+const Events = () => {
+  const [listEvents, setListEvents] = useState([])
+  const dispatch = useDispatch()
+  useEffect(() => {
+    showAllEvents()
+      .then((events) => {
+        setListEvents(events)
+        dispatch(setEvents(events))
+      })
+      
+  }, [])
+  console.log(listEvents);
 
-  render() {
-      const {events} = this.props
+  
   return (
     <Tab title="Events" icon={<Aggregate />}>
       <Box fill="vertical" overflow="auto" align="center" flex="grow">
         <Heading textAlign="center" color="control">
           Live Events
-  </Heading>
-        <DataTable columns={[{ "header": "Name", "property": "name", "primary": true, "sortable": true, "search": true }, { "header": "Dates", "property": "dates", "sortable": true }, { "header": "Topic", "property": "topic", "sortable": true }, { "header": "Description", "property": "description" }]} data={[{ "name": "Sustainabile Leadership" }, { "name": "Trains" }]} size="small" onClickRow={[{ "screen": 1, "label": "Screen", "key": 1 }]} pad="medium" />
+              </Heading>
+        <DataTable
+          columns={columns}
+          data={getData(listEvents)}
+          size="small"
+          pad="medium" />
       </Box>
     </Tab>
   )
+
 }
+
 function mapStateToProps(state) {
   return {
     events: state.events

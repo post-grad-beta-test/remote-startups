@@ -1,7 +1,7 @@
 export const CHANGE_PAGE = 'CHANGE_PAGE'
 export const ADD_USER_INFO = 'ADD_USER_INFO'
 export const CHANGE_NAV_STATE = 'CHANGE_NAV_STATE'
-expost const SET_EVENTS = 'SET_EVENTS'
+export const SET_EVENTS = 'SET_EVENTS'
 
 export function changePage (page) {
   return {

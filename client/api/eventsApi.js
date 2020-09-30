@@ -14,6 +14,7 @@ export function addNewEvent(id, event) {
 }
 
 export function showAllEvents() {
+  console.log("api");
   return request
     .get('/api/v1/events')
     .set(acceptJsonHeader)

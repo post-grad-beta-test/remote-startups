@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
-import { controlNavState } from './helpers'
+import { controlNavState } from '../helpers'
 import { Home, Nav, Login, Register, UserTabs } from '../components'
 
 const App = ({ dispatch, currentPage }) => {

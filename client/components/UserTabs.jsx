@@ -2,7 +2,7 @@ import { Tabs } from 'grommet'
 import React from 'react'
 import { connect } from 'react-redux'
 import CreateProject from './CreateProject'
-import { ProjectsJoined } from './ProjectsJoined'
+import Events from './Events'
 import UserProfile from './UserProfile'
 
 function UserTabs() {
@@ -11,7 +11,7 @@ function UserTabs() {
 
       <Tabs justify="end" flex margin="large">
         <UserProfile />
-        <ProjectsJoined />
+        <Events />
         <CreateProject />
       </Tabs >
     </>
