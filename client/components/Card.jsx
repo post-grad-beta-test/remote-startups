@@ -14,7 +14,6 @@ export const Card = () => {
       .then((events) => {
         setListEvents(events)
         dispatch(setEvents(events))
-        console.log('use effect')
       })
   }, [])
 

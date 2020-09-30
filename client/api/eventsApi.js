@@ -1,5 +1,5 @@
-import request from 'superagent'
 import { getEncodedToken } from 'authenticare/client'
+import request from 'superagent'
 const acceptJsonHeader = { Accept: 'application/json' }
 
 
@@ -14,7 +14,6 @@ export function addNewEvent(id, event) {
 }
 
 export function showAllEvents() {
-  console.log("api");
   return request
     .get('/api/v1/events')
     .set(acceptJsonHeader)
