@@ -1,50 +1,34 @@
 /* eslint-disable promise/always-return */
-import { send } from '@sendgrid/mail'
 import request from 'supertest'
-import { getUserByName } from '../db'
 import server from '../server'
 
 jest.mock('@sendgrid/mail', () => ({
   setApiKey: jest.fn(),
-  send: jest.fn()
 }))
 
-jest.mock('../db', () => ({
-  getUserByName: jest.fn(),
-  userExists: () => true
-}))
-
-test('GET /api/v1/auth', () => {
-  getUserByName.mockImplementation(() => Promise.resolve({ id: 1, email: 'test@gmail.com' }))
+test('POST api/v1/sendRegistrationEmail returns 401 if not logged in', () => {
   return request(server)
-    .get('/api/v1/auth')
-    .then(res => {
-      expect(res.body.id).toBe(1)
-    })
+    .post('/api/v1/sendRegistrationEmail')
+    .send({ email: 'test@mail.com' })
+    .expect(401)
 })
 
-describe('emails', () => {
-  test('POST api/v1/sendRegistrationEmail calls sgMail.send()', () => {
-    send.mockImplementation(() => Promise.resolve({ email: 'test@mail.com' }))
-    expect.assertions(1)
-    return request(server)
-      .post('/api/v1/sendRegistrationEmail')
-      .send({ email: 'test@mail.com' })
-      .expect(201)
-      .then(res => {
-        expect(res.body.email).toBe('test@mail.com')
-      })
-  })
+test('PATCH /auth returns 401 if not logged in', () => {
+  return request(server)
+    .patch('/api/v1/auth')
+    .send({ firstName: 'test', lastName: 'jest' })
+    .expect(401)
+})
 
-  test('POST api/v1/sendReminderEmail calls sgMail.send()', () => {
-    send.mockImplementation(() => Promise.resolve({ email: 'test@mail.com' }))
-    expect.assertions(1)
-    return request(server)
-      .post('/api/v1/sendReminderEmail')
-      .send({ email: 'test@mail.com' })
-      .expect(201)
-      .then(res => {
-        expect(res.body.email).toBe('test@mail.com')
-      })
-  })
+test('POST /auth returns 401 if not logged in', () => {
+  return request(server)
+    .post('/api/v1/auth')
+    .expect(401)
+})
+
+test('PATCH /updateEmail returns 401 if not logged in', () => {
+  return request(server)
+    .patch('/api/v1/updateEmail')
+    .send({ email: 'jest@mail.com' })
+    .expect(401)
 })
