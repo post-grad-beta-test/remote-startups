@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { setEvents } from '../actions'
 import { showAllEvents } from '../api/eventsApi'
-import { columns } from '../helpers'
+import { columns, getData } from '../helpers'
 
 const Events = () => {
   const [listEvents, setListEvents] = useState([])
@@ -18,17 +18,6 @@ const Events = () => {
       })
   }, [])
 
-  const getData = (arr) => {
-    return arr.map(event => ({
-      'name': event.name,
-      'dates': event.date_start + '-' + event.end_date,
-      'topic': event.topic,
-      'description': event.description
-    })
-
-    )
-  }
-  console.log(DATA)
   const DATA = getData(listEvents)
 
   return (
