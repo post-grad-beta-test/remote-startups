@@ -1,10 +1,10 @@
-import { Box, Heading, DataTable, Tab } from 'grommet'
+import { Box, DataTable, Heading, Tab } from 'grommet'
 import { Aggregate } from 'grommet-icons'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
-import { showAllEvents } from '../api/eventsApi'
 import { setEvents } from '../actions'
-import { columns, getData } from '../helpers'
+import { showAllEvents } from '../api/eventsApi'
+import { columns } from '../helpers'
 
 const Events = () => {
   const [listEvents, setListEvents] = useState([])
@@ -14,30 +14,40 @@ const Events = () => {
       .then((events) => {
         setListEvents(events)
         dispatch(setEvents(events))
+        console.log('use effect')
       })
-      
   }, [])
-  console.log(listEvents);
 
-  
+  const getData = (arr) => {
+    return arr.map(event => ({
+      'name': event.name,
+      'dates': event.date_start + '-' + event.end_date,
+      'topic': event.topic,
+      'description': event.description
+    })
+
+    )
+  }
+  console.log(DATA)
+  const DATA = getData(listEvents)
+
   return (
     <Tab title="Events" icon={<Aggregate />}>
       <Box fill="vertical" overflow="auto" align="center" flex="grow">
         <Heading textAlign="center" color="control">
           Live Events
-              </Heading>
+        </Heading>
         <DataTable
           columns={columns}
-          data={getData(listEvents)}
+          data={DATA}
           size="small"
           pad="medium" />
       </Box>
     </Tab>
   )
-
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     events: state.events
   }
