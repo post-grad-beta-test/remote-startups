@@ -2,9 +2,6 @@ import React from 'react'
 import { Box, Heading, Stack, Text, WorldMap } from 'grommet'
 
 function Map() {
-    const styles = {
-        margin: '0 auto'
-    }
     return (
         <Stack anchor='top' style={{display: 'flex', justifyContent:'center', alignItems:'center', marginTop: '10px'}}>
             <Box fill justify="center" >
