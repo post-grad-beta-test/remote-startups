@@ -8,17 +8,13 @@ const { saveNewEvent,
   addUserToEvent,
   getUsersForEvent } = require('../Db/projectDb')
 
-router.get('/', getTokenDecoder(), (req, res) => {
-  console.log('route');
-  if (req.user) {
-    getAllEvents()
-      .then(events => {
-        console.log(events);
-        res.status(200).json(events)})
-      .catch(() => res.status(500).send('DATABASE ERROR'))
-  } else {
-    res.status(500).send('authentication token not provided')
-  }
+router.get('/', (req, res) => {
+  getAllEvents()
+    .then(events => {
+      console.log(events)
+      res.status(200).json(events)
+    })
+    .catch(() => res.status(500).send('DATABASE ERROR'))
 })
 
 router.post('/:id', getTokenDecoder(), (req, res) => {
