@@ -48,7 +48,6 @@ test.skip('POST /api/v1/events/:id', () => {
       })
       .expect(201)
       .then((res) => {
-        console.log(res)
         expect(res.body.name).toBe('the Event')
         expect(res.body.description).toBe('this is an event yo')
       })

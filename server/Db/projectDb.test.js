@@ -44,7 +44,6 @@ describe('add an event', () => {
       expect(newEvents).toHaveLength(1)
       expect(newEvents[0]).toBe(4)
       return getAllEvents(testDb).then((moreEvents) => {
-        console.log(moreEvents)
         expect(moreEvents).toHaveLength(4)
         expect(moreEvents[3].name).toBe('an event')
         return null
