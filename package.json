@@ -15,8 +15,8 @@
     "build": "webpack",
     "server": "node server",
     "test": "jest --watchAll",
-    "lint": "eslint client server",
-    "lint:fix": "eslint client server --fix"
+    "lint": "npx eslint . --ext .js,.jsx",
+    "lint:fix": "npx eslint . --ext .js,.jsx --fix"
   },
   "babel": {
     "presets": [
@@ -61,11 +61,17 @@
     "@testing-library/react": "^11.0.0",
     "@testing-library/user-event": "^12.1.6",
     "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.1.0",
     "babel-jest": "^25.3.0",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.3.0",
-    "eslint": "^7.9.0",
-    "eslint-config-eda": "^0.1.1",
+    "eslint": "^7.4.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-standard": "^4.0.1",
     "file-loader": "^6.1.0",
     "jest": "^25.3.0",
     "knex": "^0.21.5",

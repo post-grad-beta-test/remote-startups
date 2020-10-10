@@ -6,6 +6,8 @@ const {
   getAllEvents,
   deleteEvent,
   addUserToEvent,
+  getEventsForUser,
+  getUsersForEvent,
 } = require('../db/projectDb')
 
 const testDb = knex(config)
@@ -74,9 +76,23 @@ describe('add entries to users_projects table', () => {
   })
 })
 
-function getTestToken(srv) {
-  return request(srv)
-    .post('/api/v1/auth/signin')
-    .send({ username: 'jess', password: 'jess' })
-    .then((res) => res.body.token)
-}
+describe('get events for users', () => {
+  test('return a list with name and dates for user', () => {
+    return getEventsForUser(1, testDb).then((events) => {
+      expect(events).toHaveLength(3)
+      expect(events[0][0].name).toBe('Remote Startups')
+      expect(events[1][0].topic).toBe('FOOD')
+      expect(events[2][0].date_start).toBe('23/09/20')
+    })
+  })
+})
+
+describe('get users for events', () => {
+  test('get list of users attending event', () => {
+    return getUsersForEvent(1, testDb).then((users) => {
+      expect(users).toHaveLength(2)
+      console.log(users)
+      expect(users[0][0].username).toBe('aidanS')
+    })
+  })
+})
