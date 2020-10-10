@@ -1,7 +1,7 @@
+/* eslint-disable */
 import { getEncodedToken } from 'authenticare/client'
 import request from 'superagent'
 const acceptJsonHeader = { Accept: 'application/json' }
-
 
 export function addNewEvent(id, event) {
   return request
@@ -17,7 +17,6 @@ export function showAllEvents() {
   return request
     .get('/api/v1/events')
     .set(acceptJsonHeader)
-    .set({ 'Authorization': `Bearer ${getEncodedToken()}` })
     .then(res => res.body)
     .catch(error => console.log(error))
 }
