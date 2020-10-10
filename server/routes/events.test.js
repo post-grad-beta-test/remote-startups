@@ -1,14 +1,13 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable promise/always-return */
-require('dotenv').config
 import request from 'supertest'
 import server from '../server'
-import { saveNewEvent, getAllEvents } from '../Db/projectDb'
+const { getTokenDecoder } = require('authenticare/server')
+const { saveNewEvent, getAllEvents } = require('../Db/projectDb')
 
 jest.mock('@sendgrid/mail', () => ({
   setApiKey: jest.fn(),
 }))
-
-jest.mock('../db')
 
 jest.mock('../Db/projectDb', () => ({
   saveNewEvent: jest.fn(),
@@ -24,60 +23,64 @@ test('DELETE /api/v1/events return 401 if not logged in', () => {
 })
 
 test.skip('POST /api/v1/events/:id', () => {
-  const id = 1
-  saveNewEvent.mockImplementation(() =>
-    Promise.resolve({
-      name: 'an event',
-      description: 'this is an event yo',
-      topic: 'TECHNOLOGY',
-      date_start: '20/11/20',
-      date_end: '24/11/20',
-    })
-  )
+  const user = {
+    name: 'an event',
+    description: 'this is an event yo',
+    topic: 'TECHNOLOGY',
+    date_start: '20/11/20',
+    date_end: '24/11/20',
+    image: '012',
+  }
+
+  saveNewEvent.mockImplementation(() => Promise.resolve(user))
   return getTestToken(server).then((token) => {
+    console.log(token)
     return request(server)
       .post(`/api/v1/events/1`)
-      .set('Authorization', `Bearer ${token}`)
-      .send({
-        name: 'an event',
-        description: 'this is an event yo',
-        topic: 'TECHNOLOGY',
-        date_start: '20/11/20',
-        date_end: '24/11/20',
-        image: '012',
-      })
-      .expect(201)
+      .send(user)
       .then((res) => {
+        console.log(res)
+
         expect(res.body.name).toBe('the Event')
         expect(res.body.description).toBe('this is an event yo')
       })
   })
 })
-
-test('GET /api/v1/events', () => {
-  getAllEvents.mockImplementation(() =>
-    Promise.resolve([
-      { id: 1, name: 'event', description: 'the description', user_id: 2 },
-      {
-        id: 2,
-        name: 'organise something',
-        description: 'test something',
-        user_id: 3,
-      },
-    ])
-  )
-  return request(server)
-    .get('/api/v1/events')
-    .then((res) => {
-      expect(200)
-      expect(res.body[0].name).toBe('event')
-      expect(res.body[1].description).toBe('test something')
-    })
+describe('GET /api/v1/events', () => {
+  const id = 1
+  test('test route is called', () => {
+    getAllEvents.mockImplementation(() => Promise.resolve())
+    return request(server)
+      .get('/api/v1/events')
+      .then((res) => {
+        expect.assertions(1)
+        expect(res.status).toBe(200)
+      })
+  })
+  test('return events accurately', () => {
+    getAllEvents.mockImplementation(() =>
+      Promise.resolve([
+        { id: 1, name: 'event', description: 'the description', user_id: 2 },
+        {
+          id: 2,
+          name: 'organise something',
+          description: 'test something',
+          user_id: 3,
+        },
+      ])
+    )
+    return request(server)
+      .get('/api/v1/events')
+      .then((res) => {
+        expect(res.body).toHaveLength(2)
+        expect(res.body[0].name).toBe('event')
+        expect(res.body[1].name).toBe('organise something')
+      })
+  })
 })
-
-function getTestToken(srv) {
-  return request(srv)
-    .post('/api/v1/auth/')
+function getTestToken(server) {
+  return request(server)
+    .post('/api/v1/auth/signup')
     .send({ username: 'jess', password: 'jess' })
     .then((res) => res.body.token)
 }

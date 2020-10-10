@@ -9,7 +9,6 @@ const {
   addUserToEvent,
   getUsersForEvent,
   getEventsForUser,
-  addUserToEvent,
 } = require('../Db/projectDb')
 
 router.get('/', (req, res) => {
@@ -20,7 +19,7 @@ router.get('/', (req, res) => {
     .catch(() => res.status(500).send('DATABASE ERROR'))
 })
 
-router.get('/eventsUser/:id', getTokenDecoder(), (req, res) => {
+router.get('/:id/eventsUser', getTokenDecoder(), (req, res) => {
   if (req.user) {
     const id = Number(req.params.id)
     getEventsForUser(id)
@@ -33,7 +32,7 @@ router.get('/eventsUser/:id', getTokenDecoder(), (req, res) => {
   }
 })
 
-router.get('/usersEvent/:id', getTokenDecoder(), (req, res) => {
+router.get('/:id/usersEvent', getTokenDecoder(), (req, res) => {
   if (req.user) {
     const id = Number(req.params.id)
     const { eventId } = req.body
@@ -60,7 +59,7 @@ router.post('/:id', getTokenDecoder(), (req, res) => {
   }
 })
 
-router.post('/usersEvent/:id', getTokenDecoder(), (req, res) => {
+router.post('/:id/usersEvent', getTokenDecoder(), (req, res) => {
   if (req.user) {
     const id = Number(req.params.id)
     addUserToEvent(id, req.body)

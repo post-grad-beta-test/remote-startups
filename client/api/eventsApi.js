@@ -16,7 +16,6 @@ export function addNewEvent(id, event) {
 export function showAllEvents() {
   return request
     .get('/api/v1/events')
-    .set(acceptJsonHeader)
     .then((res) => res.body)
     .catch((error) => console.log(error))
 }
