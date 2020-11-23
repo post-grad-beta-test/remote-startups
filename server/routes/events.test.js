@@ -3,14 +3,14 @@ import server from '../server'
 import { saveNewEvent, getAllEvents } from '../Db/projectDb'
 
 jest.mock('@sendgrid/mail', () => ({
-  setApiKey: jest.fn()
+  setApiKey: jest.fn(),
 }))
 
 jest.mock('../db')
 
 jest.mock('../Db/projectDb', () => ({
   saveNewEvent: jest.fn(),
-  getAllEvents: jest.fn()
+  getAllEvents: jest.fn(),
 }))
 
 test('POST /api/v1/events/:id returns 401 if not logged in', () => {
@@ -28,7 +28,7 @@ test.skip('POST /api/v1/events/:id', () => {
       description: 'this is an event yo',
       topic: 'TECHNOLOGY',
       date_start: '20/11/20',
-      date_end: '24/11/20'
+      date_end: '24/11/20',
     })
   )
   return getTestToken(server).then((token) => {
@@ -41,7 +41,7 @@ test.skip('POST /api/v1/events/:id', () => {
         topic: 'TECHNOLOGY',
         date_start: '20/11/20',
         date_end: '24/11/20',
-        image: '012'
+        image: '012',
       })
       .expect(201)
       .then((res) => {
@@ -60,8 +60,8 @@ test('GET /api/v1/events', () => {
         id: 2,
         name: 'organise something',
         description: 'test something',
-        user_id: 3
-      }
+        user_id: 3,
+      },
     ])
   )
   return request(server)
@@ -73,7 +73,7 @@ test('GET /api/v1/events', () => {
     })
 })
 
-function getTestToken (srv) {
+function getTestToken(srv) {
   return request(srv)
     .post('/api/v1/auth/')
     .send({ username: 'jess', password: 'jess' })

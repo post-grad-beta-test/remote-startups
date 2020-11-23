@@ -2,7 +2,7 @@ import request from 'supertest'
 import server from '../server'
 
 jest.mock('@sendgrid/mail', () => ({
-  setApiKey: jest.fn()
+  setApiKey: jest.fn(),
 }))
 
 test('POST api/v1/sendRegistrationEmail returns 401 if not logged in', () => {
