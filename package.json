@@ -16,7 +16,7 @@
     "server": "node server",
     "test": "jest --watchAll",
     "lint": "eslint client server",
-    "lint:fix": "eslint client server --fix"
+    "lint:fix": "eslint server client --fix"
   },
   "babel": {
     "presets": [

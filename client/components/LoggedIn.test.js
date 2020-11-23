@@ -3,8 +3,6 @@ import { render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import store from '../store'
 import LoggedIn from './LoggedIn'
-import { Home } from 'grommet-icons'
-import { toHaveValue } from '@testing-library/jest-dom/extend-expect'
 
 test('nav displays log off', () => {
   render(
