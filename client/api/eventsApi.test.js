@@ -11,7 +11,6 @@ test('fetches events from server', () => {
     })
 
   return showAllEvents().then((res) => {
-    expect(200).toHaveBeenCalled()
     expect(res.event_id).toEqual(1)
     expect(res.name).toEqual('Test Event')
     return null

@@ -1,4 +1,3 @@
-/* eslint-disable promise/always-return */
 import request from 'supertest'
 import server from '../server'
 
@@ -21,9 +20,7 @@ test('PATCH /auth returns 401 if not logged in', () => {
 })
 
 test('POST /auth returns 401 if not logged in', () => {
-  return request(server)
-    .post('/api/v1/auth')
-    .expect(401)
+  return request(server).post('/api/v1/auth').expect(401)
 })
 
 test('PATCH /updateEmail returns 401 if not logged in', () => {

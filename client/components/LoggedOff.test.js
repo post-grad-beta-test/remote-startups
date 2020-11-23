@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import store from '../store'
 import LoggedOff from './LoggedOff'
+import '@testing-library/jest-dom'
 
 test('nav displays log in and register', () => {
   render(

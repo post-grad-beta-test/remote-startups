@@ -67,7 +67,7 @@ test('GET /api/v1/events', () => {
   return request(server)
     .get('/api/v1/events')
     .then((res) => {
-      expect(200).toHaveBeenCalled()
+      expect(200)
       expect(res.body[0].name).toBe('event')
       expect(res.body[1].description).toBe('test something')
     })
