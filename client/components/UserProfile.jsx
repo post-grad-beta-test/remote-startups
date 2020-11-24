@@ -7,23 +7,25 @@ import { addUserInfo, changePage } from '../actions'
 import { getUserInfo, updateEmail } from '../api'
 import { labelStyle } from '../helpers'
 
-function UserProfile ({ dispatch, user }) {
+function UserProfile({ dispatch, user }) {
   useEffect(() => {
     getUserInfo()
-      .then(userInfo => {
+      .then((userInfo) => {
         dispatch(addUserInfo(userInfo))
       })
+      .catch((err) => console.error('user Profile error:', err))
   }, [])
 
   const { handleSubmit, control, errors } = useForm({
     // resolver: yupResolver(schema)
   })
 
-  const onSubmit = values => {
+  const onSubmit = (values) => {
     values.username = user.username
     updateEmail(values)
       .then(() => getUserInfo())
-      .then(userInfo => {
+      // .catch((err) => console.error('user Profile error:', err))
+      .then((userInfo) => {
         dispatch(addUserInfo(userInfo))
         alert('saved!')
         dispatch(changePage('Home'))
@@ -31,26 +33,42 @@ function UserProfile ({ dispatch, user }) {
   }
 
   return (
-    <Tab title="Profile" icon={<User />} plain={false} reverse={false}>
-      <Box align="center" justify="center" pad="xlarge">
-        <Form pad="medium" onSubmit={handleSubmit(onSubmit)}>
-          <FormField label="">
-            <Image src={`avatar.images/gee_me_${user.image}.svg`} width={400} height={200} mode='fit' />
+    <Tab title='Profile' icon={<User />} plain={false} reverse={false}>
+      <Box align='center' justify='center' pad='xlarge'>
+        <Form pad='medium' onSubmit={handleSubmit(onSubmit)}>
+          <FormField label=''>
+            <Image
+              src={`avatar.images/gee_me_${user.image}.svg`}
+              width={400}
+              height={200}
+              mode='fit'
+            />
           </FormField>
-          <h3>{user.firstName} {user.lastName}</h3>
-          <label style={labelStyle} htmlFor="email">Update email: </label>
-          <Controller as={TextInput} id="email" name="email" control={control} defaultValue="" placeholder={user.email} />
+          <h3>
+            {user.firstName} {user.lastName}
+          </h3>
+          <label style={labelStyle} htmlFor='email'>
+            Update email:{' '}
+          </label>
+          <Controller
+            as={TextInput}
+            id='email'
+            name='email'
+            control={control}
+            defaultValue=''
+            placeholder={user.email}
+          />
 
           <Button type='submit' value='Submit' label='Submit' />
-        </Form >
+        </Form>
       </Box>
     </Tab>
   )
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
-    user: state.createUser
+    user: state.createUser,
   }
 }
 

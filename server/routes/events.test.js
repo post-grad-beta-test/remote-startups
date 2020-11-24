@@ -14,11 +14,15 @@ jest.mock('../Db/projectDb', () => ({
 }))
 
 test('POST /api/v1/events/:id returns 401 if not logged in', () => {
-  return request(server).post('/api/v1/events/:id').expect(401)
+  return request(server)
+    .post('/api/v1/events/:id')
+    .then((res) => expect(res.statusCode).toBe(401))
 })
 
 test('DELETE /api/v1/events return 401 if not logged in', () => {
-  return request(server).delete('/api/v1/events').expect(401)
+  return request(server)
+    .delete('/api/v1/events')
+    .then((res) => expect(res.statusCode).toBe(401))
 })
 
 test.skip('POST /api/v1/events/:id', () => {
@@ -45,7 +49,6 @@ test.skip('POST /api/v1/events/:id', () => {
       })
       .expect(201)
       .then((res) => {
-        console.log(res)
         expect(res.body.name).toBe('the Event')
         expect(res.body.description).toBe('this is an event yo')
       })
