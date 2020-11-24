@@ -23,7 +23,8 @@
   
   "husky": {
     "hooks": {
-      "pre-commit": "echo \"[Husky] pre-commit\"lint && test:ci"  
+      "pre-commit": "echo \"[Husky] pre-commit\"lint"  ,
+      "pre-push": "echo \"[Husky] pre-push\"test:CI"
     }
   },
   "babel": {
