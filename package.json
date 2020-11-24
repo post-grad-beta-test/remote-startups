@@ -18,7 +18,7 @@
     "start": "run-s build server",
     "server": "node server",
     "test": "jest --watchAll",
-    "test:ci": "jest"
+    "test:CI": "jest"
   },
   
   "husky": {
