@@ -5,8 +5,8 @@ const {
   saveNewEvent,
   getAllEvents,
   deleteEvent,
-  addUserToEvent
-} = require('../db/projectDb')
+  addUserToEvent,
+} = require('../Db/projectDb')
 
 const testDb = knex(config)
 
@@ -37,7 +37,7 @@ describe('add an event', () => {
         description: 'this is an event yo',
         topic: 'TECHNOLOGY',
         date_start: '20/11/20',
-        date_end: '24/11/20'
+        date_end: '24/11/20',
       },
       testDb
     ).then((newEvents) => {
