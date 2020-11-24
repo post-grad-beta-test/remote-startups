@@ -18,6 +18,11 @@
     "lint": "eslint client server",
     "lint:fix": "eslint client server --fix"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint"
+    }
+  },
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -58,6 +63,7 @@
     "eslint-config-eda": "^0.1.1",
     "file-loader": "^6.1.0",
     "grommet": "^2.15.0",
+    "husky": "^5.0.4",
     "jest": "^25.3.0",
     "knex": "^0.21.5",
     "nock": "^13.0.4",
