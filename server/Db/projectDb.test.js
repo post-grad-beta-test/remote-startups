@@ -6,7 +6,7 @@ const {
   getAllEvents,
   deleteEvent,
   addUserToEvent
-} = require('../db/projectDb')
+} = require('../Db/projectDb')
 
 const testDb = knex(config)
 
