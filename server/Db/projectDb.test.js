@@ -5,7 +5,7 @@ const {
   saveNewEvent,
   getAllEvents,
   deleteEvent,
-  addUserToEvent,
+  addUserToEvent
 } = require('../db/projectDb')
 
 const testDb = knex(config)
@@ -37,7 +37,7 @@ describe('add an event', () => {
         description: 'this is an event yo',
         topic: 'TECHNOLOGY',
         date_start: '20/11/20',
-        date_end: '24/11/20',
+        date_end: '24/11/20'
       },
       testDb
     ).then((newEvents) => {
@@ -75,7 +75,7 @@ describe('add entries to users_projects table', () => {
   })
 })
 
-function getTestToken(srv) {
+function getTestToken (srv) {
   return request(srv)
     .post('/api/v1/auth/signin')
     .send({ username: 'jess', password: 'jess' })

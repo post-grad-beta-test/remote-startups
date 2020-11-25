@@ -55,7 +55,7 @@ const EventCard = () => {
                 </Heading>
                 {/* <Image src={`project.images/project_image_${imageNum}.svg`} opacity="strong" /> */}
                 <Text weight="bold" textAlign="center" size="medium">
-                  Dates: {event.date_start} - {event.date_ends}
+                  Dates: {event.date_start} - {event.date_end}
                 </Text>
                 <Paragraph size="small" margin="medium" textAlign="center">
                   {event.description}

@@ -11,18 +11,18 @@ export function controlNavState (dispatch) {
 }
 
 export const columns = [
-  { 'header': 'Name', 'property': 'name', 'primary': true, 'sortable': true, 'search': true },
-  { 'header': 'Dates', 'property': 'dates', 'sortable': true },
-  { 'header': 'Topic', 'property': 'topic', 'sortable': true },
-  { 'header': 'Description', 'property': 'description' }
+  { header: 'Name', property: 'name', primary: true, sortable: true, search: true },
+  { header: 'Dates', property: 'dates', sortable: true },
+  { header: 'Topic', property: 'topic', sortable: true },
+  { header: 'Description', property: 'description' }
 ]
 
 export const getData = (arr) => {
   return arr.map(event => ({
-    'name': event.name,
-    'dates': event.date_start + '-' + event.date_end,
-    'topic': event.topic,
-    'description': event.description
+    name: event.name,
+    dates: event.date_start + '-' + event.date_end,
+    topic: event.topic,
+    description: event.description
   })
   )
 }
@@ -39,4 +39,5 @@ export const getImage = () => {
 export const labelStyle = {
   display: 'block',
   fontWeight: '600',
-  padding: '1rem' }
+  padding: '1rem'
+}
