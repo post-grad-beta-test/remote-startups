@@ -7,7 +7,7 @@ const {
   getAllEvents,
   deleteEvent,
   addUserToEvent,
-  getEventsForUser,
+  getEventsForUser
 } = require('../Db/projectDb')
 
 router.get('/', (req, res) => {
