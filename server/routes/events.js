@@ -2,10 +2,36 @@ const express = require('express')
 const router = express.Router()
 const { getTokenDecoder } = require('authenticare/server')
 
-const { saveNewEvent, getAllEvents, deleteEvent } = require('../Db/projectDb')
+const {
+  saveNewEvent,
+  getAllEvents,
+  deleteEvent,
+  addUserToEvent,
+  getEventsForUser,
+} = require('../Db/projectDb')
 
 router.get('/', (req, res) => {
   getAllEvents()
+    .then((events) => {
+      res.status(200).json(events)
+    })
+    .catch(() => res.status(500).send('DATABASE ERROR'))
+})
+
+router.post('/join', (req, res) => {
+  const { eventId, userId } = Number(req.body)
+  addUserToEvent(eventId, userId)
+    .then((ids) => {
+      res.status(200).json(ids[0])
+    })
+    .catch((err) => {
+      res.status(500).send(`DATABASE ERROR ${err.message}`)
+    })
+})
+
+router.get('/:id', (req, res) => {
+  const { id } = req.params
+  getEventsForUser(Number(id))
     .then((events) => {
       res.status(200).json(events)
     })
