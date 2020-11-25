@@ -24,7 +24,6 @@ function UserProfile({ dispatch, user }) {
     values.username = user.username
     updateEmail(values)
       .then(() => getUserInfo())
-      // .catch((err) => console.error('user Profile error:', err))
       .then((userInfo) => {
         dispatch(addUserInfo(userInfo))
         alert('saved!')

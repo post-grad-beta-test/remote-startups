@@ -33,7 +33,6 @@ const getWord = () => {
   ]
 
   const iconName = iconsArray[Math.floor(Math.random() * 9)]
-  console.log(iconName)
   return iconName
 }
 const EventCard = () => {
@@ -47,8 +46,6 @@ const EventCard = () => {
     })
   }, [])
   let anIcon = getWord()
-  // const imageNum = getImage()
-  console.log(listEvents)
   return (
     <div className='container'>
       <Grid gap='medium' columns={{ count: 'fit', size: 'medium' }}>
