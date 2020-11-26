@@ -31,7 +31,6 @@ function getUsersForEvent ({ eventId, db = connection }) {
 }
 
 function getEventsForUser (id, db = connection) {
-  console.log(id)
   return db('users_projects').where('user_id', id).select('project_id')
 }
 
