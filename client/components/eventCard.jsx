@@ -1,7 +1,8 @@
 /* eslint-disable promise/always-return */
 import { Box, Button, Grid, Heading, Paragraph, Text } from 'grommet'
+import { PowerCycle } from 'grommet-icons'
 import { Achievement, Add, Anchor, BusinessService, Channel, Dashboard, Deploy, FingerPrint, Group, Grow, Organization } from 'grommet-icons'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Component } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { setEvents } from '../actions'
 import { showAllEvents } from '../api/eventsApi'
@@ -27,6 +28,14 @@ const getWord = () => {
 const EventCard = () => {
   const [listEvents, setListEvents] = useState([])
   const dispatch = useDispatch()
+  const [isLoading, setLoading] = useState(false)
+
+  const subscribe = () => {
+    setLoading(true);
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then(response => response.json())
+      .then(json => { console.log(json); setLoading(false)})
+  }
 
   useEffect(() => {
     showAllEvents()
@@ -62,7 +71,17 @@ const EventCard = () => {
                 </Paragraph>
 
                 <Box align="center" justify="center" pad="small" direction="row-responsive" flex alignSelf="center" basis="xxsmall" gap="small" margin="xsmall">
-                  <Button label="Join" icon={<Add />} onClick={() => alert('You joined an event')} />
+                  
+                 { !isLoading && <Button label="Join" icon={<Add />} onClick={subscribe} />}
+                 { isLoading && <PowerCycle label="Joining now..."/>}
+                  
+                  {/* Below is the testing code for loading spinner */}
+                  {/* { !isLoading && <button className="button" onClick={subscribe}>
+                    Join NOW
+                  </button>}
+                  { isLoading && <button className="button" disabled>
+                    <i className=""></i>Joining Event...
+                  </button>} */}
 
                 </Box>
               </Box>
