@@ -1,18 +1,7 @@
 /* eslint-disable promise/always-return */
 import { Box, Button, Grid, Heading, Paragraph, Text } from 'grommet'
-import {
-  Achievement,
-  Add,
-  Anchor,
-  BusinessService,
-  Channel,
-  Dashboard,
-  Deploy,
-  FingerPrint,
-  Group,
-  Grow,
-  Organization,
-} from 'grommet-icons'
+import { PowerCycle } from 'grommet-icons'
+import { Achievement, Add, Anchor, BusinessService, Channel, Dashboard, Deploy, FingerPrint, Group, Grow, Organization } from 'grommet-icons'
 import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { setEvents } from '../actions'
@@ -38,6 +27,14 @@ const getWord = () => {
 const EventCard = () => {
   const [listEvents, setListEvents] = useState([])
   const dispatch = useDispatch()
+  const [isLoading, setLoading] = useState(false)
+
+  const subscribe = () => {
+    setLoading(true);
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then(response => response.json())
+      .then(json => { console.log(json); setLoading(false)})
+  }
 
   useEffect(() => {
     showAllEvents().then((arrayEvents) => {
@@ -106,22 +103,11 @@ const EventCard = () => {
                   {event.description}
                 </Paragraph>
 
-                <Box
-                  align='center'
-                  justify='center'
-                  pad='small'
-                  direction='row-responsive'
-                  flex
-                  alignSelf='center'
-                  basis='xxsmall'
-                  gap='small'
-                  margin='xsmall'
-                >
-                  <Button
-                    label='Join'
-                    icon={<Add />}
-                    onClick={() => alert('You joined an event')}
-                  />
+                <Box align="center" justify="center" pad="small" direction="row-responsive" flex alignSelf="center" basis="xxsmall" gap="small" margin="xsmall">
+                  
+                 { !isLoading && <Button label="Join" icon={<Add />} onClick={subscribe} />}
+                 { isLoading && <PowerCycle label="Joining now..."/>
+           
                 </Box>
               </Box>
             </Box>
