@@ -1,4 +1,3 @@
-/* eslint-disable promise/always-return */
 import request from 'supertest'
 import server from '../server'
 import { saveNewEvent, getAllEvents } from '../Db/projectDb'
@@ -16,15 +15,18 @@ jest.mock('../Db/projectDb', () => ({
 }))
 
 test('POST /api/v1/events/:id returns 401 if not logged in', () => {
-  return request(server).post('/api/v1/events/:id').expect(401)
+  return request(server)
+    .post('/api/v1/events/:id')
+    .then((res) => expect(res.statusCode).toBe(401))
 })
 
 test('DELETE /api/v1/events return 401 if not logged in', () => {
-  return request(server).delete('/api/v1/events').expect(401)
+  return request(server)
+    .delete('/api/v1/events')
+    .then((res) => expect(res.statusCode).toBe(401))
 })
 
 test.skip('POST /api/v1/events/:id', () => {
-  const id = 1
   saveNewEvent.mockImplementation(() =>
     Promise.resolve({
       name: 'an event',
@@ -48,7 +50,6 @@ test.skip('POST /api/v1/events/:id', () => {
       })
       .expect(201)
       .then((res) => {
-        console.log(res)
         expect(res.body.name).toBe('the Event')
         expect(res.body.description).toBe('this is an event yo')
       })
@@ -70,7 +71,7 @@ test('GET /api/v1/events', () => {
   return request(server)
     .get('/api/v1/events')
     .then((res) => {
-      expect(200)
+      expect(res.statusCode).toBe(200)
       expect(res.body[0].name).toBe('event')
       expect(res.body[1].description).toBe('test something')
     })

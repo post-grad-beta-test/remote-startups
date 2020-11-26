@@ -8,8 +8,8 @@ export function sendRegistrationEmail (email) {
     .set(acceptJsonHeader)
     .set({ Authorization: `Bearer ${getEncodedToken()}` })
     .send({ email })
-    .then(res => res.body)
-    .catch(err => console.log(err.message))
+    .then((res) => res.body)
+    .catch((err) => console.log(err.message))
 }
 
 export function sendReminderEmail (email) {
@@ -18,8 +18,8 @@ export function sendReminderEmail (email) {
     .set(acceptJsonHeader)
     .set({ Authorization: `Bearer ${getEncodedToken()}` })
     .send({ email })
-    .then(res => res.body)
-    .catch(err => console.log(err.message))
+    .then((res) => res.body)
+    .catch((err) => console.log(err.message))
 }
 
 export function addNewUserInfo (info) {
@@ -28,8 +28,8 @@ export function addNewUserInfo (info) {
     .set(acceptJsonHeader)
     .set({ Authorization: `Bearer ${getEncodedToken()}` })
     .send(info)
-    .then(res => res.body)
-    .catch(err => console.log(err.message))
+    .then((res) => res.body)
+    .catch((err) => console.log(err.message))
 }
 
 export function getUserInfo () {
@@ -37,8 +37,15 @@ export function getUserInfo () {
     .post('/api/v1/auth')
     .set(acceptJsonHeader)
     .set({ Authorization: `Bearer ${getEncodedToken()}` })
-    .then(res => res.body)
-    .catch(err => console.log(err.message))
+    .then((res) => res.body)
+    .catch((err) => {
+      if (err.status === undefined) {
+        return { id: '', username: '' }
+      }
+
+      throw Error('api error')
+    })
+
 }
 
 export function updateEmail (info) {
@@ -47,6 +54,6 @@ export function updateEmail (info) {
     .set(acceptJsonHeader)
     .set({ Authorization: `Bearer ${getEncodedToken()}` })
     .send(info)
-    .then(res => res.body)
-    .catch(err => console.log(err.message))
+    .then((res) => res.body)
+    .catch((err) => console.log(err.message))
 }

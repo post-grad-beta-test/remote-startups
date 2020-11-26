@@ -1,14 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const { getTokenDecoder } = require('authenticare/server')
+const { saveNewEvent, getAllEvents, deleteEvent } = require('../Db/projectDb')
 
-const {
-  saveNewEvent,
-  getAllEvents,
-  deleteEvent,
-  addUserToEvent,
-  getUsersForEvent
-} = require('../Db/projectDb')
 
 router.get('/', (req, res) => {
   getAllEvents()

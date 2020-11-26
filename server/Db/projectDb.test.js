@@ -6,7 +6,8 @@ const {
   getAllEvents,
   deleteEvent,
   addUserToEvent
-} = require('../db/projectDb')
+} = require('../Db/projectDb')
+
 
 const testDb = knex(config)
 
@@ -44,7 +45,6 @@ describe('add an event', () => {
       expect(newEvents).toHaveLength(1)
       expect(newEvents[0]).toBe(4)
       return getAllEvents(testDb).then((moreEvents) => {
-        console.log(moreEvents)
         expect(moreEvents).toHaveLength(4)
         expect(moreEvents[3].name).toBe('an event')
         return null
@@ -74,10 +74,3 @@ describe('add entries to users_projects table', () => {
     })
   })
 })
-
-function getTestToken (srv) {
-  return request(srv)
-    .post('/api/v1/auth/signin')
-    .send({ username: 'jess', password: 'jess' })
-    .then((res) => res.body.token)
-}
