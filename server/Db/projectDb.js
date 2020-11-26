@@ -22,8 +22,9 @@ function deleteEvent (id, db = connection) {
   return db('projects').where({ id }).delete()
 }
 
-function addUserToEvent (eventId, userId, db = connection) {
-  return db('users_projects').insert({ project_id: eventId, user_id: userId })
+function addUserToEvent (id, eventId, db = connection) {
+  console.log(id, eventId)
+  return db('users_projects').insert({ project_id: eventId, user_id: id })
 }
 
 function getUsersForEvent ({ eventId, db = connection }) {
