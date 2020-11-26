@@ -20,12 +20,13 @@ export function showAllEvents () {
     .catch((error) => console.log(error))
 }
 
-export function joinEvent () {
+export function joinEvent (id, eventID) {
   return request
     .post('/api/v1/events/join')
     .set(acceptJsonHeader)
+    .send(id, eventID)
     .then((res) => res.body)
-    .catch((error) => console.error(error))
+    .catch((error) => console.log(error))
 }
 
 export function showAllUserEvents (id) {
