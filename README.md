@@ -15,7 +15,7 @@ npx knex seed:run
 cp .env.example .env
 ```
 
-To run in development:
+To run in development (watch mode):
 
 ```sh
 npm run dev

@@ -4,28 +4,35 @@ const connection = knex(config)
 
 function saveNewEvent (id, event, db = connection) {
   const { name, description, startDate, endDate, topic } = event
-  return db('projects')
-    .insert({ user_id: id, name, description, date_start: startDate, date_end: endDate, topic })
+  return db('projects').insert({
+    user_id: id,
+    name,
+    description,
+    date_start: startDate,
+    date_end: endDate,
+    topic
+  })
 }
 
 function getAllEvents (db = connection) {
-  return db('projects')
-    .select()
+  return db('projects').select()
 }
 
 function deleteEvent (id, db = connection) {
   return db('projects').where({ id }).delete()
 }
 
-function addUserToEvent (userId, eventId, db = connection) {
-  return db('users_projects')
-    .insert({ project_id: eventId, user_id: userId })
+function addUserToEvent (id, eventId, db = connection) {
+  console.log(id, eventId)
+  return db('users_projects').insert({ project_id: eventId, user_id: id })
 }
 
 function getUsersForEvent ({ eventId, db = connection }) {
-  return db('users_projects')
-    .where('event_id', eventId)
-    .select('users_id')
+  return db('users_projects').where('project_id', eventId).select('users_id')
+}
+
+function getEventsForUser (id, db = connection) {
+  return db('users_projects').where('user_id', id).select('project_id')
 }
 
 module.exports = {
@@ -33,6 +40,6 @@ module.exports = {
   getAllEvents,
   deleteEvent,
   addUserToEvent,
-  getUsersForEvent
-
+  getUsersForEvent,
+  getEventsForUser
 }

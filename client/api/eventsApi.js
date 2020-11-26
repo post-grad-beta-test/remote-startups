@@ -19,3 +19,20 @@ export function showAllEvents () {
     .then((res) => res.body)
     .catch((error) => console.log(error))
 }
+
+export function joinEvent (id, eventID) {
+  return request
+    .post('/api/v1/events/attending')
+    .set(acceptJsonHeader)
+    .send(id, eventID)
+    .then((res) => res.body)
+    .catch((error) => console.log(error))
+}
+
+export function showAllUserEvents (id) {
+  return request
+    .get(`/api/v1/events/${id}/attending`)
+    .set(acceptJsonHeader)
+    .then((res) => res.body)
+    .catch((error) => console.error(error))
+}

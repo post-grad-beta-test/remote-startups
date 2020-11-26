@@ -1,5 +1,10 @@
 import nock from 'nock'
-import { addNewEvent, showAllEvents } from './eventsApi'
+import {
+  addNewEvent,
+  showAllEvents,
+  joinEvent,
+  showAllUserEvents
+} from './eventsApi'
 
 test('fetches events from server', () => {
   nock(/localhost/)
@@ -24,6 +29,44 @@ describe('send a new event to the server', () => {
   test('post an event to the server', () => {
     return addNewEvent(1, 'an event', 'a description').then((result) => {
       expect(scope.isDone()).toBe(true)
+    })
+  })
+})
+
+describe('user can join an event', () => {
+  const scope = nock(/localhost/)
+    .post('/api/v1/events/attending')
+    .reply(201)
+
+  test('post userID and projectID to server', () => {
+    return joinEvent('1', '4').then((result) => {
+      expect(scope.isDone()).toBe(true)
+    })
+  })
+})
+
+describe('GET all events user is attending', () => {
+  const id = 1
+  nock(/localhost/)
+    .get(`/api/v1/events/${id}/attending`)
+    .reply(200, {
+      results: [
+        {
+          project_id: 1
+        },
+        {
+          project_id: 2
+        },
+        {
+          project_id: 3
+        }
+      ]
+    })
+
+  test('get all events by user attending', () => {
+    return showAllUserEvents(id).then((res) => {
+      expect(res.results).toHaveLength(3)
+      expect(res.results[0].project_id).toBe(1)
     })
   })
 })
