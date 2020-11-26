@@ -30,9 +30,9 @@ function getUsersForEvent ({ eventId, db = connection }) {
   return db('users_projects').where('project_id', eventId).select('users_id')
 }
 
-function getEventsForUser ({ userId, db = connection }) {
-  console.log(userId)
-  return db('users_projects').where('user_id', userId).select('project_id')
+function getEventsForUser (id, db = connection) {
+  console.log(id)
+  return db('users_projects').where('user_id', id).select('project_id')
 }
 
 module.exports = {

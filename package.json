@@ -20,10 +20,9 @@
     "test": "jest --watchAll",
     "test:CI": "jest"
   },
-  
   "husky": {
     "hooks": {
-      "pre-commit": "echo \"[Husky] pre-commit\"lint"  ,
+      "pre-commit": "echo \"[Husky] pre-commit\"lint",
       "pre-push": "echo \"[Husky] pre-push\"test:CI"
     }
   },

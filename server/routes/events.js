@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
     .catch(() => res.status(500).send('DATABASE ERROR'))
 })
 
-router.post('/join', (req, res) => {
+router.post('/attending', (req, res) => {
   const { eventId, userId } = Number(req.body)
   addUserToEvent(eventId, userId)
     .then((ids) => {
@@ -29,7 +29,7 @@ router.post('/join', (req, res) => {
     })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id/attending', (req, res) => {
   const { id } = req.params
   getEventsForUser(Number(id))
     .then((events) => {
