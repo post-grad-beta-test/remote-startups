@@ -1,6 +1,10 @@
 import nock from 'nock'
-import { getEventsForUser } from '../../server/Db/projectDb'
-import { addNewEvent, showAllEvents, joinEvent } from './eventsApi'
+import {
+  addNewEvent,
+  showAllEvents,
+  joinEvent,
+  showAllUserEvents
+} from './eventsApi'
 
 test('fetches events from server', () => {
   nock(/localhost/)
@@ -42,24 +46,27 @@ describe('user can join an event', () => {
 })
 
 describe('GET all events user is attending', () => {
+  const id = 1
   nock(/localhost/)
-    .post('/api/v1/events/1/attending')
-    .reply(200, [
-      {
-        project_id: 1
-      },
-      {
-        project_id: 2
-      },
-      {
-        project_id: 3
-      }
-    ])
+    .get(`/api/v1/events/${id}/attending`)
+    .reply(200, {
+      results: [
+        {
+          project_id: 1
+        },
+        {
+          project_id: 2
+        },
+        {
+          project_id: 3
+        }
+      ]
+    })
 
   test('get all events by user attending', () => {
-    return getEventsForUser(1).then((res) => {
-      expect(res).toHaveLength(3)
-      expect(res[0].project_id).toBe(1)
+    return showAllUserEvents(id).then((res) => {
+      expect(res.results).toHaveLength(3)
+      expect(res.results[0].project_id).toBe(1)
     })
   })
 })
