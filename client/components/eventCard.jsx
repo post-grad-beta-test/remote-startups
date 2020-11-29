@@ -1,7 +1,19 @@
 /* eslint-disable promise/always-return */
 import { Box, Button, Grid, Heading, Paragraph, Text } from 'grommet'
-import { PowerCycle } from 'grommet-icons'
-import { Achievement, Add, Anchor, BusinessService, Channel, Dashboard, Deploy, FingerPrint, Group, Grow, Organization } from 'grommet-icons'
+import {
+  Achievement,
+  Add,
+  Anchor,
+  BusinessService,
+  Channel,
+  Dashboard,
+  Deploy,
+  FingerPrint,
+  Group,
+  Grow,
+  Organization,
+  PowerCycle
+} from 'grommet-icons'
 import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { setEvents } from '../actions'
@@ -104,10 +116,10 @@ const EventCard = () => {
                 </Paragraph>
 
                 <Box align="center" justify="center" pad="small" direction="row-responsive" flex alignSelf="center" basis="xxsmall" gap="small" margin="xsmall">
-                  
-                 { !isLoading && <Button label="Join" icon={<Add />} onClick={subscribe} />}
-                 { isLoading && <PowerCycle label="Joining now..."/>
-           
+
+                  { !isLoading && <Button label="Join" icon={<Add />} onClick={subscribe} />}
+                  { isLoading && <PowerCycle label="Joining now..."/> }
+
                 </Box>
               </Box>
             </Box>
