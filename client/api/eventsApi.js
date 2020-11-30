@@ -7,7 +7,7 @@ const acceptJsonHeader = { Accept: 'application/json' }
  * @param {string} id -User Id
  * @param {object} event -Form field inputs from CreateProject
  */
-export function addNewEvent(id, event) {
+export function addNewEvent (id, event) {
   return request
     .post('/api/v1/events/' + id)
     .set(acceptJsonHeader)
@@ -17,7 +17,11 @@ export function addNewEvent(id, event) {
     .catch((error) => console.log(error))
 }
 
-export function showAllEvents() {
+/**
+ * Request array of events from projects database
+ * @returns {array} All events
+ */
+export function showAllEvents () {
   return request
     .get('/api/v1/events')
     .set(acceptJsonHeader)
@@ -25,7 +29,7 @@ export function showAllEvents() {
     .catch((error) => console.log(error))
 }
 
-export function joinEvent(id, eventID) {
+export function joinEvent (id, eventID) {
   return request
     .post('/api/v1/events/attending')
     .set(acceptJsonHeader)
@@ -34,7 +38,7 @@ export function joinEvent(id, eventID) {
     .catch((error) => console.log(error))
 }
 
-export function showAllUserEvents(id) {
+export function showAllUserEvents (id) {
   return request
     .get(`/api/v1/events/${id}/attending`)
     .set(acceptJsonHeader)
