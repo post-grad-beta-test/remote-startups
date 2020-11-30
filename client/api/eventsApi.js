@@ -6,6 +6,8 @@ const acceptJsonHeader = { Accept: 'application/json' }
  * Post new event to projects table
  * @param {string} id - User Id
  * @param {object} event - Form field inputs from CreateProject
+ *
+ * @returns {array} array[0] eventId
  */
 export function addNewEvent (id, event) {
   return request
@@ -32,6 +34,8 @@ export function showAllEvents () {
  * Add userID and EventId to users_projects table
  * @param {string} id - User Id
  * @param {string} eventId - eventId
+ *
+ * @returns {array} array[0] team id
  */
 export function joinEvent (id, eventId) {
   return request
@@ -44,6 +48,8 @@ export function joinEvent (id, eventId) {
 /**
  * Get a list of all events user has joined
  * @param {string} id - User Id
+ *
+ * @returns {array} A list of event ids
  */
 export function showAllUserEvents (id) {
   return request
