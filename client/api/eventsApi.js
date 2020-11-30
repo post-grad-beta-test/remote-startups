@@ -2,7 +2,12 @@ import { getEncodedToken } from 'authenticare/client'
 import request from 'superagent'
 const acceptJsonHeader = { Accept: 'application/json' }
 
-export function addNewEvent (id, event) {
+/**
+ * Post new event to projects database
+ * @param {string} id -User Id
+ * @param {object} event -Form field inputs from CreateProject
+ */
+export function addNewEvent(id, event) {
   return request
     .post('/api/v1/events/' + id)
     .set(acceptJsonHeader)
@@ -12,7 +17,7 @@ export function addNewEvent (id, event) {
     .catch((error) => console.log(error))
 }
 
-export function showAllEvents () {
+export function showAllEvents() {
   return request
     .get('/api/v1/events')
     .set(acceptJsonHeader)
@@ -20,7 +25,7 @@ export function showAllEvents () {
     .catch((error) => console.log(error))
 }
 
-export function joinEvent (id, eventID) {
+export function joinEvent(id, eventID) {
   return request
     .post('/api/v1/events/attending')
     .set(acceptJsonHeader)
@@ -29,7 +34,7 @@ export function joinEvent (id, eventID) {
     .catch((error) => console.log(error))
 }
 
-export function showAllUserEvents (id) {
+export function showAllUserEvents(id) {
   return request
     .get(`/api/v1/events/${id}/attending`)
     .set(acceptJsonHeader)
