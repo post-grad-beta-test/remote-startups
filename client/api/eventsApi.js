@@ -41,7 +41,10 @@ export function joinEvent (id, eventId) {
     .then((res) => res.body)
     .catch((error) => console.log(error))
 }
-
+/**
+ * Get a list of all events user has joined
+ * @param {string} id - User Id
+ */
 export function showAllUserEvents (id) {
   return request
     .get(`/api/v1/events/${id}/attending`)
