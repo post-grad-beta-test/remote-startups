@@ -7,7 +7,7 @@ const acceptJsonHeader = { Accept: 'application/json' }
  * @param {string} id - User Id
  * @param {object} event - Form field inputs from CreateProject
  *
- * @returns {array} array[0] eventId
+ * @returns {Promise.<number[]>} array[0] eventId
  */
 export function addNewEvent (id, event) {
   return request
