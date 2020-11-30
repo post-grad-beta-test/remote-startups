@@ -9,7 +9,6 @@ A platform that supports online collaboration and group events.
 
 ```sh
 npm i
-npm knex
 npx knex migrate:latest
 npx knex seed:run
 cp .env.example .env
@@ -20,6 +19,8 @@ To run in development (watch mode):
 ```sh
 npm run dev
 ```
+
+If you see warning `API key does not start with "SG.".`, make sure you've put a real SendGrid API key in `.env`.  Ask your teammates for more info.
 
 To run in production:
 
@@ -67,7 +68,7 @@ Develop a platform where users can find people to attend their online events.
 - [Express](https://expressjs.com/en/api.html)
 - [Knex.js (SQL)](https://knexjs.org/)
 - [JWT Auth (Local)](https://jwt.io/)
-- [Lint] (https://www.npmjs.com/package/lint)
-- [Husky] (https://www.npmjs.com/package/husky)
+- [Lint](https://www.npmjs.com/package/lint)
+- [Husky](https://www.npmjs.com/package/husky)
 
 ### Ta-Da!
