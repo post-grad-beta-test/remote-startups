@@ -45,7 +45,7 @@ export function showAllEvents () {
  * @param {string} id - User Id
  * @param {string} eventId - eventId
  *
- * @returns {array} array[0] team id
+ * @returns {Promise.<number[]>} array[0] team id
  */
 export function joinEvent (id, eventId) {
   return request
@@ -59,9 +59,9 @@ export function joinEvent (id, eventId) {
  * Get a list of all events user has joined
  * @param {string} id - User Id
  *
- * @returns {array} A list of event ids
+ * @returns {Promise.<number[]>} A list of event ids
  */
-export function showAllUserEvents (id) {
+export function showAllUserEventIds (id) {
   return request
     .get(`/api/v1/events/${id}/attending`)
     .set(acceptJsonHeader)
