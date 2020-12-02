@@ -1,51 +1,25 @@
 /* eslint-disable promise/always-return */
 import { Box, Button, Grid, Heading, Paragraph, Text } from 'grommet'
-import {
-  Achievement,
-  Add,
-  Anchor,
-  BusinessService,
-  Channel,
-  Dashboard,
-  Deploy,
-  FingerPrint,
-  Group,
-  Grow,
-  Organization,
-  PowerCycle
-} from 'grommet-icons'
+import getIcon from '../helpers/getIcon'
+import { Add, PowerCycle } from 'grommet-icons'
 import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { setEvents } from '../actions'
 import { showAllEvents } from '../api/eventsApi'
 
-const getWord = () => {
-  let iconsArray = [
-    <FingerPrint size='xlarge' />,
-    <Achievement size='xlarge' />,
-    <Anchor size='xlarge' />,
-    <BusinessService size='xlarge' />,
-    <Channel size='xlarge' />,
-    <Dashboard size='xlarge' />,
-    <Deploy size='xlarge' />,
-    <Group size='xlarge' />,
-    <Grow size='xlarge' />,
-    <Organization size='xlarge' />,
-  ]
-
-  const iconName = iconsArray[Math.floor(Math.random() * 9)]
-  return iconName
-}
 const EventCard = () => {
   const [listEvents, setListEvents] = useState([])
   const dispatch = useDispatch()
   const [isLoading, setLoading] = useState(false)
 
   const subscribe = () => {
-    setLoading(true);
+    setLoading(true)
     fetch('https://jsonplaceholder.typicode.com/todos/1')
-      .then(response => response.json())
-      .then(json => { console.log(json); setLoading(false)})
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json)
+        setLoading(false)
+      })
   }
 
   useEffect(() => {
@@ -54,7 +28,8 @@ const EventCard = () => {
       dispatch(setEvents(arrayEvents))
     })
   }, [])
-  let anIcon = getWord()
+  const AnIcon = getIcon()
+  console.log(AnIcon)
   return (
     <div className='container'>
       <Grid gap='medium' columns={{ count: 'fit', size: 'medium' }}>
@@ -96,7 +71,7 @@ const EventCard = () => {
                 hoverIndicator
                 gap='xsmall'
               >
-                {anIcon}
+                <AnIcon size='xlarge' />
 
                 <Heading
                   level='2'
@@ -115,11 +90,21 @@ const EventCard = () => {
                   {event.description}
                 </Paragraph>
 
-                <Box align="center" justify="center" pad="small" direction="row-responsive" flex alignSelf="center" basis="xxsmall" gap="small" margin="xsmall">
-
-                  { !isLoading && <Button label="Join" icon={<Add />} onClick={subscribe} />}
-                  { isLoading && <PowerCycle label="Joining now..."/> }
-
+                <Box
+                  align='center'
+                  justify='center'
+                  pad='small'
+                  direction='row-responsive'
+                  flex
+                  alignSelf='center'
+                  basis='xxsmall'
+                  gap='small'
+                  margin='xsmall'
+                >
+                  {!isLoading && (
+                    <Button label='Join' icon={<Add />} onClick={subscribe} />
+                  )}
+                  {isLoading && <PowerCycle label='Joining now...' />}
                 </Box>
               </Box>
             </Box>
