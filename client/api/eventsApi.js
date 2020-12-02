@@ -4,7 +4,7 @@ const acceptJsonHeader = { Accept: 'application/json' }
 
 /**
  * Post new event to projects table
- * @param {string} id - User Id
+ * @param {string} userId - User Id
  * @param {object} event - Form field inputs from CreateProject
  * @param {string} event.name - The name of the event
  * @param {string} event.description - A description of the event
@@ -14,9 +14,9 @@ const acceptJsonHeader = { Accept: 'application/json' }
  *
  * @returns {Promise.<number[]>} array[0] eventId
  */
-export function addNewEvent (id, event) {
+export function addNewEvent (userId, event) {
   return request
-    .post('/api/v1/events/' + id)
+    .post('/api/v1/events/' + userId)
     .set(acceptJsonHeader)
     .set({ Authorization: `Bearer ${getEncodedToken()}` })
     .send(event)
@@ -25,12 +25,20 @@ export function addNewEvent (id, event) {
 }
 
 /**
- * @typedef {object} Event
- * @property {number} id
+ * Event object details
+ * @typedef {object<string, any>} Event
+ * @property {number} id - event id
+ * @property {string} name- Name of event
+ * @property {string} description - description of event
+ * @property {string} topic - Event category
+ * @property {number} startDate - start date of event
+ * @property {number} endDate - end date of event
  */
 /**
  * Request array of events from projects table
+ *
  * @returns {Promise.<Event[]>}
+ * @type {Event}
  */
 export function showAllEvents () {
   return request
@@ -42,16 +50,16 @@ export function showAllEvents () {
 
 /**
  * Add userID and EventId to users_projects table
- * @param {string} id - User Id
+ * @param {string} userId - User Id
  * @param {string} eventId - eventId
  *
  * @returns {Promise.<number[]>} array[0] team id
  */
-export function joinEvent (id, eventId) {
+export function joinEvent (userId, eventId) {
   return request
     .post('/api/v1/events/attending')
     .set(acceptJsonHeader)
-    .send(id, eventId)
+    .send(userId, eventId)
     .then((res) => res.body)
     .catch((error) => console.log(error))
 }
