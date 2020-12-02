@@ -5,7 +5,7 @@ import { Add, PowerCycle } from 'grommet-icons'
 import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { setEvents } from '../actions'
-import { showAllEvents } from '../api/eventsApi'
+import { loadAllEvents } from '../actions'
 
 const EventCard = () => {
   const [listEvents, setListEvents] = useState([])
@@ -23,11 +23,13 @@ const EventCard = () => {
   }
 
   useEffect(() => {
-    showAllEvents().then((arrayEvents) => {
-      setListEvents(arrayEvents)
-      dispatch(setEvents(arrayEvents))
-    })
+    dispatch(loadAllEvents()).then(setListEvents)
+
+    // showAllEvents().then((arrayEvents) => {
+    //   setListEvents(arrayEvents)
+    //   dispatch(setEvents(arrayEvents))
   }, [])
+
   const AnIcon = getIcon()
   console.log(AnIcon)
   return (
