@@ -16,8 +16,9 @@ const InitialUserInfo = {
 
 /**
  * CreateUser reducer updates userState in Store
- * @param {userState} state - User state object
- * @param {string} action  - Redux action
+ * @param {userState} state - initial  userState object
+ * @param {string} action  - add user to state
+ * @returns {object} - updated state object
  */
 function createUser (state = InitialUserInfo, action) {
   switch (action.type) {
