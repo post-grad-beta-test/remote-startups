@@ -1,10 +1,24 @@
 import { ADD_USER_INFO } from '../actions'
 
+/**
+ * State 'user' object in redux store
+ * @typedef {object} userState - createuser state object
+ * @property {string} username -  user username
+ * @property {string} id - user ud
+ *
+ */
+
+/** @type {userState}  */
 const InitialUserInfo = {
   id: '',
   username: ''
 }
 
+/**
+ * CreateUser reducer updates userState in Store
+ * @param {userState} state - User state object
+ * @param {string} action  - Redux action
+ */
 function createUser (state = InitialUserInfo, action) {
   switch (action.type) {
     case ADD_USER_INFO:
