@@ -26,7 +26,7 @@ export function addNewEvent (userId, event) {
 
 /**
  * Event object details
- * @typedef {object} Event
+ * @typedef {object.<string, any>} Event
  * @property {number} id - event id
  * @property {string} name- Name of event
  * @property {string} description - description of event
