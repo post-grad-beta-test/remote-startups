@@ -18,27 +18,34 @@ router.get('/', (req, res) => {
     .catch(() => res.status(500).send('DATABASE ERROR'))
 })
 
-router.post('/:id/attending', (req, res) => {
-  const id = Number(req.params.id)
-  const event = Number(req.body.event)
-  addUserToEvent(id, event)
-    .then((ids) => {
-      res.status(200).json(ids[0])
-    })
-    .catch((err) => {
-      res.status(500).send(`DATABASE ERROR ${err.message}`)
-    })
+router.post('/:id/attending', getTokenDecoder(), (req, res) => {
+  if (req.user) {
+    const id = Number(req.params.id)
+    const event = Number(req.body.event)
+    addUserToEvent(id, event)
+      .then((ids) => {
+        res.status(200).json(ids[0])
+      })
+      .catch((err) => {
+        res.status(500).send(`DATABASE ERROR ${err.message}`)
+      })
+  } else {
+    res.status(500).send('authentication token not provided')
+  }
 })
 
-router.get('/:id/attending', (req, res) => {
-  const { id } = req.params
-  getEventsForUser(Number(id))
-    .then((events) => {
-      res.status(200).json(events)
-    })
-    .catch(() => res.status(500).send('DATABASE ERROR'))
+router.get('/:id/attending', getTokenDecoder(), (req, res) => {
+  if (req.user) {
+    const { id } = req.params
+    getEventsForUser(Number(id))
+      .then((events) => {
+        res.status(200).json(events)
+      })
+      .catch(() => res.status(500).send('DATABASE ERROR'))
+  } else {
+    res.status(500).send('authentication token not provided')
+  }
 })
-
 router.post('/:id', getTokenDecoder(), (req, res) => {
   if (req.user) {
     const id = Number(req.params.id)
