@@ -1,5 +1,5 @@
 import { Tabs } from "grommet";
-import { Link } from "grommet-icons";
+import { Link } from "react-router-dom";
 import React from "react";
 import { connect } from "react-redux";
 import CreateProject from "./CreateProject";
@@ -10,11 +10,13 @@ function UserTabs() {
   return (
     <>
       <Tabs justify="end" flex margin="large">
-        <UserProfile />
+        {/* <Tab label="User Profile"/> */}
+          <UserProfile />
         <Events />
-        <Link to="/CreateProject">
-          <CreateProject />
-        </Link>
+        {/* This link breaks the <CreateProject /> */}
+        {/* <Link to="/CreateProject"> */}
+        <CreateProject />
+        {/* </Link> */}
       </Tabs>
     </>
   );

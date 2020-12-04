@@ -1,12 +1,20 @@
-import { getEncodedToken } from 'authenticare/client'
+import { getEncodedToken, register as authRegister, signIn as authLogin } from 'authenticare/client'
+// import { getUserTokenInfo, isAuthenticated, removeUser } from '../auth'
 import request from 'superagent'
-const acceptJsonHeader = { Accept: 'application/json' }
+import { baseApiUrl as baseUrl } from '../config'
+
+// this function needs to bes set after the get/etc request to allow auth
+function authorizeUser () {
+  return {
+    Accept: 'application/json',
+    Authorization: `Bearer ${getEncodedToken()}`
+  }
+}
 
 export function sendRegistrationEmail (email) {
   return request
     .post('/api/v1/sendRegistrationEmail')
-    .set(acceptJsonHeader)
-    .set({ Authorization: `Bearer ${getEncodedToken()}` })
+    .set(authorizeUser())
     .send({ email })
     .then((res) => res.body)
     .catch((err) => console.log(err.message))
@@ -15,8 +23,7 @@ export function sendRegistrationEmail (email) {
 export function sendReminderEmail (email) {
   return request
     .post('/api/v1/sendReminderEmail')
-    .set(acceptJsonHeader)
-    .set({ Authorization: `Bearer ${getEncodedToken()}` })
+    .set(authorizeUser())
     .send({ email })
     .then((res) => res.body)
     .catch((err) => console.log(err.message))
@@ -25,8 +32,7 @@ export function sendReminderEmail (email) {
 export function addNewUserInfo (info) {
   return request
     .patch('/api/v1/auth')
-    .set(acceptJsonHeader)
-    .set({ Authorization: `Bearer ${getEncodedToken()}` })
+    .set(authorizeUser())
     .send(info)
     .then((res) => res.body)
     .catch((err) => console.log(err.message))
@@ -35,8 +41,7 @@ export function addNewUserInfo (info) {
 export function getUserInfo () {
   return request
     .post('/api/v1/auth')
-    .set(acceptJsonHeader)
-    .set({ Authorization: `Bearer ${getEncodedToken()}` })
+    .set(authorizeUser())
     .then((res) => res.body)
     .catch((err) => {
       if (err.status === undefined) {
@@ -50,9 +55,29 @@ export function getUserInfo () {
 export function updateEmail (info) {
   return request
     .patch('/api/v1/updateEmail')
-    .set(acceptJsonHeader)
-    .set({ Authorization: `Bearer ${getEncodedToken()}` })
+    .set(authorizeUser())
     .send(info)
     .then((res) => res.body)
     .catch((err) => console.log(err.message))
+}
+
+// Added - testing
+
+const errorMessages = {
+  USERNAME_UNAVAILABLE: 'Sorry, that username is taken.',
+  INVALID_CREDENTIALS: 'Sorry, your username or password is incorrect.'
+}
+
+export function register (creds) {
+  return authRegister(creds, { baseUrl })
+    .catch(err => {
+      throw errorMessages[err.response.body.errorType]
+    })
+}
+
+export function login (creds) {
+  return authLogin(creds, { baseUrl })
+    .catch(err => {
+      throw errorMessages[err.response.body.errorType]
+    })
 }

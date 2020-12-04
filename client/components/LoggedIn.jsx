@@ -1,6 +1,6 @@
 import { logOff } from 'authenticare/client/auth'
 import { Anchor, Box, Header, Menu, Nav, ResponsiveContext } from 'grommet'
-import { Home } from 'grommet-icons'
+import { Home, Link } from 'grommet-icons'
 import React from 'react'
 import { connect } from 'react-redux'
 import { changeNavState, changePage } from '../actions'

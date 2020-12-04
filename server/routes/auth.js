@@ -2,20 +2,23 @@ const express = require('express')
 const router = express.Router()
 const { applyAuthRoutes, getTokenDecoder } = require('authenticare/server')
 const sgMail = require('@sendgrid/mail')
+const { userExists, getUserByUsername, createUser } = require('../Db/users')
+// why is it Db instead of db?
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 const {
-  userExists,
-  saveNewUser,
+  // is this a name double up with applyAuthRoutes
+  // userExists,
   getUserByName,
+  // createUser,
   addDetails,
   updateEmail
 } = require('../db')
 
 applyAuthRoutes(router, {
   userExists,
-  createUser: saveNewUser,
-  getUserByName
+  getUserByName: getUserByUsername,
+  createUser
 })
 
 router.post('/sendRegistrationEmail', getTokenDecoder(), (req, res) => {

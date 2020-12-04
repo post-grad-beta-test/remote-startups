@@ -1,29 +1,38 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { controlNavState } from "../helpers";
-import { Home, Nav, Login, Register, UserTabs } from '../components'
+import { Home, Nav, Login, Register, UserTabs } from "../components";
 import Routes from "./Routes";
 
- import { IfAuthenticated, IfNotAuthenticated } from "./Authenticated";
+
+import { IfAuthenticated, IfNotAuthenticated } from "./Authenticated";
 //Authentication now managed via Nav.jsx component
-// I've also discovered that deleting all that code makes the login function not work. 
+// I've also discovered that deleting all that code makes the login function not work.
 
-const App = ({ dispatch, currentPage }) => {
-  useEffect(() => controlNavState(dispatch), []);
-
-  return (
-    <>
-      <Router>
-        <Nav />
-        <Routes />
-      </Router>
-    </>
-  );
-};
+// export class App extends React.Component {
+  const App = ({ dispatch, currentPage }) => {
+    useEffect(() => controlNavState(dispatch), [])
+  // componentDidMount() {
+  //   const confirmSuccess = () => {};
+  //   this.props.dispatch(checkAuth(confirmSuccess));
+  // }
+  // render() {
+  //   const { auth } = this.props;
+    return (
+      <>
+        <Router>
+          <Nav />
+          <Routes />
+        </Router>
+      </>
+    );
+  }
+// }
 
 function mapStateToProps(state) {
   return {
+    auth: state.auth,
     currentPage: state.currentPage,
   };
 }

@@ -21,8 +21,8 @@ const Routes = () => {
         <Route path="/CreateProject" component={CreateProject} />
         <Route path="/Events" component={Events} />
         <Route path="/Login" component={Login} />
-        <Route path="/Register" component={Register} />
-        <Route path="/UserProfile" component={UserProfile} />
+        <Route exact path="/Register" component={Register} />
+        <Route path="/UserProfile/:id" component={UserProfile} />
         {/* <Route exact path="/MyEvents" component={MyEvents} />
         <Route exact path="/Logoff" component={Logoff} /> */}
     </>
