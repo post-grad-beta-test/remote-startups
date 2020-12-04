@@ -1,10 +1,11 @@
-import { joinEvent, showAllEvents } from '../api/eventsApi'
+import { joinEvent, showAllEvents, showAllUserEvents } from '../api/eventsApi'
 
 export const CHANGE_PAGE = 'CHANGE_PAGE'
 export const ADD_USER_INFO = 'ADD_USER_INFO'
 export const CHANGE_NAV_STATE = 'CHANGE_NAV_STATE'
 export const SET_EVENTS = 'SET_EVENTS'
 export const LOAD_ALL_EVENTS = 'LOAD_ALL_EVENTS'
+export const SET_DISABLED_BTN = 'SET_DISABLED_BTN'
 
 export function changePage (page) {
   return {
@@ -13,10 +14,11 @@ export function changePage (page) {
   }
 }
 
-export function addUserInfo (username) {
+export function addUserInfo (username, id) {
   return {
     type: ADD_USER_INFO,
-    username
+    username,
+    id
   }
 }
 
@@ -31,6 +33,13 @@ export function setEvents (events) {
   return {
     type: SET_EVENTS,
     events
+  }
+}
+
+export function setDisabledBtn (eventIds) {
+  return {
+    type: SET_DISABLED_BTN,
+    eventIds
   }
 }
 
@@ -49,8 +58,15 @@ export function loadAllEvents () {
   }
 }
 
-export function displayUsersEvents () {
+export function disableJoinedEvents (userId, eventId) {
   return (dispatch) => {
-    return joinEvent().then()
+    // dispatch(setLoading(true))
+    return joinEvent(userId, eventId).then(() =>
+      // dispatch(setLoading(false))
+      showAllUserEvents(userId).then((eventIds) => {
+        dispatch(setDisabledBtn(eventIds))
+        return eventIds
+      })
+    )
   }
 }

@@ -22,8 +22,9 @@ export function showAllEvents () {
 
 export function joinEvent (id, eventID) {
   return request
-    .post('/api/v1/events/attending')
+    .get(`/api/v1/events/${id}/attending`)
     .set(acceptJsonHeader)
+    .set({ Authorization: `Bearer ${getEncodedToken()}` })
     .send(id, eventID)
     .then((res) => res.body)
     .catch((error) => console.log(error))
@@ -33,6 +34,7 @@ export function showAllUserEvents (id) {
   return request
     .get(`/api/v1/events/${id}/attending`)
     .set(acceptJsonHeader)
+    .set({ Authorization: `Bearer ${getEncodedToken()}` })
     .then((res) => res.body)
     .catch((error) => console.error(error))
 }

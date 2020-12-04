@@ -4,34 +4,22 @@ import getIcon from '../helpers/getIcon'
 import { Add, PowerCycle } from 'grommet-icons'
 import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
-import { setEvents } from '../actions'
-import { loadAllEvents } from '../actions'
+import { loadAllEvents, disableJoinedEvents } from '../actions'
 
-const EventCard = () => {
+const EventCard = (user) => {
   const [listEvents, setListEvents] = useState([])
   const dispatch = useDispatch()
   const [isLoading, setLoading] = useState(false)
 
-  const subscribe = () => {
-    setLoading(true)
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json)
-        setLoading(false)
-      })
+  const subscribe = (userId, eventId) => {
+    dispatch(disableJoinedEvents(userId, eventId))
   }
 
   useEffect(() => {
     dispatch(loadAllEvents()).then(setListEvents)
-
-    // showAllEvents().then((arrayEvents) => {
-    //   setListEvents(arrayEvents)
-    //   dispatch(setEvents(arrayEvents))
   }, [])
 
   const AnIcon = getIcon()
-  console.log(AnIcon)
   return (
     <div className='container'>
       <Grid gap='medium' columns={{ count: 'fit', size: 'medium' }}>
@@ -103,10 +91,15 @@ const EventCard = () => {
                   gap='small'
                   margin='xsmall'
                 >
-                  {!isLoading && (
+                  <Button
+                    label='Join'
+                    icon={<Add />}
+                    onClick={() => subscribe(event.id, user)}
+                  />
+                  {/* {!isLoading && (
                     <Button label='Join' icon={<Add />} onClick={subscribe} />
                   )}
-                  {isLoading && <PowerCycle label='Joining now...' />}
+                  {isLoading && <PowerCycle label='Joining now...' />} */}
                 </Box>
               </Box>
             </Box>
@@ -120,6 +113,7 @@ const EventCard = () => {
 function mapStateToProps(state) {
   return {
     events: state.setEvents,
+    user: state.createUser.id,
   }
 }
 export default connect(mapStateToProps)(EventCard)
