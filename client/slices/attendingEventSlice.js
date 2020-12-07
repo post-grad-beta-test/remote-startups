@@ -3,39 +3,54 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialJoinedState = {
   loading: false,
+  success: false,
   failed: false,
   eventIds: []
 }
 
 const attendingEvents = createSlice({
-  name: 'joined',
+  name: 'event',
   initialState: initialJoinedState,
   reducers: {
-    getEventIds: (state) => {
+    joiningEvent: (state) => {
       state.loading = true
     },
-    getEventIdsSuccess: (state, { payload }) => {
-      state.eventIds = payload
+    joiningEventSuccess: (state) => {
+      state.success = true
       state.loading = false
       state.failed = false
     },
-    getEventIdsError: (state) => {
+    joiningEventError: (state) => {
       state.loading = false
       state.failed = true
+    },
+    getEventIdsComplete: (state, { payload }) => {
+      state.eventIds = payload
     }
   }
 })
 
 const { actions, reducer } = attendingEvents
 
-export const { getEventIds, getEventIdsSuccess, getEventIdsError } = actions
+export const {
+  fetchEvents,
+  joiningEvent,
+  joiningEventSuccess,
+  joiningEventError
+} = actions
 
 export const eventIdsSelector = (state) => state.eventIds
 
 export default reducer
 
-export function fetchJoinedEventIds (userId, eventId) {
-  return async (dispatch) => {
-    dispatch(eventsData.joinEvent(userId, eventId))
+export function joinEvent (userId, eventId) {
+  return (dispatch) => {
+    dispatch(joiningEvent())
+    return eventsData
+      .joinEvent(userId, eventId)
+      .then((result) => {
+        dispatch(joiningEventSuccess())
+      })
+      .catch((error) => console.log(error))
   }
 }
