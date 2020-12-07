@@ -25,8 +25,8 @@ export function changeNavState (navState) {
 }
 
 export function setEvents (events) {
-  return ({
+  return {
     type: SET_EVENTS,
     events
-  })
+  }
 }

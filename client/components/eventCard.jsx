@@ -12,11 +12,12 @@ import {
   Group,
   Grow,
   Organization,
-  PowerCycle
+  PowerCycle,
 } from 'grommet-icons'
 import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
-import { setEvents } from '../actions'
+import { setEvents } from '../actions/'
+import { joinEvent } from '../slices/attendingEventSlice'
 import { showAllEvents } from '../api/eventsApi'
 
 const getWord = () => {
@@ -36,16 +37,13 @@ const getWord = () => {
   const iconName = iconsArray[Math.floor(Math.random() * 9)]
   return iconName
 }
-const EventCard = () => {
+const EventCard = (userId) => {
   const [listEvents, setListEvents] = useState([])
   const dispatch = useDispatch()
   const [isLoading, setLoading] = useState(false)
 
-  const subscribe = () => {
-    setLoading(true);
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
-      .then(response => response.json())
-      .then(json => { console.log(json); setLoading(false)})
+  const subscribe = (eventId, userId) => {
+    dispatch(joinEvent(eventId, userId))
   }
 
   useEffect(() => {
@@ -115,11 +113,25 @@ const EventCard = () => {
                   {event.description}
                 </Paragraph>
 
-                <Box align="center" justify="center" pad="small" direction="row-responsive" flex alignSelf="center" basis="xxsmall" gap="small" margin="xsmall">
-
-                  { !isLoading && <Button label="Join" icon={<Add />} onClick={subscribe} />}
-                  { isLoading && <PowerCycle label="Joining now..."/> }
-
+                <Box
+                  align='center'
+                  justify='center'
+                  pad='small'
+                  direction='row-responsive'
+                  flex
+                  alignSelf='center'
+                  basis='xxsmall'
+                  gap='small'
+                  margin='xsmall'
+                >
+                  {!isLoading && (
+                    <Button
+                      label='Join'
+                      icon={<Add />}
+                      onClick={() => subscribe(userId, event.id)}
+                    />
+                  )}
+                  {isLoading && <PowerCycle label='Joining now...' />}
                 </Box>
               </Box>
             </Box>
@@ -133,6 +145,7 @@ const EventCard = () => {
 function mapStateToProps(state) {
   return {
     events: state.setEvents,
+    userId: state.createUser.id,
   }
 }
 export default connect(mapStateToProps)(EventCard)
