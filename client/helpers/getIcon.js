@@ -25,6 +25,6 @@ export default function getIcon () {
     Organization
   ]
 
-  const iconName = array[Math.floor(Math.random() * 9)]
+  const iconName = array[Math.floor(Math.random() * (array.length - 1))]
   return iconName
 }
