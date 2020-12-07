@@ -4,10 +4,11 @@ const eventSlice = createSlice({
   name: event,
   initialState: [],
   reducer: {
-    setEvents (state, action) {}
+    setEvents: (state, action) => {
+      state.events = action.payload
+    }
   }
 })
-
 const { actions, reducer } = eventSlice
 
 export const { setEvents } = actions

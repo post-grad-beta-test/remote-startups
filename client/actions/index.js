@@ -23,10 +23,3 @@ export function changeNavState (navState) {
     navState
   }
 }
-
-export function setEvents (events) {
-  return ({
-    type: SET_EVENTS,
-    events
-  })
-}
