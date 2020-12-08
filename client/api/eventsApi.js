@@ -1,4 +1,4 @@
-import { getEncodedToken } from 'authenticare/client'
+import { getAuthorizationHeader } from 'authenticare/client'
 import request from 'superagent'
 const acceptJsonHeader = { Accept: 'application/json' }
 
@@ -6,7 +6,7 @@ export function addNewEvent (id, event) {
   return request
     .post('/api/v1/events/' + id)
     .set(acceptJsonHeader)
-    .set({ Authorization: `Bearer ${getEncodedToken()}` })
+    .set(getAuthorizationHeader())
     .send(event)
     .then((res) => res.body)
     .catch((error) => console.log(error))
@@ -21,12 +21,12 @@ export function showAllEvents () {
 }
 
 export function joinEvent (id, eventID) {
-  console.log('request')
+  console.log('request', eventID, 5)
   return request
-    .get(`/api/v1/events/${id}/attending`)
+    .post(`/api/v1/events/${id}/attending`)
     .set(acceptJsonHeader)
-    .set({ Authorization: `Bearer ${getEncodedToken()}` })
-    .send(id, eventID)
+    .set(getAuthorizationHeader())
+    .send(eventID)
     .then((res) => res.body)
     .catch((error) => console.log(error))
 }
@@ -35,7 +35,7 @@ export function showAllUserEvents (id) {
   return request
     .get(`/api/v1/events/${id}/attending`)
     .set(acceptJsonHeader)
-    .set({ Authorization: `Bearer ${getEncodedToken()}` })
+    .set(getAuthorizationHeader())
     .then((res) => res.body)
     .catch((error) => console.error(error))
 }
