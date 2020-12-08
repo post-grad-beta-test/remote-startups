@@ -4,11 +4,11 @@ import currentPage from './currentPage'
 import { setEvents } from './setEvents'
 import { setDisabled } from './setDisabled'
 
-const reducers = combineReducers({
+const reducer = combineReducers({
   currentPage,
   createUser,
   setEvents,
   setDisabled
 })
 
-export default reducers
+export default reducer
