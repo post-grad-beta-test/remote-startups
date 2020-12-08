@@ -1,11 +1,12 @@
-import { joinEvent, showAllEvents, showAllUserEvents } from '../api/eventsApi'
+import * as eventsData from '../api/eventsApi'
 
 export const CHANGE_PAGE = 'CHANGE_PAGE'
 export const ADD_USER_INFO = 'ADD_USER_INFO'
 export const CHANGE_NAV_STATE = 'CHANGE_NAV_STATE'
 export const SET_EVENTS = 'SET_EVENTS'
 export const LOAD_ALL_EVENTS = 'LOAD_ALL_EVENTS'
-export const SET_DISABLED_BTN = 'SET_DISABLED_BTN'
+export const SET_DISABLED = 'SET_DISABLED'
+export const SET_DISABLED_LOADING = 'SET_DISABLED_LOADING'
 
 export function changePage (page) {
   return {
@@ -36,17 +37,23 @@ export function setEvents (events) {
   }
 }
 
-export function setDisabledBtn (eventIds) {
+export function setDisabled (eventIds) {
   return {
-    type: SET_DISABLED_BTN,
+    type: SET_DISABLED,
     eventIds
+  }
+}
+
+export function setDisabledLoading (loading) {
+  return {
+    type: SET_DISABLED_LOADING
   }
 }
 
 export function loadAllEvents () {
   return (dispatch) => {
     // dispatch(setLoading(true))
-    return showAllEvents().then((events) => {
+    return eventsData.showAllEvents().then((events) => {
       // dispatch(setLoading(false))
       dispatch(setEvents(events))
       return events
@@ -61,10 +68,10 @@ export function loadAllEvents () {
 export function disableJoinedEvents (userId, eventId) {
   return (dispatch) => {
     // dispatch(setLoading(true))
-    return joinEvent(userId, eventId).then(() =>
+    return eventsData.joinEvent(userId, eventId).then(() =>
       // dispatch(setLoading(false))
-      showAllUserEvents(userId).then((eventIds) => {
-        dispatch(setDisabledBtn(eventIds))
+      eventsData.showAllUserEvents(userId).then((eventIds) => {
+        dispatch(setDisabled(eventIds))
         return eventIds
       })
     )
