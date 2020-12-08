@@ -21,6 +21,7 @@ export function showAllEvents () {
 }
 
 export function joinEvent (id, eventID) {
+  console.log('request')
   return request
     .get(`/api/v1/events/${id}/attending`)
     .set(acceptJsonHeader)

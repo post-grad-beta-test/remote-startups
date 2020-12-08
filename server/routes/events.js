@@ -19,19 +19,17 @@ router.get('/', (req, res) => {
 })
 
 router.post('/:id/attending', getTokenDecoder(), (req, res) => {
-  if (req.user) {
-    const id = Number(req.params.id)
-    const event = Number(req.body.event)
-    addUserToEvent(id, event)
-      .then((ids) => {
-        res.status(200).json(ids[0])
-      })
-      .catch((err) => {
-        res.status(500).send(`DATABASE ERROR ${err.message}`)
-      })
-  } else {
-    res.status(500).send('authentication token not provided')
-  }
+  console.log('server')
+
+  const id = Number(req.params.id)
+  const event = Number(req.body.event)
+  addUserToEvent(id, event)
+    .then((ids) => {
+      res.status(200).json(ids[0])
+    })
+    .catch((err) => {
+      res.status(500).send(`DATABASE ERROR ${err.message}`)
+    })
 })
 
 router.get('/:id/attending', getTokenDecoder(), (req, res) => {
