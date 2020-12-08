@@ -5,8 +5,8 @@ export const ADD_USER_INFO = 'ADD_USER_INFO'
 export const CHANGE_NAV_STATE = 'CHANGE_NAV_STATE'
 export const SET_EVENTS = 'SET_EVENTS'
 export const LOAD_ALL_EVENTS = 'LOAD_ALL_EVENTS'
-export const SET_DISABLED = 'SET_DISABLED'
-export const SET_DISABLED_LOADING = 'SET_DISABLED_LOADING'
+export const SET_JOINED = 'SET_DISABLED'
+export const SET_LOADING = 'SET_LOADING'
 
 export function changePage (page) {
   return {
@@ -37,24 +37,25 @@ export function setEvents (events) {
   }
 }
 
-export function setDisabled (eventIds) {
+export function fetchJoined (eventIds) {
   return {
-    type: SET_DISABLED,
+    type: SET_JOINED,
     eventIds
   }
 }
 
-export function setDisabledLoading (loading) {
+export function setLoading (loading) {
   return {
-    type: SET_DISABLED_LOADING
+    type: SET_LOADING,
+    loading
   }
 }
 
 export function loadAllEvents () {
   return (dispatch) => {
-    // dispatch(setLoading(true))
+    dispatch(setLoading(true))
     return eventsData.showAllEvents().then((events) => {
-      // dispatch(setLoading(false))
+      dispatch(setLoading(false))
       dispatch(setEvents(events))
       return events
     })
@@ -65,15 +66,13 @@ export function loadAllEvents () {
   }
 }
 
-export function disableJoinedEvents (userId, eventId) {
+export function attendEvent (userId, eventId) {
+  console.log(userId, eventId)
   return (dispatch) => {
-    // dispatch(setLoading(true))
-    return eventsData.joinEvent(userId, eventId).then(() =>
-      // dispatch(setLoading(false))
-      eventsData.showAllUserEvents(userId).then((eventIds) => {
-        dispatch(setDisabled(eventIds))
-        return eventIds
-      })
-    )
+    dispatch(setLoading(true))
+    return eventsData
+      .joinEvent(userId, eventId)
+      .then(() => dispatch(setLoading(false)))
+      .catch((error) => console.log(error))
   }
 }
