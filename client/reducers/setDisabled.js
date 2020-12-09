@@ -2,10 +2,11 @@ import { SET_JOINED, SET_LOADING } from '../actions'
 
 const initialState = {
   eventIDs: [],
+  loading: false,
   failed: false
 }
 
-export function setDisabled (state = initialState, action) {
+export function setJoined (state = initialState, action) {
   switch (action.type) {
     case SET_JOINED:
       return action.eventIds

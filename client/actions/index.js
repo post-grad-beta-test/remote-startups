@@ -51,6 +51,9 @@ export function setLoading (loading) {
   }
 }
 
+/**
+ * A thunk that fetches all the events from the database and adds them to the store
+ */
 export function loadAllEvents () {
   return (dispatch) => {
     dispatch(setLoading(true))
