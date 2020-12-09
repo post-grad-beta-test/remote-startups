@@ -4,7 +4,7 @@ import getIcon from '../helpers/getIcon'
 import { Add, PowerCycle } from 'grommet-icons'
 import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
-import { loadAllEvents, attendEvent } from '../actions'
+import { loadAllEvents, attendEvent, fetchEventIds } from '../actions'
 
 const EventCard = (user) => {
   const [listEvents, setListEvents] = useState([])
@@ -18,7 +18,11 @@ const EventCard = (user) => {
    */
   const subscribe = (userId, eventId) => {
     console.log(userId, eventId)
-    dispatch(attendEvent(userId, eventId))
+    dispatch(attendEvent(userId, eventId)).then(() => {
+      dispatch(fetchEventIds(userId)).then((eventIds) => {
+        console.log(eventIds)
+      })
+    })
   }
 
   useEffect(() => {
