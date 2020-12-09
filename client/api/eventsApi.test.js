@@ -3,7 +3,7 @@ import {
   addNewEvent,
   showAllEvents,
   joinEvent,
-  showAllUserEvents
+  showAllUserEventIds
 } from './eventsApi'
 
 test('fetches events from server', () => {
@@ -64,7 +64,7 @@ describe.skip('GET all events user is attending', () => {
     })
 
   test('get all events by user attending', () => {
-    return showAllUserEvents(id).then((res) => {
+    return showAllUserEventIds(id).then((res) => {
       expect(res.results).toHaveLength(3)
       expect(res.results[0].project_id).toBe(1)
     })
