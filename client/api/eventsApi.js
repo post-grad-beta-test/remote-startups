@@ -60,7 +60,6 @@ export function joinEvent (userId, eventId) {
     .set(acceptJsonHeader)
     .set(getAuthorizationHeader())
     .send({ eventId })
-    .send(userId, eventId)
     .then((res) => res.body)
     .catch((error) => console.log(error))
 }
