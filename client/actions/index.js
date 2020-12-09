@@ -37,7 +37,7 @@ export function setEvents (events) {
   }
 }
 
-export function fetchJoined (eventIds) {
+export function setJoined (eventIds) {
   return {
     type: SET_JOINED,
     eventIds
@@ -76,6 +76,21 @@ export function attendEvent (userId, eventId) {
     return eventsData
       .joinEvent(userId, eventId)
       .then(() => dispatch(setLoading(false)))
+      .catch((error) => console.log(error))
+  }
+}
+
+export function fetchEventIds (eventId) {
+  console.log('start fetch')
+  return (dispatch) => {
+    dispatch(setLoading(true))
+    return eventsData
+      .showAllUserEventIds(eventId)
+      .then((eventIds) => {
+        console.log(eventIds)
+        dispatch(setJoined(eventIds))
+        dispatch(setLoading(false))
+      })
       .catch((error) => console.log(error))
   }
 }
