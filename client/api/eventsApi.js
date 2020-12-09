@@ -20,13 +20,13 @@ export function showAllEvents () {
     .catch((error) => console.log(error))
 }
 
-export function joinEvent (id, eventID) {
-  console.log('request', eventID, 5)
+export function joinEvent (id, eventId) {
+  console.log('request', eventId, 5)
   return request
     .post(`/api/v1/events/${id}/attending`)
     .set(acceptJsonHeader)
     .set(getAuthorizationHeader())
-    .send(eventID)
+    .send({ eventId })
     .then((res) => res.body)
     .catch((error) => console.log(error))
 }
