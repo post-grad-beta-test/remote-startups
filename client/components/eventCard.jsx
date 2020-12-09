@@ -11,6 +11,11 @@ const EventCard = (user) => {
   const dispatch = useDispatch()
   const [isLoading, setLoading] = useState(false)
 
+  /**
+   * a function that dispatches a request for the user to join an event
+   * @param {number} userId
+   * @param {number} eventId - The id of the event user clicked
+   */
   const subscribe = (userId, eventId) => {
     console.log(userId, eventId)
     dispatch(attendEvent(userId, eventId))
@@ -30,11 +35,11 @@ const EventCard = (user) => {
               align='center'
               pad='small'
               background={{
-                0: 'b',
-                1: 'r',
-                2: 'a',
-                3: 'n',
-                4: 'd',
+                // 0: 'b',
+                // 1: 'r',
+                // 2: 'a',
+                // 3: 'n',
+                // 4: 'd',
                 color: 'white',
                 image: "url('')",
                 position: 'bottom',
