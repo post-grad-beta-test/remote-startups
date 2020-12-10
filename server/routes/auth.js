@@ -43,6 +43,7 @@ router.post('/sendRegistrationEmail', getTokenDecoder(), (req, res) => {
   }
 })
 
+//look at this
 router.patch('/auth', getTokenDecoder(), (req, res) => {
   if (req.user) {
     addDetails(req.body)

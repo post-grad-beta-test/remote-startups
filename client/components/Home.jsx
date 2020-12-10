@@ -1,13 +1,11 @@
 import React from "react";
 import EventCard from "./eventCard";
 import WorldMap from "./WorldMap";
-import { Link } from "react-router-dom";
 
 function Home() {
   return (
     <>
       <WorldMap />
-
       <EventCard />
     </>
   );

@@ -16,10 +16,12 @@ function Login () {
   })
 
   const onSubmit = values => {
+    console.log("zero")
     const { username, password } = values
     signIn({ username, password }, { baseUrl })
       .then(token => {
         if (isAuthenticated()) {
+          console.log("one")
           dispatch(changePage('User'))
           dispatch(changeNavState('Logged In'))
           return getUserInfo()

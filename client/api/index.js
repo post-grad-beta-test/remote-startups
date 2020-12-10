@@ -20,6 +20,7 @@ export function sendRegistrationEmail (email) {
     .catch((err) => console.log(err.message))
 }
 
+// Do we need this?
 export function sendReminderEmail (email) {
   return request
     .post('/api/v1/sendReminderEmail')
@@ -29,6 +30,7 @@ export function sendReminderEmail (email) {
     .catch((err) => console.log(err.message))
 }
 
+// this is the same as register?
 export function addNewUserInfo (info) {
   return request
     .patch('/api/v1/auth')
@@ -38,18 +40,20 @@ export function addNewUserInfo (info) {
     .catch((err) => console.log(err.message))
 }
 
+//find where this is useful - clicking on log out...
 export function getUserInfo () {
   return request
+  //should this be a get?
     .post('/api/v1/auth')
     .set(authorizeUser())
     .then((res) => res.body)
-    .catch((err) => {
-      if (err.status === undefined) {
-        return { id: '', username: '' }
-      }
-
-      throw Error('api error')
-    })
+    .catch((err) => console.log(err.message)
+      // //why is this different?
+      // if (err.status === undefined) {
+      //   return { id: '', username: '' }
+      // }
+      // throw Error('api error')
+    )
 }
 
 export function updateEmail (info) {
@@ -60,6 +64,8 @@ export function updateEmail (info) {
     .then((res) => res.body)
     .catch((err) => console.log(err.message))
 }
+
+//MAKE A GETINDIVIDUALUSER
 
 // Added - testing
 

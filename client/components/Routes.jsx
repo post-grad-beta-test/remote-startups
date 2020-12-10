@@ -1,5 +1,4 @@
 import React from "react";
-// NO HashRouter! BrowserRouter?
 import { Route } from "react-router-dom";
 import Homepage from "./Home"; 
 import CreateProject from "./CreateProject";

@@ -3,62 +3,62 @@ import { isAuthenticated } from "authenticare/client";
 import { Link } from "react-router-dom";
 import { logOff } from "authenticare/client/auth";
 import { changeNavState, changePage } from "../actions";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import { IfAuthenticated, IfNotAuthenticated } from "./Authenticated";
-import LoggedIn from "./LoggedIn";
-import LoggedOff from "./LoggedOff";
+
 import { Tabs, Menu } from "grommet";
 
-//if using authenticated here then current page needs to be linked up
 
 function Nav({ dispatch, username }) {
-  function logOffHandler() {
-    logOff();
-//These below crash due to not being a function
-
-    dispatch(changePage("Home"));
-    dispatch(changeNavState("Logged Off"));
-  }
   return (
     <>
       <div>
-        {isAuthenticated ? (
-          <>
-            <Tabs>
-              <Link to="/">Home</Link>
-
-              <Link to="/UserProfile/:id">User Profile</Link>
-              {/* auth issues trying to load the user profile */}
-              <Link to="/Events">Events</Link>
-              <Link to="/" onClick={() => logOffHandler()}>
-                Logout
-              </Link>
-            </Tabs>
-          </>
-        ) : (
-          <>
-            <Link to="/">Home</Link>
-            <Link to="/Login">Log in</Link>
-            <Link to="/Register">Register</Link>
-          </>
-        )}
+        <Link to="/">Home</Link>
+        <IfAuthenticated>
+          <Link to="#" onClick={logOff}>
+            Log off
+          </Link>
+        </IfAuthenticated>
+        <IfNotAuthenticated>
+          <Link to="/Register">Register</Link>
+          <Link to="/Login">Sign in</Link>
+        </IfNotAuthenticated>
       </div>
     </>
   );
 }
 
+// removed for now
+// {isAuthenticated ? (
+//   <>
+//     <Tabs>
+//       <Link to="/">Home</Link>
+//       <Link to="/UserProfile/:id">User Profile</Link>
+//        auth issues trying to load the user profile perhaps due to id not being good?*
+//       <Link to="/Events">Events</Link>
+//       <Link to="/" onClick={() => logOffHandler()}>
+//         Logout
+//       </Link>
+//     </Tabs>
+//   </>
+// ) : (
+//   <>
+//     <Link to="/">Home</Link>
+//     <Link to="/Login">Log in</Link>
+//     <Link to="/Register">Register</Link>
+//   </>
+// )}
+
 //             <Link to="/" onClick={() => logout()}>
 //               Logout
 //             </Link>
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
-    username: state.createUser.username
-  }
+    username: state.createUser.username,
+  };
 }
 
-export default connect(mapStateToProps)(Nav)
-
-
+export default connect(mapStateToProps)(Nav);
 
 //__________________________________________
 // import React from "react";
