@@ -5,7 +5,7 @@ export const ADD_USER_INFO = 'ADD_USER_INFO'
 export const CHANGE_NAV_STATE = 'CHANGE_NAV_STATE'
 export const SET_EVENTS = 'SET_EVENTS'
 export const LOAD_ALL_EVENTS = 'LOAD_ALL_EVENTS'
-export const SET_JOINED = 'SET_DISABLED'
+export const SET_JOINED = 'SET_JOINED'
 export const SET_LOADING = 'SET_LOADING'
 
 export function changePage (page) {
