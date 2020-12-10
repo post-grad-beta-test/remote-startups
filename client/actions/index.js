@@ -80,12 +80,12 @@ export function attendEvent (userId, eventId) {
   }
 }
 
-export function fetchEventIds (eventId) {
+export function fetchEventIds (userId) {
   console.log('start fetch')
   return (dispatch) => {
     dispatch(setLoading(true))
     return eventsData
-      .showAllUserEventIds(eventId)
+      .showAllUserEventIds(userId)
       .then((eventIds) => {
         console.log(eventIds)
         dispatch(setJoined(eventIds))
