@@ -4,12 +4,18 @@ import getIcon from '../helpers/getIcon'
 import { Add, PowerCycle } from 'grommet-icons'
 import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
-import { loadAllEvents, attendEvent, fetchEventIds } from '../actions'
+import {
+  loadAllEvents,
+  attendEvent,
+  fetchEventIds,
+  setDisabled,
+} from '../actions'
 
-const EventCard = (user) => {
+const EventCard = (user, events) => {
   const [listEvents, setListEvents] = useState([])
   const dispatch = useDispatch()
-  const [isLoading, setLoading] = useState(false)
+  const [isBtnDisabled, setBtnDisabled] = useState(false)
+  console.log(isBtnDisabled)
 
   /**
    * a function that dispatches a request for the user to join an event
@@ -17,17 +23,23 @@ const EventCard = (user) => {
    * @param {number} eventId - The id of the event user clicked
    */
   const subscribe = (userId, eventId) => {
-    console.log(userId, eventId)
-    dispatch(attendEvent(userId, eventId)).then(() => {
-      dispatch(fetchEventIds(userId)).then((eventIds) => {
-        console.log(eventIds)
-      })
-    })
+    // dispatch(setDisabled(eventId)
+    dispatch(attendEvent(userId, eventId))
+      .then(setBtnDisabled(true))
+      .then(dispatch(fetchEventIds(userId)))
+      .then((eventIds) => console.log(eventIds))
   }
 
   useEffect(() => {
     dispatch(loadAllEvents()).then(setListEvents)
   }, [])
+
+  useEffect(() => {
+    setBtnDisabled
+  })
+  // useEffect(() => {
+  //   setBtnDisabled(events.id.disabled)
+  // }, {})
 
   const AnIcon = getIcon()
   return (
@@ -102,6 +114,7 @@ const EventCard = (user) => {
                   margin='xsmall'
                 >
                   <Button
+                    disabled={isBtnDisabled}
                     label='Join'
                     icon={<Add />}
                     onClick={() => subscribe(user.user, event.id)}

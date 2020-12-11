@@ -7,6 +7,7 @@ export const SET_EVENTS = 'SET_EVENTS'
 export const LOAD_ALL_EVENTS = 'LOAD_ALL_EVENTS'
 export const SET_JOINED = 'SET_JOINED'
 export const SET_LOADING = 'SET_LOADING'
+export const SET_DISABLED = 'SET_DISABLED'
 
 export function changePage (page) {
   return {
@@ -51,14 +52,24 @@ export function setLoading (loading) {
   }
 }
 
+export function setDisabled (eventId) {
+  return {
+    type: SET_DISABLED,
+    eventId
+  }
+}
+
 /**
  * A thunk that fetches all the events from the database and adds them to the store
  */
 export function loadAllEvents () {
   return (dispatch) => {
-    dispatch(setLoading(true))
+    // dispatch(setLoading(true))
     return eventsData.showAllEvents().then((events) => {
-      dispatch(setLoading(false))
+      // dispatch(setLoading(false))
+      // events.map((event) => {
+      //   event.disabled = false
+      // })
       dispatch(setEvents(events))
       return events
     })
@@ -90,6 +101,7 @@ export function fetchEventIds (userId) {
         console.log(eventIds)
         dispatch(setJoined(eventIds))
         dispatch(setLoading(false))
+        return eventIds
       })
       .catch((error) => console.log(error))
   }
