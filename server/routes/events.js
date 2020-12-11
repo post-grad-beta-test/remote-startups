@@ -19,11 +19,9 @@ router.get('/', (req, res) => {
 })
 
 router.post('/:id/attending', getTokenDecoder(), (req, res) => {
-  console.log(req.body)
-
   const id = Number(req.params.id)
   const { eventId } = req.body
-  console.log(eventId)
+
   addUserToEvent(id, eventId)
     .then((ids) => {
       res.status(200).json(ids[0])

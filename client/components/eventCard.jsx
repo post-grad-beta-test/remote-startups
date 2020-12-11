@@ -43,7 +43,6 @@ const EventCard = ({ user, events, joinedIds }) => {
     <div className='container'>
       <Grid gap='medium' columns={{ count: 'fit', size: 'medium' }}>
         {listEvents.map((event) => {
-          console.log('event map', event, joinedIds)
           return (
             <div key={event.id}>
               <Box
@@ -136,7 +135,6 @@ const EventCard = ({ user, events, joinedIds }) => {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     events: state.setEvents,
     user: state.createUser.id,

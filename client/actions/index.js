@@ -81,7 +81,6 @@ export function loadAllEvents () {
 }
 
 export function attendEvent (userId, eventId) {
-  console.log(userId, eventId)
   return (dispatch) => {
     dispatch(setLoading(true))
     return eventsData
@@ -92,13 +91,11 @@ export function attendEvent (userId, eventId) {
 }
 
 export function fetchEventIds (userId) {
-  console.log('start fetch')
   return (dispatch) => {
     dispatch(setLoading(true))
     return eventsData
       .showAllUserEventIds(userId)
       .then((eventIds) => {
-        console.log(eventIds)
         dispatch(setJoined(eventIds))
         dispatch(setLoading(false))
         return eventIds
