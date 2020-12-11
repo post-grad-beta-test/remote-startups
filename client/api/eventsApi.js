@@ -61,7 +61,12 @@ export function joinEvent (userId, eventId) {
     .set(getAuthorizationHeader())
     .send({ eventId })
     .then((res) => res.body)
-    .catch((error) => console.log(error))
+    .catch((error) => {
+      if (error.status === undefined) {
+        return { project_id: '' }
+      }
+      throw Error('fetch event error')
+    })
 }
 /**
  * Get a list of all events user has joined

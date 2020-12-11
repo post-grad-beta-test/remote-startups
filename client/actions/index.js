@@ -52,12 +52,12 @@ export function setLoading (loading) {
   }
 }
 
-export function setDisabled (eventId) {
-  return {
-    type: SET_DISABLED,
-    eventId
-  }
-}
+// export function setDisabled (eventId) {
+//   return {
+//     type: SET_DISABLED,
+//     eventId
+//   }
+// }
 
 /**
  * A thunk that fetches all the events from the database and adds them to the store
