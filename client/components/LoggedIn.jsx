@@ -4,7 +4,7 @@ import { Home } from "grommet-icons";
 import React from "react";
 import { connect } from "react-redux";
 import { changeNavState, changePage } from "../actions";
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 function LoggedIn({ dispatch, username }) {
   function logOffHandler() {
@@ -40,9 +40,11 @@ function LoggedIn({ dispatch, username }) {
             />
           ) : (
             <Nav direction="row">
-              <Link to="/">
-                <Anchor onClick={logOffHandler} label="Log Off" />
-              </Link>
+              <Router>
+                <Link to="/">
+                  <Anchor onClick={logOffHandler} label="Log Off" />
+                </Link>
+              </Router>
             </Nav>
           )
         }

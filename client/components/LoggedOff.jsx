@@ -3,7 +3,8 @@ import { Home } from "grommet-icons";
 import React from "react";
 import { connect } from "react-redux";
 import { changePage } from "../actions";
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from "react-router-dom";
+
 
 function LoggedOff({ dispatch }) {
   return (
@@ -34,18 +35,20 @@ function LoggedOff({ dispatch }) {
             />
           ) : (
             <Nav direction="row">
-              <Link to="/Login">
-                <Anchor
-                  onClick={() => dispatch(changePage("Login"))}
-                  label="Log In"
-                />
-              </Link>
-              <Link to="/Register">
-                <Anchor
-                  onClick={() => dispatch(changePage("Register"))}
-                  label="Register"
-                />
-              </Link>
+              <Router>
+                <Link to="/Login">
+                  <Anchor
+                    onClick={() => dispatch(changePage("Login"))}
+                    label="Log In"
+                  />
+                </Link>
+                <Link to="/Register">
+                  <Anchor
+                    onClick={() => dispatch(changePage("Register"))}
+                    label="Register"
+                  />
+                </Link>
+              </Router>
             </Nav>
           )
         }
