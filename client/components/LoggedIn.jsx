@@ -1,49 +1,60 @@
-import { logOff } from 'authenticare/client/auth'
-import { Anchor, Box, Header, Menu, Nav, ResponsiveContext } from 'grommet'
-import { Home, Link } from 'grommet-icons'
-import React from 'react'
-import { connect } from 'react-redux'
-import { changeNavState, changePage } from '../actions'
+import { logOff } from "authenticare/client/auth";
+import { Anchor, Box, Header, Menu, Nav, ResponsiveContext } from "grommet";
+import { Home } from "grommet-icons";
+import React from "react";
+import { connect } from "react-redux";
+import { changeNavState, changePage } from "../actions";
+import { Link } from 'react-router-dom';
 
-function LoggedIn ({ dispatch, username }) {
-  function logOffHandler () {
-    logOff()
-    dispatch(changePage('Home'))
-    dispatch(changeNavState('Logged Off'))
+function LoggedIn({ dispatch, username }) {
+  function logOffHandler() {
+    logOff();
+    dispatch(changePage("Home"));
+    dispatch(changeNavState("Logged Off"));
   }
 
   return (
     <Header background="dark" pad="medium">
-      <Box direction="row" align="center" gap="small" onClick={() => dispatch(changePage('Home'))} >
-        <Home/>
+      <Box
+        direction="row"
+        align="center"
+        gap="small"
+        onClick={() => dispatch(changePage("Home"))}
+      >
+        <Home />
       </Box>
-      <Box direction="row" align="center" gap="small" onClick={() => dispatch(changePage('User'))} >
-                Logged in as {username}
+      <Box
+        direction="row"
+        align="center"
+        gap="small"
+        onClick={() => dispatch(changePage("User"))}
+      >
+        Logged in as {username}
       </Box>
       <ResponsiveContext.Consumer>
-        {responsive =>
-          responsive === 'small' ? (
+        {(responsive) =>
+          responsive === "small" ? (
             <Menu
               label="Go Places"
-              items={[
-                { label: 'Log Off', onClick: () => logOffHandler() }
-              ]}
+              items={[{ label: "Log Off", onClick: () => logOffHandler() }]}
             />
           ) : (
             <Nav direction="row">
-              <Anchor onClick={logOffHandler} label="Log Off" />
+              <Link to="/">
+                <Anchor onClick={logOffHandler} label="Log Off" />
+              </Link>
             </Nav>
           )
         }
       </ResponsiveContext.Consumer>
     </Header>
-  )
+  );
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
-    username: state.createUser.username
-  }
+    username: state.createUser.username,
+  };
 }
 
-export default connect(mapStateToProps)(LoggedIn)
+export default connect(mapStateToProps)(LoggedIn);
