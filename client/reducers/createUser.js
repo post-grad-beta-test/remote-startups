@@ -16,7 +16,7 @@ const InitialUserInfo = {
 
 /**
  * CreateUser reducer updates userState in Store
- * @param {userState} state - initial  userState object
+ * @param {userState} state - initial userState object
  * @param {string} action  - add user to state
  * @returns {userState} - updated state object
  */
