@@ -24,3 +24,11 @@ test('dispatches api request', () => {
     expect(dispActions[0]).toEqual({ type: 'SET_EVENTS' })
   })
 })
+
+test('dispatches correct actions to join event', () => {
+  const store = mockStore({})
+  const dispatchActions = store.getActions()
+  return store.dispatch(actions.attendEvent('2', '3')).then(() => {
+    expect(dispatchActions[0]).toEqual(actions.setLoading(true))
+  })
+})
