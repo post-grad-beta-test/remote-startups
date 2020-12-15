@@ -63,8 +63,10 @@ function Register () {
   return (
     <Box align='center' pad='large' >
       <Form pad="small" onSubmit={handleSubmit(onSubmit)}>
+        
         <label style={labelStyle} htmlFor='firstName'> First Name </label>
         <Controller as={TextInput} id='firstName' name="firstName" control={control} defaultValue="" type='text' />
+
         <label style={labelStyle} htmlFor='lastName'>Last Name</label>
         <Controller as={TextInput} id="lastName" name="lastName" control={control} defaultValue="" type='text' />
 
