@@ -53,10 +53,22 @@ describe('fetchAllEvents()', () => {
 })
 test('dispatches correct actions to join event', () => {
   const store = mockStore({})
-  const dispatchActions = store.getActions()
   joinEvent.mockResolvedValue('1')
+
+  const expectedActions = [
+    {
+      type: anAction.SET_LOADING,
+      loading: true
+    },
+    {
+      type: anAction.SET_LOADING,
+      loading: false
+    }
+  ]
   return store.dispatch(anAction.attendEvent('2', '3')).then(() => {
-    expect(dispatchActions[0].type).toEqual('SET_LOADING')
+    store.subscribe(() => {
+      expect(store.getActions()).toEqual(expectedActions)
+    })
   })
 })
 
