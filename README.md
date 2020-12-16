@@ -20,12 +20,44 @@ To run in development (watch mode):
 npm run dev
 ```
 
-If you see warning `API key does not start with "SG.".`, make sure you've put a real SendGrid API key in `.env`.  Ask your teammates for more info.
+If you see warning `API key does not start with "SG.".`, make sure you've put a real SendGrid API key in `.env`. Ask your teammates for more info.
 
 To run in production:
 
 ```sh
 npm start
+```
+
+## JS Docs/ Better-Docs
+
+---
+
+'JS Doc' is used to document this project.
+
+We would like to keep the project documentation up to date with changes to the main branch. For a pull request to be approved all functions should include a 'JS doc' block.
+example:
+
+```
+    /**
+ * Add userID and EventId to users_projects table
+ * @param {string} userId - User Id
+ * @param {string} eventId - eventId
+ *
+ * @returns {Promise.<number[]>} array[0] team id
+ */
+ const function joinEvent(userId, eventID){...}
+```
+
+Project documentation is found in the [docs]('./docs') folder.
+
+More information about JSdoc and creating doc blocks can be found in the [JSdoc documentation](https://jsdoc.app/index.html)
+
+A JSdoc quick reference/cheatsheet found here: [Devhints JSdoc](https://devhints.io/jsdoc)
+
+To update docs
+
+```
+npm run docs
 ```
 
 ## User Stories
