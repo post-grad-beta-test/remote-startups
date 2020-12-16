@@ -1,34 +1,61 @@
-import * as actions from './index'
-import configureStore from 'redux-mock-store'
+import * as anAction from './index'
+import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
+import { showAllEvents, joinEvent } from '../api/eventsApi'
 
 const middleware = [thunk]
-const mockStore = configureStore(middleware)
+const mockStore = configureMockStore(middleware)
+
+jest.mock('../api/eventsApi')
 
 test('changePage returns page', () => {
-  const action = actions.changePage('test')
-  expect(action.type).toBe(actions.CHANGE_PAGE)
+  const action = anAction.changePage('test')
+  expect(action.type).toBe(anAction.CHANGE_PAGE)
   expect(action.page).toEqual('test')
 })
 
 test('addUserInfo returns user info', () => {
-  const action = actions.addUserInfo({ username: 'test' })
-  expect(action.type).toBe(actions.ADD_USER_INFO)
+  const action = anAction.addUserInfo({ username: 'test' })
+  expect(action.type).toBe(anAction.ADD_USER_INFO)
   expect(action.username).toEqual({ username: 'test' })
 })
 
-test('dispatches api request', () => {
-  const store = mockStore([])
-  const dispActions = store.getActions()
-  return store.dispatch(actions.loadAllEvents()).then((result) => {
-    expect(dispActions[0]).toEqual({ type: 'SET_EVENTS' })
+describe('fetchAllEvents()', () => {
+  test('dispatches loading action', () => {
+    const event = [{ name: 'test' }]
+    const store = mockStore()
+    showAllEvents.mockResolvedValue(event)
+    const expectedActions = [
+      {
+        type: anAction.SET_LOADING,
+        loading: true
+      },
+      {
+        type: anAction.SET_LOADING,
+        loading: false
+      },
+      {
+        type: anAction.SET_EVENTS,
+        events: event
+      },
+      {
+        type: anAction.SET_LOADING,
+        loading: false
+      }
+    ]
+
+    return store.dispatch(anAction.loadAllEvents()).then(() => {
+      store.subscribe(() => {
+        expect(store.getActions()).toEqual(expectedActions)
+      })
+    })
   })
 })
-
 test('dispatches correct actions to join event', () => {
   const store = mockStore({})
   const dispatchActions = store.getActions()
-  return store.dispatch(actions.attendEvent('2', '3')).then(() => {
-    expect(dispatchActions[0]).toEqual(actions.setLoading(true))
+  joinEvent.mockResolvedValue('1')
+  return store.dispatch(anAction.attendEvent('2', '3')).then(() => {
+    expect(dispatchActions[0].type).toEqual('SET_LOADING')
   })
 })
