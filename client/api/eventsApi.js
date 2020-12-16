@@ -62,7 +62,7 @@ export function joinEvent (userId, eventId) {
     .send({ eventId })
     .then((res) => res.body)
     .catch((error) => {
-      console.log(error)
+      console.error(error)
       if (error.status === undefined) {
         return { project_id: '' }
       }
