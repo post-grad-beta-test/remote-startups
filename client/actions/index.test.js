@@ -1,7 +1,7 @@
 import * as anAction from './index'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import { showAllEvents, joinEvent } from '../api/eventsApi'
+import { showAllEvents, joinEvent, showAllUserEventIds } from '../api/eventsApi'
 
 const middleware = [thunk]
 const mockStore = configureMockStore(middleware)
@@ -57,5 +57,32 @@ test('dispatches correct actions to join event', () => {
   joinEvent.mockResolvedValue('1')
   return store.dispatch(anAction.attendEvent('2', '3')).then(() => {
     expect(dispatchActions[0].type).toEqual('SET_LOADING')
+  })
+})
+
+test('dispatches actions to fetch eventIds for userID', () => {
+  const joinedIds = [{ id: 2 }, { id: 3 }]
+  const store = mockStore({})
+  showAllUserEventIds.mockResolvedValue(joinedIds)
+
+  const expectedActions = [
+    {
+      type: anAction.SET_LOADING,
+      loading: true
+    },
+    {
+      type: anAction.SET_JOINED,
+      eventIds: joinedIds
+    },
+    {
+      type: anAction.SET_LOADING,
+      loading: false
+    }
+  ]
+
+  return store.dispatch(anAction.fetchEventIds('1')).then(() => {
+    store.subscribe(() => {
+      expect(store.getActions()).toEqual(expectedActions)
+    })
   })
 })
