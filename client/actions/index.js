@@ -61,7 +61,7 @@ export function setLoading (loading) {
 
 /**
  * fetches Event[] then add events to store
- * @returns {<Event[]>}
+ * @returns {Promise.<Event[]>}
  */
 export function loadAllEvents () {
   return (dispatch) => {
