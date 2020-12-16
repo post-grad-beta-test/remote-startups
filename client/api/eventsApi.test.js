@@ -22,7 +22,7 @@ test('fetches events from server', () => {
   })
 })
 
-describe.skip('send a new event to the server', () => {
+describe('send a new event to the server', () => {
   const scope = nock(/localhost/)
     .post('/api/v1/events/1')
     .reply(201)
@@ -33,9 +33,9 @@ describe.skip('send a new event to the server', () => {
   })
 })
 
-describe.skip('user can join an event', () => {
+describe('user can join an event', () => {
   const scope = nock(/localhost/)
-    .post('/api/v1/events/attending')
+    .post('/api/v1/events/1/attending')
     .reply(201)
 
   test('post userID and projectID to server', () => {
@@ -45,7 +45,7 @@ describe.skip('user can join an event', () => {
   })
 })
 
-describe.skip('GET all events user is attending', () => {
+describe('GET all events user is attending', () => {
   const id = 1
   nock(/localhost/)
     .get(`/api/v1/events/${id}/attending`)
