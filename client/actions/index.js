@@ -60,26 +60,31 @@ export function setLoading (loading) {
 // }
 
 /**
- * A thunk that fetches all the events from the database and adds them to the store
+ * fetches Event[] then add events to store
+ * @returns {<Event[]>}
  */
 export function loadAllEvents () {
   return (dispatch) => {
-    // dispatch(setLoading(true))
-    return eventsData.showAllEvents().then((events) => {
-      // dispatch(setLoading(false))
-      // events.map((event) => {
-      //   event.disabled = false
-      // })
-      dispatch(setEvents(events))
-      return events
-    })
-    // .catch(err => {
-    //    dispatch(setLoading(false))
-    //    throw err
-    // })
+    dispatch(setLoading(true))
+    return eventsData
+      .showAllEvents()
+      .then((events) => {
+        dispatch(setLoading(false))
+        dispatch(setEvents(events))
+        return events
+      })
+      .catch((err) => {
+        dispatch(setLoading(false))
+        throw Error(err.message)
+      })
   }
 }
 
+/**
+ * make eventsAPI post request and dispatch loading state.
+ * @param {number} userId - user id
+ * @param {number} eventId - event id
+ */
 export function attendEvent (userId, eventId) {
   return (dispatch) => {
     dispatch(setLoading(true))
@@ -90,6 +95,11 @@ export function attendEvent (userId, eventId) {
   }
 }
 
+/**
+ * fetch eventIds for user then dispatch action to disable join button
+ * @param {number} userId - user id
+ * @returns {Number[]>}
+ */
 export function fetchEventIds (userId) {
   return (dispatch) => {
     dispatch(setLoading(true))
