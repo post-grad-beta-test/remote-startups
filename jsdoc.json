@@ -1,0 +1,18 @@
+{
+  "recurseDepth": 2,
+  "source": {
+    "include": ["./client"],
+    "exclude": ["./server/public/bundle.js"],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(node_modules/|docs)"
+  },
+  "plugins": ["plugins/markdown", "node_modules/better-docs/category"],
+  "opts": {
+    "encoding": "utf8",
+    "destination": "docs/",
+    "readme": "readme.md",
+    "recurse": true,
+    "verbose": true,
+    "template": "node_modules/better-docs"
+  }
+}
