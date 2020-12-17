@@ -52,7 +52,7 @@ export function setLoading (loading) {
 
 /**
  * fetches Event[] then add events to store
- * @returns {<Event[]>}
+ * @returns {Promise.<Event[]>}
  */
 export function loadAllEvents () {
   return (dispatch) => {
@@ -89,7 +89,7 @@ export function attendEvent (userId, eventId) {
 /**
  * fetch eventIds for user then dispatch action to disable join button
  * @param {number} userId - user id
- * @returns {Number[]>}
+ * @returns {Promise.<Number[]>}
  */
 export function fetchEventIds (userId) {
   return (dispatch) => {
