@@ -32,9 +32,9 @@ npm start
 
 ---
 
-'JS Doc' is used to document this project.
+JSDoc is used to document this project.
 
-We would like to keep the project documentation up to date with changes to the main branch. For a pull request to be approved all functions should include a 'JS doc' block.
+We would like to keep the project documentation up to date with changes to the main branch. For a pull request to be approved all functions should include a JSDoc block.
 example:
 
 ```
