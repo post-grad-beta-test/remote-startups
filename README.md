@@ -38,7 +38,7 @@ We would like to keep the project documentation up to date with changes to the m
 example:
 
 ```
-    /**
+/**
  * Add userID and EventId to users_projects table
  * @param {string} userId - User Id
  * @param {string} eventId - eventId
