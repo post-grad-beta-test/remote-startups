@@ -1,4 +1,4 @@
-import { getEncodedToken } from 'authenticare/client'
+import { getAuthorizationHeader } from 'authenticare/client'
 import request from 'superagent'
 const acceptJsonHeader = { Accept: 'application/json' }
 
@@ -18,10 +18,10 @@ export function addNewEvent (userId, event) {
   return request
     .post('/api/v1/events/' + userId)
     .set(acceptJsonHeader)
-    .set({ Authorization: `Bearer ${getEncodedToken()}` })
+    .set(getAuthorizationHeader())
     .send(event)
     .then((res) => res.body)
-    .catch((error) => console.log(error))
+    .catch((err) => console.error(err))
 }
 
 /**
@@ -44,7 +44,7 @@ export function showAllEvents () {
     .get('/api/v1/events')
     .set(acceptJsonHeader)
     .then((res) => res.body)
-    .catch((error) => console.log(error))
+    .catch((err) => console.error(err))
 }
 
 /**
@@ -56,11 +56,18 @@ export function showAllEvents () {
  */
 export function joinEvent (userId, eventId) {
   return request
-    .post('/api/v1/events/attending')
+    .post(`/api/v1/events/${userId}/attending`)
     .set(acceptJsonHeader)
-    .send(userId, eventId)
+    .set(getAuthorizationHeader())
+    .send({ eventId })
     .then((res) => res.body)
-    .catch((error) => console.log(error))
+    .catch((error) => {
+      console.error(error)
+      if (error.status === undefined) {
+        return { project_id: '' }
+      }
+      throw Error('fetch event error')
+    })
 }
 /**
  * Get a list of all events user has joined
@@ -72,6 +79,7 @@ export function showAllUserEventIds (userId) {
   return request
     .get(`/api/v1/events/${userId}/attending`)
     .set(acceptJsonHeader)
+    .set(getAuthorizationHeader())
     .then((res) => res.body)
-    .catch((error) => console.error(error))
+    .catch((err) => console.error(err))
 }

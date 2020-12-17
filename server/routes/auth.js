@@ -10,7 +10,7 @@ const {
   getUserByName,
   addDetails,
   updateEmail
-} = require('../db')
+} = require('../Db/db')
 
 applyAuthRoutes(router, {
   userExists,

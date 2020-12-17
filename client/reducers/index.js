@@ -2,15 +2,14 @@ import { combineReducers } from 'redux'
 import createUser from './createUser'
 import currentPage from './currentPage'
 import setEvents from './setEvents'
+import { setJoinEvent, setDataLoading } from './setDisabled'
 
-/**
- * combine reducers to add to store
- */
-
-const reducers = combineReducers({
+const reducer = combineReducers({
   currentPage,
   createUser,
-  setEvents
+  setEvents,
+  setJoinEvent,
+  setDataLoading
 })
 
-export default reducers
+export default reducer
