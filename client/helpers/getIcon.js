@@ -11,6 +11,10 @@ import {
   Organization
 } from 'grommet-icons'
 
+/**
+ * Selects a random icon
+ * @returns - grommet icon component
+ */
 export default function getIcon () {
   const array = [
     Achievement,
