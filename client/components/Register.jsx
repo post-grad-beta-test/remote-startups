@@ -13,13 +13,13 @@ import { labelStyle } from '../helpers'
 
 const schema = yup.object().shape({
   email: yup.string().email().required('Email is a required field'),
-  // password: yup
-  //   .string()
-  //   .required('Please enter your password')
-  //   .matches(
-  //     /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-  //     'Password must contain at least 8 characters, one uppercase, one number and one special case character'
-  //   ),
+  password: yup
+    .string()
+    .required('Please enter your password')
+    .matches(
+      /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+      'Password must contain at least 8 characters, one uppercase, one number and one special case character'
+    ),
   confirmPassword: yup
     .string()
     .required('Please confirm your password')
@@ -58,14 +58,32 @@ function Register() {
   }
 
   return (
-    <Box align='center' pad='large' >
-      <Form pad="small" onSubmit={handleSubmit(onSubmit)}>
-        
-        <label style={labelStyle} htmlFor='firstName'> First Name </label>
-        <Controller as={TextInput} id='firstName' name="firstName" control={control} defaultValue="" type='text' />
+    <Box align='center' pad='large'>
+      <Form pad='small' onSubmit={handleSubmit(onSubmit)}>
+        <label style={labelStyle} htmlFor='firstName'>
+          {' '}
+          First Name{' '}
+        </label>
+        <Controller
+          as={TextInput}
+          id='firstName'
+          name='firstName'
+          control={control}
+          defaultValue=''
+          type='text'
+        />
 
-        <label style={labelStyle} htmlFor='lastName'>Last Name</label>
-        <Controller as={TextInput} id="lastName" name="lastName" control={control} defaultValue="" type='text' />
+        <label style={labelStyle} htmlFor='lastName'>
+          Last Name
+        </label>
+        <Controller
+          as={TextInput}
+          id='lastName'
+          name='lastName'
+          control={control}
+          defaultValue=''
+          type='text'
+        />
 
         <label style={labelStyle} htmlFor='username'>
           username
