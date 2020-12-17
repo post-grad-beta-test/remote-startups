@@ -1,15 +1,10 @@
 /* eslint-disable promise/always-return */
 import { Box, Button, Grid, Heading, Paragraph, Text } from 'grommet'
 import getIcon from '../helpers/getIcon'
-import { Add, PowerCycle } from 'grommet-icons'
+import { Add } from 'grommet-icons'
 import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
-import {
-  loadAllEvents,
-  attendEvent,
-  fetchEventIds,
-  setDisabled,
-} from '../actions'
+import { loadAllEvents, attendEvent, fetchEventIds } from '../actions'
 
 const EventCard = ({ user, events, joinedIds }) => {
   const [listEvents, setListEvents] = useState([])
@@ -21,22 +16,16 @@ const EventCard = ({ user, events, joinedIds }) => {
    * @param {number} eventId - The id of the event user clicked
    */
   const subscribe = (userId, eventId) => {
-    // dispatch(setDisabled(eventId)
     dispatch(attendEvent(userId, eventId))
       .then(dispatch(fetchEventIds(userId)))
-      .then((eventIds) => console.log(eventIds))
+      .catch((err) => console.error(err))
   }
 
   useEffect(() => {
-    dispatch(loadAllEvents()).then(setListEvents)
+    dispatch(loadAllEvents())
+      .then(setListEvents)
+      .catch((err) => console.error(err))
   }, [])
-
-  // useEffect(() => {
-  //   setBtnDisabled
-  // })
-  // useEffect(() => {
-  //   setBtnDisabled(events.id.disabled)
-  // }, {})
 
   const AnIcon = getIcon()
   return (
@@ -49,11 +38,6 @@ const EventCard = ({ user, events, joinedIds }) => {
                 align='center'
                 pad='small'
                 background={{
-                  // 0: 'b',
-                  // 1: 'r',
-                  // 2: 'a',
-                  // 3: 'n',
-                  // 4: 'd',
                   color: 'white',
                   image: "url('')",
                   position: 'bottom',
@@ -92,7 +76,6 @@ const EventCard = ({ user, events, joinedIds }) => {
                   >
                     {event.name}
                   </Heading>
-                  {/* <Image src={`project.images/project_image_${imageNum}.svg`} opacity="strong" /> */}
                   <Text weight='bold' textAlign='center' size='medium'>
                     Dates: {event.date_start} - {event.date_end}
                   </Text>
@@ -119,10 +102,6 @@ const EventCard = ({ user, events, joinedIds }) => {
                       icon={<Add />}
                       onClick={() => subscribe(user, event.id)}
                     />
-                    {/* {!isLoading && (
-                    <Button label='Join' icon={<Add />} onClick={subscribe} />
-                  )}
-                  {isLoading && <PowerCycle label='Joining now...' />} */}
                   </Box>
                 </Box>
               </Box>
