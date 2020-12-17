@@ -15,20 +15,26 @@ router.get('/', (req, res) => {
     .then((events) => {
       res.status(200).json(events)
     })
-    .catch(() => res.status(500).send('DATABASE ERROR'))
-})
-
-router.post('/:id/attending', getTokenDecoder(), (req, res) => {
-  const id = Number(req.params.id)
-  const { eventId } = req.body
-
-  addUserToEvent(id, eventId)
-    .then((ids) => {
-      res.status(200).json(ids[0])
-    })
     .catch((err) => {
       res.status(500).send(`DATABASE ERROR ${err.message}`)
     })
+})
+
+router.post('/:id/attending', getTokenDecoder(), (req, res) => {
+  if (req.user) {
+    const id = Number(req.params.id)
+    const { eventId } = req.body
+
+    addUserToEvent(id, eventId)
+      .then((ids) => {
+        res.status(200).json(ids[0])
+      })
+      .catch((err) => {
+        res.status(500).send(`DATABASE ERROR ${err.message}`)
+      })
+  } else {
+    res.status(401).send('authentication token not provided')
+  }
 })
 
 router.get('/:id/attending', getTokenDecoder(), (req, res) => {
@@ -38,9 +44,11 @@ router.get('/:id/attending', getTokenDecoder(), (req, res) => {
       .then((events) => {
         res.status(200).json(events)
       })
-      .catch(() => res.status(500).send('DATABASE ERROR'))
+      .catch((err) => {
+        res.status(500).send(`DATABASE ERROR ${err.message}`)
+      })
   } else {
-    res.status(500).send('authentication token not provided')
+    res.status(401).send('authentication token not provided')
   }
 })
 router.post('/:id', getTokenDecoder(), (req, res) => {
@@ -50,9 +58,11 @@ router.post('/:id', getTokenDecoder(), (req, res) => {
       .then((ids) => {
         return res.status(200).json(ids[0])
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        res.status(500).send(`DATABASE ERROR ${err.message}`)
+      })
   } else {
-    res.status(500).send('authentication token not provided')
+    res.status(401).send('authentication token not provided')
   }
 })
 
@@ -64,11 +74,11 @@ router.delete('/', getTokenDecoder(), (req, res) => {
         res.sendStatus(200)
         return null
       })
-      .catch((error) => {
-        res.status(500).send('DATABASE ERROR' + error.message)
+      .catch((err) => {
+        res.status(500).send(`DATABASE ERROR ${err.message}`)
       })
   } else {
-    res.status(500).send('authentication token not provided')
+    res.status(401).send('authentication token not provided')
   }
 })
 
