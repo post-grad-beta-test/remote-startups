@@ -4,10 +4,8 @@ export const CHANGE_PAGE = 'CHANGE_PAGE'
 export const ADD_USER_INFO = 'ADD_USER_INFO'
 export const CHANGE_NAV_STATE = 'CHANGE_NAV_STATE'
 export const SET_EVENTS = 'SET_EVENTS'
-export const LOAD_ALL_EVENTS = 'LOAD_ALL_EVENTS'
 export const SET_JOINED = 'SET_JOINED'
 export const SET_LOADING = 'SET_LOADING'
-export const SET_DISABLED = 'SET_DISABLED'
 
 export function changePage (page) {
   return {
@@ -52,13 +50,6 @@ export function setLoading (loading) {
   }
 }
 
-// export function setDisabled (eventId) {
-//   return {
-//     type: SET_DISABLED,
-//     eventId
-//   }
-// }
-
 /**
  * fetches Event[] then add events to store
  * @returns {<Event[]>}
@@ -75,7 +66,7 @@ export function loadAllEvents () {
       })
       .catch((err) => {
         dispatch(setLoading(false))
-        throw Error(err.message)
+        throw err
       })
   }
 }
@@ -91,7 +82,7 @@ export function attendEvent (userId, eventId) {
     return eventsData
       .joinEvent(userId, eventId)
       .then(() => dispatch(setLoading(false)))
-      .catch((error) => console.log(error))
+      .catch((error) => console.error(error))
   }
 }
 
@@ -110,6 +101,6 @@ export function fetchEventIds (userId) {
         dispatch(setLoading(false))
         return eventIds
       })
-      .catch((error) => console.log(error))
+      .catch((error) => console.error(error))
   }
 }

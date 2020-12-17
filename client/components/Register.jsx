@@ -54,7 +54,7 @@ function Register() {
         dispatch(changePage('User'))
         dispatch(changeNavState('Logged In'))
       })
-      .catch((err) => console.log(err.message))
+      .catch((err) => console.error(err.message))
   }
 
   return (

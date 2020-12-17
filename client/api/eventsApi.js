@@ -21,7 +21,7 @@ export function addNewEvent (userId, event) {
     .set(getAuthorizationHeader())
     .send(event)
     .then((res) => res.body)
-    .catch((error) => console.log(error))
+    .catch((err) => console.error(err))
 }
 
 /**
@@ -44,7 +44,7 @@ export function showAllEvents () {
     .get('/api/v1/events')
     .set(acceptJsonHeader)
     .then((res) => res.body)
-    .catch((error) => console.log(error))
+    .catch((err) => console.error(err))
 }
 
 /**
@@ -62,7 +62,6 @@ export function joinEvent (userId, eventId) {
     .send({ eventId })
     .then((res) => res.body)
     .catch((error) => {
-      console.log(error)
       if (error.status === undefined) {
         return { project_id: '' }
       }
@@ -81,5 +80,5 @@ export function showAllUserEventIds (userId) {
     .set(acceptJsonHeader)
     .set(getAuthorizationHeader())
     .then((res) => res.body)
-    .catch((error) => console.error(error))
+    .catch((err) => console.error(err))
 }

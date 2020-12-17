@@ -5,8 +5,9 @@ import { saveNewEvent, getAllEvents } from '../Db/projectDb'
 jest.mock('@sendgrid/mail', () => ({
   setApiKey: jest.fn()
 }))
+jest.mock('../Db/projectDb')
 
-jest.mock('../db')
+jest.mock('../Db/db')
 
 jest.mock('../Db/projectDb', () => ({
   saveNewEvent: jest.fn(),
