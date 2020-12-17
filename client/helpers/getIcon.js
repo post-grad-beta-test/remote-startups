@@ -13,7 +13,7 @@ import {
 
 /**
  * Selects a random icon
- * @returns - grommet icon component
+ * @returns {import('grommet-icons').Icon} grommet icon component
  */
 export default function getIcon () {
   const array = [
