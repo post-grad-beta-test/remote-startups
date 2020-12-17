@@ -48,7 +48,7 @@ example:
  const function joinEvent(userId, eventID){...}
 ```
 
-Project documentation is found in the [docs]('./docs') folder.
+Project documentation is found in the [docs](./docs) folder.
 
 More information about JSdoc and creating doc blocks can be found in the [JSdoc documentation](https://jsdoc.app/index.html)
 
