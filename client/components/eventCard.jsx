@@ -9,7 +9,6 @@ import { loadAllEvents, attendEvent, fetchEventIds } from '../actions'
 const EventCard = ({ user, events, joinedIds }) => {
   const [listEvents, setListEvents] = useState([])
   const dispatch = useDispatch()
-
   /**
    * a function that dispatches a request for the user to join an event
    * @param {number} userId
@@ -17,7 +16,7 @@ const EventCard = ({ user, events, joinedIds }) => {
    */
   const subscribe = (userId, eventId) => {
     dispatch(attendEvent(userId, eventId))
-      .then(dispatch(fetchEventIds(userId)))
+      .then(dispatch(fetchEventIds(user)))
       .catch((err) => console.error(err))
   }
 
@@ -27,6 +26,11 @@ const EventCard = ({ user, events, joinedIds }) => {
       .catch((err) => console.error(err))
   }, [])
 
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchEventIds(user)).catch((err) => console.error(err))
+    }
+  }, [])
   const AnIcon = getIcon()
   return (
     <div className='container'>
