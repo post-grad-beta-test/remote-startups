@@ -1,7 +1,11 @@
+import * as eventsData from '../api/eventsApi'
+
 export const CHANGE_PAGE = 'CHANGE_PAGE'
 export const ADD_USER_INFO = 'ADD_USER_INFO'
 export const CHANGE_NAV_STATE = 'CHANGE_NAV_STATE'
 export const SET_EVENTS = 'SET_EVENTS'
+export const SET_JOINED = 'SET_JOINED'
+export const SET_LOADING = 'SET_LOADING'
 
 export function changePage (page) {
   return {
@@ -10,10 +14,11 @@ export function changePage (page) {
   }
 }
 
-export function addUserInfo (username) {
+export function addUserInfo (username, id) {
   return {
     type: ADD_USER_INFO,
-    username
+    username,
+    id
   }
 }
 
@@ -25,8 +30,77 @@ export function changeNavState (navState) {
 }
 
 export function setEvents (events) {
-  return ({
+  return {
     type: SET_EVENTS,
     events
-  })
+  }
+}
+
+export function setJoined (eventIds) {
+  return {
+    type: SET_JOINED,
+    eventIds
+  }
+}
+
+export function setLoading (loading) {
+  return {
+    type: SET_LOADING,
+    loading
+  }
+}
+
+/**
+ * fetches Event[] then add events to store
+ * @returns {Promise.<Event[]>}
+ */
+export function loadAllEvents () {
+  return (dispatch) => {
+    dispatch(setLoading(true))
+    return eventsData
+      .showAllEvents()
+      .then((events) => {
+        dispatch(setLoading(false))
+        dispatch(setEvents(events))
+        return events
+      })
+      .catch((err) => {
+        dispatch(setLoading(false))
+        throw err
+      })
+  }
+}
+
+/**
+ * make eventsAPI post request and dispatch loading state.
+ * @param {number} userId - user id
+ * @param {number} eventId - event id
+ */
+export function attendEvent (userId, eventId) {
+  return (dispatch) => {
+    dispatch(setLoading(true))
+    return eventsData
+      .joinEvent(userId, eventId)
+      .then(() => dispatch(setLoading(false)))
+      .catch((error) => console.error(error))
+  }
+}
+
+/**
+ * fetch eventIds for user then dispatch action to disable join button
+ * @param {number} userId - user id
+ * @returns {Promise.<Number[]>}
+ */
+export function fetchEventIds (userId) {
+  return (dispatch) => {
+    dispatch(setLoading(true))
+    return eventsData
+      .showAllUserEventIds(userId)
+      .then((eventIds) => {
+        dispatch(setJoined(eventIds))
+        dispatch(setLoading(false))
+        return eventIds
+      })
+      .catch((error) => console.error(error))
+  }
 }

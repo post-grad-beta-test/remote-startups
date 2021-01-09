@@ -9,7 +9,7 @@ export function sendRegistrationEmail (email) {
     .set({ Authorization: `Bearer ${getEncodedToken()}` })
     .send({ email })
     .then((res) => res.body)
-    .catch((err) => console.log(err.message))
+    .catch((err) => console.error(err.message))
 }
 
 export function sendReminderEmail (email) {
@@ -19,7 +19,7 @@ export function sendReminderEmail (email) {
     .set({ Authorization: `Bearer ${getEncodedToken()}` })
     .send({ email })
     .then((res) => res.body)
-    .catch((err) => console.log(err.message))
+    .catch((err) => console.error(err.message))
 }
 
 export function addNewUserInfo (info) {
@@ -29,7 +29,7 @@ export function addNewUserInfo (info) {
     .set({ Authorization: `Bearer ${getEncodedToken()}` })
     .send(info)
     .then((res) => res.body)
-    .catch((err) => console.log(err.message))
+    .catch((err) => console.error(err.message))
 }
 
 export function getUserInfo () {
@@ -54,5 +54,5 @@ export function updateEmail (info) {
     .set({ Authorization: `Bearer ${getEncodedToken()}` })
     .send(info)
     .then((res) => res.body)
-    .catch((err) => console.log(err.message))
+    .catch((err) => console.error(err.message))
 }

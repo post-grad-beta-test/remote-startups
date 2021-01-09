@@ -23,7 +23,6 @@ function deleteEvent (id, db = connection) {
 }
 
 function addUserToEvent (id, eventId, db = connection) {
-  console.log(id, eventId)
   return db('users_projects').insert({ project_id: eventId, user_id: id })
 }
 

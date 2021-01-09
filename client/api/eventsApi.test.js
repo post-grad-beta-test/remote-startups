@@ -35,7 +35,7 @@ describe('send a new event to the server', () => {
 
 describe('user can join an event', () => {
   const scope = nock(/localhost/)
-    .post('/api/v1/events/attending')
+    .post('/api/v1/events/1/attending')
     .reply(201)
 
   test('post userID and projectID to server', () => {
