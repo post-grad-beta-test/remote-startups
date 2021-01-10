@@ -17,7 +17,7 @@ const CreateProject = ({ userId, dispatch }) => {
         alert('saved!')
         dispatch(changePage('Home'))
       })
-      .catch(err => console.log(err.message))
+      .catch(err => console.error(err.message))
   }
   return (
     <>
