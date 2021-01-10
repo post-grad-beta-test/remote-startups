@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Home</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#addNewEvent">addNewEvent</a></li><li><a href="global.html#joinEvent">joinEvent</a></li><li><a href="global.html#showAllEvents">showAllEvents</a></li><li><a href="global.html#showAllUserEventIds">showAllUserEventIds</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p></p>
+                    <h1>Home</h1>
+                </header>
+                
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>Coject</h1>
+<p>A platform that supports online collaboration and group events.</p>
+<h2>Set up instructions:</h2>
+<ul>
+<li>Clone the repo</li>
+<li>Create branch according to feature you are working on</li>
+</ul>
+<pre class="prettyprint source lang-sh"><code>npm i
+npx knex migrate:latest
+npx knex seed:run
+cp .env.example .env
+</code></pre>
+<p>To run in development (watch mode):</p>
+<pre class="prettyprint source lang-sh"><code>npm run dev
+</code></pre>
+<p>If you see warning <code>API key does not start with &quot;SG.&quot;.</code>, make sure you've put a real SendGrid API key in <code>.env</code>.  Ask your teammates for more info.</p>
+<p>To run in production:</p>
+<pre class="prettyprint source lang-sh"><code>npm start
+</code></pre>
+<h2>User Stories</h2>
+<hr>
+<h3>version 1:</h3>
+<p>Develop a platform where users can find people to attend their online events.</p>
+<ul>
+<li>A user wants to host event.</li>
+<li>Create a new event that will will appear on the home page</li>
+<li>A user can join an event</li>
+<li>User profile will show a list of joined events</li>
+</ul>
+<h3>MVP</h3>
+<hr>
+<ul>
+<li>
+<p>Refer to the Github project - <a href="https://github.com/post-grad-beta-test/coject/projects/1">product backlog</a></p>
+</li>
+<li>
+<p><a href="https://miro.com/app/board/o9J_leNHzkI=/">Miro Board</a></p>
+</li>
+</ul>
+<h2>Testing</h2>
+<hr>
+<ul>
+<li>Run <code>npm test</code> to run jest in watch mode.</li>
+<li>Run <code>npm run lint:fix</code> to format files before making any commits.</li>
+<li>Husky will check files are linted before you commit and will run tests before pushing to remote.</li>
+<li>Pull requests are to be pair reviewed before feature/bug fix can be added to main branch.</li>
+<li>Node.js CI tests must pass before any pull request will merged in to main branch.</li>
+</ul>
+<h2>The Tech</h2>
+<hr>
+<ul>
+<li><a href="https://reactjs.org/docs/getting-started.html">React</a></li>
+<li><a href="https://redux.js.org/">Redux</a></li>
+<li><a href="https://expressjs.com/en/api.html">Express</a></li>
+<li><a href="https://knexjs.org/">Knex.js (SQL)</a></li>
+<li><a href="https://jwt.io/">JWT Auth (Local)</a></li>
+<li><a href="https://www.npmjs.com/package/lint">Lint</a></li>
+<li><a href="https://www.npmjs.com/package/husky">Husky</a></li>
+</ul>
+<h3>Ta-Da!</h3></article>
+    </section>
+
+
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>
